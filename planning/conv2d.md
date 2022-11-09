@@ -1,22 +1,25 @@
 # 2D Convolution important processors in NVDLA
 Based on http://nvdla.org/hw/v1/hwarch.html
 
-## Single Datapoint Processor (SDP)
+## Stages of interest currently:
+### Single Datapoint Processor (SDP)
 ILA already exists: https://github.com/djapp18/NVDLA_SDP
 Apply both linear (scaling, normalisation, addition) and non-linear functions (ReLu, Sigmoid, Hyperbolic tangent) onto individual data points. Normally after CNN operation
 
-## Planar Data Processor (PDP)
+### Planar Data Processor (PDP)
 Spatial operations that are common in CNN applications (max-pool, min-pool, avg-pool = operator on pooling window)
 Has dedicated memory interface to fetch input data from memory and outputs directly to memory
 
-# Memory interfaces
-CSB - Configuration space bus - used to set/ read config registers. A set of CSB space dedicated for SDP and a separate register for 'done' so ping pongs. Each request to CSB has a fixed request size of 32 bits of data, and has a fixed 16bit address size. Left col shows request (write/ read) params, right col shows returned result for writes and reads.
+## Memory interfaces:
+### CSB - Configuration space bus 
+Used to set/ read config registers. A set of CSB space dedicated for SDP and a separate register for 'done' so ping pongs. Each request to CSB has a fixed request size of 32 bits of data, and has a fixed 16bit address size. Left col shows request (write/ read) params, right col shows returned result for writes and reads.
 <p align="middle">
   <img src="./csb_request.png" width="49%" />
   <img src="./csb_response.png" width="49%" /> 
 </p>
 
-DBBIF - Data backbone for loading params and datasets. Writes must always be acknowledged, reads must always get return data. Configurable data bus width of 32, 64, 128, 256 or 512-bits. core2dbb is prefix. Left = General request format, Right = write channel specifics + write response, Read not shown, but same as write but use r not w and replace wstrb by rid (read response id).
+### DBBIF - Data backbone 
+Used for loading params and datasets. Writes must always be acknowledged, reads must always get return data. Configurable data bus width of 32, 64, 128, 256 or 512-bits. core2dbb is prefix. Left = General request format, Right = write channel specifics + write response, Read not shown, but same as write but use r not w and replace wstrb by rid (read response id).
 <p align="middle">
   <img src="./dbbif_request.png" width="49%" />
   <img src="./dbbif_write_data+response.png" width="49%" /> 
