@@ -1,3 +1,6 @@
+# 2D Convolution important processors in NVDLA
+Based on http://nvdla.org/hw/v1/hwarch.html
+
 ## Single Datapoint Processor (SDP)
 ILA already exists: https://github.com/djapp18/NVDLA_SDP
 Apply both linear (scaling, normalisation, addition) and non-linear functions (ReLu, Sigmoid, Hyperbolic tangent) onto individual data points. Normally after CNN operation
@@ -117,42 +120,46 @@ Same as for SDP
 ### Registers for PDP:
 | Name                          | Address | Description                                                                                                                                                              |
 |-------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| S_STATUS                      | 0xd000  | Idle status of two register groups                                                                                                                                       |
-| S_POINTER                     | 0xd004  | Pointer for CSB master and data path to access groups                                                                                                                    |
-| D_OP_ENABLE                   | 0xd008  | Set it to 1 to kick off operation for current register group                                                                                                             |
-| D_DATA_CUBE_IN_WIDTH          | 0xd00c  | Input data cube’s width                                                                                                                                                  |
-| D_DATA_CUBE_IN_HEIGHT         | 0xd010  | Input data cube’s height                                                                                                                                                 |
-| D_DATA_CUBE_IN_CHANNEL        | 0xd014  | Input data cube’s channel                                                                                                                                                |
-| D_DATA_CUBE_OUT_WIDTH         | 0xd018  | Output data cube’s width                                                                                                                                                 |
-| D_DATA_CUBE_OUT_HEIGHT        | 0xd01c  | Output data cube’s height                                                                                                                                                |
-| D_DATA_CUBE_OUT_CHANNEL       | 0xd020  | Output data cube’s channel                                                                                                                                               |
-| D_OPERATION_MODE_CFG          | 0xd024  | Split number                                                                                                                                                             |
-| D_NAN_FLUSH_TO_ZERO           | 0xd028  | Option to flush input NaN to zero                                                                                                                                        |
-| D_PARTIAL_WIDTH_IN            | 0xd02c  | Partial width for first, last and middle partitions of input cube                                                                                                        |
-| D_PARTIAL_WIDTH_OUT           | 0xd030  | Partial width for first, last and middle partitions of output cube                                                                                                       |
-| D_POOLING_KERNEL_CFG          | 0xd034  | Kernel width and kernel stride                                                                                                                                           |
-| D_RECIP_KERNEL_WIDTH          | 0xd038  | Reciprocal of pooling kernel width, set to actual value * (2^16) when INT8/INT16 format enabled. and set to actual value for fp16 precision mode with fp17 data format.  |
-| D_RECIP_KERNEL_HEIGHT         | 0xd03c  | Reciprocal of pooling kernel height, set to actual value * (2^16) when INT8/INT16 format enabled. and set to actual value for fp16 precision mode with fp17 data format. |
-| D_POOLING_PADDING_CFG         | 0xd040  | Left/right/top/bottom padding size                                                                                                                                       |
-| D_POOLING_PADDING_VALUE_1_CFG | 0xd044  | Padding_value*1                                                                                                                                                          |
-| D_POOLING_PADDING_VALUE_2_CFG | 0xd048  | Padding_value*2                                                                                                                                                          |
-| D_POOLING_PADDING_VALUE_3_CFG | 0xd04c  | Padding_value*3                                                                                                                                                          |
-| D_POOLING_PADDING_VALUE_4_CFG | 0xd050  | Padding_value*4                                                                                                                                                          |
-| D_POOLING_PADDING_VALUE_5_CFG | 0xd054  | Padding_value*5                                                                                                                                                          |
-| D_POOLING_PADDING_VALUE_6_CFG | 0xd058  | Padding_value*6                                                                                                                                                          |
-| D_POOLING_PADDING_VALUE_7_CFG | 0xd05c  | Padding_value*7                                                                                                                                                          |
-| D_SRC_BASE_ADDR_LOW           | 0xd060  | Lower 32bits of input data address                                                                                                                                       |
-| D_SRC_BASE_ADDR_HIGH          | 0xd064  | Higher 32bits of input data address when axi araddr is 64bits                                                                                                            |
-| D_SRC_LINE_STRIDE             | 0xd068  | Line stride of input cube                                                                                                                                                |
-| D_SRC_SURFACE_STRIDE          | 0xd06c  | Surface stride of input cube                                                                                                                                             |
-| D_DST_BASE_ADDR_LOW           | 0xd070  | Lower 32bits of output data address                                                                                                                                      |
-| D_DST_BASE_ADDR_HIGH          | 0xd074  | Higher 32bits of output data address when axi awaddr is 64bits                                                                                                           |
-| D_DST_LINE_STRIDE             | 0xd078  | Line stride of output cube                                                                                                                                               |
-| D_DST_SURFACE_STRIDE          | 0xd07c  | Surface stride of output cube                                                                                                                                            |
-| D_DST_RAM_CFG                 | 0xd080  | RAM type of destination cube                                                                                                                                             |
-| D_DATA_FORMAT                 | 0xd084  | Precision of input data                                                                                                                                                  |
-| D_INF_INPUT_NUM               | 0xd088  | Input infinity element number                                                                                                                                            |
-| D_NAN_INPUT_NUM               | 0xd08c  | Input NaN element number                                                                                                                                                 |
-| D_NAN_OUTPUT_NUM              | 0xd090  | Output NaN element number                                                                                                                                                |
-| D_PERF_ENABLE                 | 0xd094  | Enable/disable performance counting                                                                                                                                      |
-| D_PERF_WRITE_STALL            | 0xd098  | Counting stalls of write requests                                                                                                                                        |
+| S_STATUS                      | `0xd000`  | Idle status of two register groups                                                                                                                                       |
+| S_POINTER                     | `0xd004`  | Pointer for CSB master and data path to access groups                                                                                                                    |
+| D_OP_ENABLE                   | `0xd008`  | Set it to 1 to kick off operation for current register group                                                                                                             |
+| D_DATA_CUBE_IN_WIDTH          | `0xd00c`  | Input data cube’s width                                                                                                                                                  |
+| D_DATA_CUBE_IN_HEIGHT         | `0xd010`  | Input data cube’s height                                                                                                                                                 |
+| D_DATA_CUBE_IN_CHANNEL        | `0xd014`  | Input data cube’s channel                                                                                                                                                |
+| D_DATA_CUBE_OUT_WIDTH         | `0xd018`  | Output data cube’s width                                                                                                                                                 |
+| D_DATA_CUBE_OUT_HEIGHT        | `0xd01c`  | Output data cube’s height                                                                                                                                                |
+| D_DATA_CUBE_OUT_CHANNEL       | `0xd020`  | Output data cube’s channel                                                                                                                                               |
+| D_OPERATION_MODE_CFG          | `0xd024`  | Split number                                                                                                                                                             |
+| D_NAN_FLUSH_TO_ZERO           | `0xd028`  | Option to flush input NaN to zero                                                                                                                                        |
+| D_PARTIAL_WIDTH_IN            | `0xd02c`  | Partial width for first, last and middle partitions of input cube                                                                                                        |
+| D_PARTIAL_WIDTH_OUT           | `0xd030`  | Partial width for first, last and middle partitions of output cube                                                                                                       |
+| D_POOLING_KERNEL_CFG          | `0xd034`  | Kernel width and kernel stride                                                                                                                                           |
+| D_RECIP_KERNEL_WIDTH          | `0xd038`  | Reciprocal of pooling kernel width, set to actual value * (2^16) when INT8/INT16 format enabled. and set to actual value for fp16 precision mode with fp17 data format.  |
+| D_RECIP_KERNEL_HEIGHT         | `0xd03c`  | Reciprocal of pooling kernel height, set to actual value * (2^16) when INT8/INT16 format enabled. and set to actual value for fp16 precision mode with fp17 data format. |
+| D_POOLING_PADDING_CFG         | `0xd040`  | Left/right/top/bottom padding size                                                                                                                                       |
+| D_POOLING_PADDING_VALUE_1_CFG | `0xd044`  | Padding_value*1                                                                                                                                                          |
+| D_POOLING_PADDING_VALUE_2_CFG | `0xd048`  | Padding_value*2                                                                                                                                                          |
+| D_POOLING_PADDING_VALUE_3_CFG | `0xd04c`  | Padding_value*3                                                                                                                                                          |
+| D_POOLING_PADDING_VALUE_4_CFG | `0xd050`  | Padding_value*4                                                                                                                                                          |
+| D_POOLING_PADDING_VALUE_5_CFG | `0xd054`  | Padding_value*5                                                                                                                                                          |
+| D_POOLING_PADDING_VALUE_6_CFG | `0xd058`  | Padding_value*6                                                                                                                                                          |
+| D_POOLING_PADDING_VALUE_7_CFG | `0xd05c`  | Padding_value*7                                                                                                                                                          |
+| D_SRC_BASE_ADDR_LOW           | `0xd060`  | Lower 32bits of input data address                                                                                                                                       |
+| D_SRC_BASE_ADDR_HIGH          | `0xd064`  | Higher 32bits of input data address when axi araddr is 64bits                                                                                                            |
+| D_SRC_LINE_STRIDE             | `0xd068`  | Line stride of input cube                                                                                                                                                |
+| D_SRC_SURFACE_STRIDE          | `0xd06c`  | Surface stride of input cube                                                                                                                                             |
+| D_DST_BASE_ADDR_LOW           | `0xd070`  | Lower 32bits of output data address                                                                                                                                      |
+| D_DST_BASE_ADDR_HIGH          | `0xd074`  | Higher 32bits of output data address when axi awaddr is 64bits                                                                                                           |
+| D_DST_LINE_STRIDE             | `0xd078`  | Line stride of output cube                                                                                                                                               |
+| D_DST_SURFACE_STRIDE          | `0xd07c`  | Surface stride of output cube                                                                                                                                            |
+| D_DST_RAM_CFG                 | `0xd080`  | RAM type of destination cube                                                                                                                                             |
+| D_DATA_FORMAT                 | `0xd084`  | Precision of input data                                                                                                                                                  |
+| D_INF_INPUT_NUM               | `0xd088`  | Input infinity element number                                                                                                                                            |
+| D_NAN_INPUT_NUM               | `0xd08c`  | Input NaN element number                                                                                                                                                 |
+| D_NAN_OUTPUT_NUM              | `0xd090`  | Output NaN element number                                                                                                                                                |
+| D_PERF_ENABLE                 | `0xd094`  | Enable/disable performance counting                                                                                                                                      |
+| D_PERF_WRITE_STALL            | `0xd098`  | Counting stalls of write requests                                                                                                                                        |
+
+## Remaining questions
+1. SDP_RDMA and PDP_RDMA are used for loading in data ... should I worry about them or are they just for SRAM loading?
+2. Not sure what addresses to use for input data + how to layout the data 
