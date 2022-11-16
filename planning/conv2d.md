@@ -166,3 +166,18 @@ Same as for SDP
 ## Remaining questions
 1. SDP_RDMA and PDP_RDMA are used for loading in data ... should I worry about them or are they just for SRAM loading?
 2. Not sure what addresses to use for input data + how to layout the data 
+
+
+## Useful functions from NVDLA sw repo
+Repo link: https://github.com/nvdla/sw
+
+`kmd/firmware/sdp.c` has low level set up for registers in SDP_DMA and SDP
+
+`kmd/firmware/include/opendla_small.h` has all offsets and memory addresses for registers
+
+`kmd/include/nvdla_interface.h` has high level functions that I think we could use as opposed to reinventing the wheel?
+- To write data from a local address to the NVDLA use: `dla_data_write(void *driver_context, void *task_data, void *src, uint64_t dst, uint32_t size, uint64_t offset)`
+- To ask Deep Learning Accelerator to set up registers and execute a task use: `dla_execute_task(void *engine_context, void *task_data, void *config_data)`
+
+
+      
