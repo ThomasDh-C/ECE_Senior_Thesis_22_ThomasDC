@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class dla_processor_group:
+class Dla_processor_group:
     def __init__(self):
         self.id = np.uint8(0)
         self.rdma_id = np.uint8(0)
@@ -14,16 +14,16 @@ class dla_processor_group:
         self.programming = np.uint8(0)
         self.start_time = np.uint64(0)  # store time in us
 
-        self.op_desc = dla_common_op_desc()
-        self.consumers = [dla_common_op_desc()
+        self.op_desc = Dla_common_op_desc()
+        self.consumers = [Dla_common_op_desc()
                           for i in range(6)]  # 6 for 6 processors (DLA_OP_NUM)
-        self.fused_parent = dla_common_op_desc()
-        self.dla_operation_container = dla_operation_container()
-        self.dla_surface_container = dla_surface_container()
+        self.fused_parent = Dla_common_op_desc()
+        self.operation_desc = Dla_operation_container()
+        self.surface_desc = Dla_surface_container()
 
 
 # Notes: __attribute__ ((packed, aligned(4)));
-class dla_common_op_desc:
+class Dla_common_op_desc:
     # all current values are arbitrary
     def __init__(self):
         # set by ucode ... couldn't find any info on where this is really set
@@ -33,30 +33,91 @@ class dla_common_op_desc:
         self.dependency_count = np.uint8(0)
         self.reserved0 = np.zeros(3, dtype='uint8')  # reserved0 is not a typo
         # 6 for 6 processors (DLA_OP_NUM)
-        self.consumers = [dla_consumer() for i in range(6)]
-        self.fused_parent = dla_consumer()
+        self.consumers = [Dla_consumer() for i in range(6)]
+        self.fused_parent = Dla_consumer()
 
 
-class dla_operation_container:
+class Dla_operation_container:
     # all current values are arbitrary
     def __init__(self):
         # normally this is a union object
         # so the values of sdp rn are the vals of this
         # class normally
-        self.param = dla_sdp_stat_desc()
+        self.sdp_op = Dla_sdp_op_desc()
 
         # all union items
-        # struct dla_bdma_stat_desc bdma_stat;
-        # struct dla_conv_stat_desc conv_stat;
-        # DONE - struct dla_sdp_stat_desc sdp_stat;
-        # struct dla_pdp_stat_desc pdp_stat;
-        # struct dla_cdp_stat_desc cdp_stat;
-        # struct dla_rubik_stat_desc rubik_stat;
-
-# __attribute__ ((packed, aligned(4)));
+        # struct dla_bdma_op_desc bdma_op;
+        # struct dla_conv_op_desc conv_op;
+        # DONE struct dla_sdp_op_desc sdp_op;
+        # struct dla_pdp_op_desc pdp_op;
+        # struct dla_cdp_op_desc cdp_op;
+        # struct dla_rubik_op_desc rubik_op;
 
 
-class dla_sdp_stat_desc:
+class Dla_sdp_op_desc:
+    # Notes: __packed __aligned(4);
+    # all current values are arbitrary
+    def __init__(self):
+        # Precision parameters
+        # dla_precision
+        self.src_precision = np.uint8(0)
+        self.dst_precision = np.uint8(0)
+        self.lut_index = np.int16(0)
+
+        self.out_cvt = Dla_cvt_param()
+
+        # Performance parameters
+        self.conv_mode = np.uint8(0)
+        self.batch_num = np.uint8(0)
+        self.reserved0 = np.uint16(0)
+
+        self.batch_stride = np.uint32(0)  # will be used when batch_num > 1
+
+        # Algorithm parameters
+        self.x1_op = Dla_sdp_op()
+        self.x2_op = Dla_sdp_op()
+        self.y_op = Dla_sdp_op()
+
+
+class Dla_cvt_param:
+    # all current values are arbitrary
+    def __init__(self):
+        self.scale = np.int16(0)
+        self.truncate = np.uint8(0)
+        self.enable = np.uint8(0)
+        self.offset = np.int32(0)
+
+
+class Dla_sdp_op:
+    # __packed __aligned(4);
+    # all current values are arbitrary
+    def __init__(self):
+        self.enable = np.uint8(0)
+        self.alu_type = np.uint8(0)  # dla_sdp_alu_op_type
+        self.type = np.uint8(0)  # dla_sdp_op_type
+        self.mode = np.uint8(0)  # dla_sdp_op_mode
+
+        self.act = np.uint8(0)  # dla_act_type
+        self.shift_value = np.uint8(0)  # left shift
+        self.truncate = np.uint8(0)
+        self.precision = np.uint8(0)
+
+        self.alu_operand = np.int32(0)
+        self.mul_operand = np.int32(0)
+
+        self.cvt = Dla_sdp_cvt()
+
+
+class Dla_sdp_cvt:
+    # __packed __aligned(4)
+    # all current values are arbitrary
+    def __init__(self):
+        self.alu_cvt = Dla_cvt_param()
+        self.mul_cvt = Dla_cvt_param()
+
+
+class Dla_sdp_stat_desc:
+    # __attribute__ ((packed, aligned(4)));
     # all current values are arbitrary
     def __init__(self):
         # normally this is a union object
@@ -75,13 +136,13 @@ class dla_sdp_stat_desc:
         self.runtime = np.uint32(0)
 
 
-class dla_surface_container:
+class Dla_surface_container:
     # all current values are arbitrary
     def __init__(self):
         # normally this is a union object
         # so the values of sdp_surface rn are the vals of this
         # class normally
-        self.sdp_surface = dla_sdp_surface_desc()
+        self.sdp_surface = Dla_sdp_surface_desc()
 
         # all union items
         # struct dla_bdma_surface_desc bdma_surface;
@@ -91,26 +152,25 @@ class dla_surface_container:
         # struct dla_cdp_surface_desc cdp_surface;
         # struct dla_rubik_surface_desc rubik_surface;
 
-# __attribute__ ((packed, aligned(4)));
 
-
-class dla_sdp_surface_desc:
+class Dla_sdp_surface_desc:
+    # __attribute__ ((packed, aligned(4)));
     # all current values are arbitrary
     def __init__(self):
         # source input, available when SDP working on offline mode
-        self.src_data = dla_data_cube()
-        self.x1_data = dla_data_cube()  # input
-        self.x2_data = dla_data_cube()  # input
-        self.y_data = dla_data_cube()  # input
-        self.dst_data = dla_data_cube()  # output
-
-# __attribute__ ((packed, aligned(4)));
+        self.src_data = Dla_data_cube()
+        self.x1_data = Dla_data_cube()  # input
+        self.x2_data = Dla_data_cube()  # input
+        self.y_data = Dla_data_cube()  # input
+        self.dst_data = Dla_data_cube()  # output
 
 
-class dla_data_cube:
+class Dla_data_cube:
+    # __attribute__ ((packed, aligned(4)));
     # all current values are arbitrary
     def __init__(self):
-        self.type = np.uint16(0)  # dla_mem_type
+        # dla engine can read from [External DRAM, CV-SRAM, DLA sub-module]
+        self.type = np.uint16(0)
         # offset to the actual IOVA in task.address_list
         self.address = np.int16(0)
         self.offset = np.uint32(0)  # offset within address
@@ -129,10 +189,9 @@ class dla_data_cube:
         # For Rubik only
         self.plane_stride = np.uint32(0)
 
-# __attribute__ ((packed, aligned(4)));
 
-
-class dla_consumer:
+class Dla_consumer:
+    # __attribute__ ((packed, aligned(4)));
     # all current values are arbitrary
     def __init__(self):
         # the index of dla_common_op_desc in dep_graph_addr
