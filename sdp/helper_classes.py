@@ -78,6 +78,24 @@ class Dla_sdp_op_desc:
         self.x2_op = Dla_sdp_op()
         self.y_op = Dla_sdp_op()
 
+    def __str__(self):
+        ret = ""
+        ret += "src_precision    = {:u}\n".format(self.src_precision)
+        ret += "dst_precision    = {:u}\n".format(self.dst_precision)
+        ret += "lut_index        = {:d}\n".format(self.lut_index)
+        ret += "out_cvt          =\n"
+        ret += str(self.out_cvt)
+        ret += "conv_mode        = {:u}\n".format(self.conv_mode)
+        ret += "batch_num        = {:u}\n".format(self.batch_num)
+        ret += "batch_stride     = {:u}\n".format(self.batch_stride)
+        ret += "x1_op            = [ dla_sdp_op =>\n"
+        ret += str(self.x1_op)
+        ret += "x2_op            = [ dla_sdp_op =>\n"
+        ret += str(self.x2_op)
+        ret += "y_op             = [ dla_sdp_op =>\n"
+        ret += str(self.y_op)
+        return ret
+
 
 class Dla_cvt_param:
     # all current values are arbitrary
@@ -87,6 +105,10 @@ class Dla_cvt_param:
         self.enable = np.uint8(0)
         self.offset = np.int32(0)
 
+    def __str__(self):
+        return "[ scale = {:d}, truncate = {:u}, enable = {:u}, offset = {:d} ]\n".format(
+            self.scale, self.truncate, self.enable, self.offset)
+
 
 class Dla_sdp_op:
     # __packed __aligned(4);
@@ -94,7 +116,8 @@ class Dla_sdp_op:
     def __init__(self):
         self.enable = np.uint8(0)
         self.alu_type = np.uint8(0)  # dla_sdp_alu_op_type
-        self.type = np.uint8(0)  # dla_sdp_op_type
+        # dla_sdp_op_type (SDP_OP_NONE, MUL, ADD, BOTH)
+        self.type = np.uint8(0)
         self.mode = np.uint8(0)  # dla_sdp_op_mode
 
         self.act = np.uint8(0)  # dla_act_type
@@ -106,6 +129,25 @@ class Dla_sdp_op:
         self.mul_operand = np.int32(0)
 
         self.cvt = Dla_sdp_cvt()
+
+    def __str__(self):
+        ret = ""
+        ret += "    enable         = {:u}\n".format(self.enable)
+        ret += "    alu_type       = {:u}\n".format(self.alu_type)
+        ret += "    type           = {:u}\n".format(self.type)
+        ret += "    mode           = {:u}\n".format(self.mode)
+        ret += "    act            = {:u}\n".format(self.act)
+        ret += "    shift_value    = {:u}\n".format(self.shift_value)
+        ret += "    truncate       = {:u}\n".format(self.truncate)
+        ret += "    precision      = {:u}\n".format(self.precision)
+        ret += "    alu_operand    = {:d}\n".format(self.alu_operand)
+        ret += "    mul_operand    = {:d}\n".format(self.mul_operand)
+        ret += "cvt.alu_cvt          =\n"
+        ret += str(self.cvt.alu_cvt)
+        ret += "cvt.mul_cvt          =\n"
+        ret += str(self.cvt.mul_cvt)
+        ret += "]\n"
+        return ret
 
 
 class Dla_sdp_cvt:
@@ -164,6 +206,20 @@ class Dla_sdp_surface_desc:
         self.y_data = Dla_data_cube()  # input
         self.dst_data = Dla_data_cube()  # output
 
+    def __str__(self):
+        ret = ""
+        ret += "src_data            =   dla_data_cube =>\n"
+        ret += str(self.src_data)
+        ret += "x1_data             =   dla_data_cube =>\n"
+        ret += str(self.x1_data)
+        ret += "x2_data             =   dla_data_cube =>\n"
+        ret += str(self.x2_data)
+        ret += "y_data              =   dla_data_cube =>\n"
+        ret += str(self.y_data)
+        ret += "dst_data            =   dla_data_cube =>\n"
+        ret += str(self.dst_data)
+        return ret
+
 
 class Dla_data_cube:
     # __attribute__ ((packed, aligned(4)));
@@ -176,7 +232,7 @@ class Dla_data_cube:
         self.offset = np.uint32(0)  # offset within address
 
         self.size = np.uint32(0)
-        # Cube dimensions
+    # Cube dimensions
         self.width = np.uint16(0)
         self.height = np.uint16(0)
         self.channel = np.uint16(0)
@@ -189,6 +245,20 @@ class Dla_data_cube:
         # For Rubik only
         self.plane_stride = np.uint32(0)
 
+    def __str__(self):
+        ret = "["
+        ret += "    type          = {:u}\n".format(self.type)
+        ret += "    address       = {:d}\n".format(self.address)
+        ret += "    width         = {:x}\n".format(self.width)
+        ret += "    height        = {:x}\n".format(self.height)
+        ret += "    channel       = {:x}\n".format(self.channel)
+        ret += "    size          = {:u}\n".format(self.size)
+        ret += "    line_stride   = {:u}\n".format(self.line_stride)
+        ret += "    surf_stride   = {:u}\n".format(self.surf_stride)
+        ret += "    plane_stride  = {:u}\n".format(self.plane_stride)
+        ret += "]"
+        return ret
+
 
 class Dla_consumer:
     # __attribute__ ((packed, aligned(4)));
@@ -198,3 +268,77 @@ class Dla_consumer:
         self.index = np.int16(0)
         self.event = np.uint8(0)
         self.res = np.uint8(0)
+
+# LUT classes
+class Dla_lut_param:
+	# all current values are arbitrary
+	def __init__(self):
+		LUT_LINEAR_EXP_TABLE_ENTRY_LOG2 = 6
+		LUT_LINEAR_ONLY_TABLE_ENTRY_LOG2 = 8
+		self.linear_exp_table = np.zeros(
+			(1 << LUT_LINEAR_EXP_TABLE_ENTRY_LOG2)+1, dtype='int16')
+		self.linear_only_table = np.zeros(
+			(1 << LUT_LINEAR_ONLY_TABLE_ENTRY_LOG2)+1, dtype='int16')
+
+		self.linear_exp_offset = Dla_lut_offset()
+		self.linear_only_offset = Dla_lut_offset()
+
+		# The start and end point of raw table,
+		# valid when raw_method=LINEAR only
+		self.linear_exp_start = np.uint64()
+		self.linear_exp_end = np.uint64()
+		self.linear_only_start = np.uint64()
+		self.linear_only_end = np.uint64()
+
+		self.linear_exp_underflow_slope = Dla_slope()
+		self.linear_exp_overflow_slope = Dla_slope()
+		self.linear_only_underflow_slope = Dla_slope()
+		self.linear_only_overflow_slope = Dla_slope()
+
+		# dla_lut_priority, when both lut are hit (or one overflow,
+		# the other underflow), which one should be selected as output
+		self.hybrid_priority = np.uint8(0)
+		self.underflow_priority = np.uint8(0)
+		self.overflow_priority = np.uint8(0)
+		self.method = np.uint8(0) # dla_lut_method
+
+class Dla_lut_offset:
+    # all current values are arbitrary
+    # used to be a union
+    def __init__(self):
+        # Number should be substracted on log domain before look up
+        # exponetial table it has the same definition as hardware
+        # thus input scaling should also take into account when
+        # set this field.
+        self.exp_offset = np.int8(0)
+
+        # Number of bits should be right shift before looking
+        # up linear table
+        self.frac_bits = np.int8(0)
+        self.reserved0 = np.uint16(0)
+
+
+class Dla_float_data:
+    """This struct is used to represent floating point values by INT.\n
+    Suppose we have a float point number fp_x, it will be represented
+    as: fp_x = scale_int_x>>(shifter_x)
+    This is very useful for INT pipeline"""
+    # all current values are arbitrary
+    # __packed __aligned(4);
+
+    def __init__(self) -> None:
+        self.scale = np.int16(0)
+        self.shifter = np.int8(0)
+        self.reserved0 = np.uint8(0)
+
+
+class Dla_slope:
+    """ For INT pipeline, we use the struct above to represent a floating number\n
+    For FP16 pipeline, we should store the FP16 encoded value into a uint16_t\n
+    container"""
+    # all current values are arbitrary
+    # used to be a union
+
+    def __init__(self):
+        self.data_i = Dla_float_data()
+        self.data_f = np.uint16()

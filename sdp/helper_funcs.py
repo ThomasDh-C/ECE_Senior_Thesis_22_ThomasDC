@@ -1,4 +1,5 @@
 import numpy as np
+from helper_classes import *
 
 
 def retrieve_all_macros():
@@ -326,3 +327,26 @@ def dla_disable_intr(mask: np.uint32):
     reg = glb_reg_read("S_INTR_MASK")
     reg = reg | mask
     glb_reg_write("S_INTR_MASK", reg)
+
+
+def dla_read_input_address(data: Dla_data_cube, op_index: np.int16, roi_index: np.uint8, bpp: np.uint8):
+    """NOT IMPLEMENTED"""
+    # TODO: implement
+    return np.uint64(-1)
+
+
+def dla_get_dma_cube_address():
+    """NOT IMPLEMENTED"""
+    # TODO: implement
+    return np.uint64(-1)
+
+
+def dla_read_lut():
+    """NOT IMPLEMENTED"""
+    # TODO: implement
+    return Dla_lut_param()
+
+
+def update_lut(reg_base: str, lut: Dla_lut_param, precision: np.uint8):
+    """NOT IMPLEMENTED"""
+    # TODO: implement
