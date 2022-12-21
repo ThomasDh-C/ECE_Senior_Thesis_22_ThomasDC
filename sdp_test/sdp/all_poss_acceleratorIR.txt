@@ -1,0 +1,55 @@
+SDP_S_POINTER: group_id, group_id_shift
+SDPRDMA_S_POINTER: rdma_group_id, rdma_group_id_shift
+SDP_D_PERF_ENABLE: dma_stats_enable, dma_stats_enable_shift, lut_stats_enable, lut_stats_enable_shift, sat_stats_enable, sat_stats_enable_shift, nan_stats_enable, nan_stats_enable_shift
+SDPRDMA_D_OP_ENABLE: enable
+SDP_D_OP_ENABLE: enable
+SDPRDMA_D_{rdma}_CFG: rdma_disable, rdma_disable_shift, rdma_to_which_engine, rdma_to_which_engine_shift, prec, prec_shift, mode, mode, ram_type, ram_type_shift
+SDPRDMA_D_{bias_data_cube}_BASE_ADDR_LOW: low
+SDPRDMA_D_{bias_data_cube}_BASE_ADDR_HIGH: high
+SDPRDMA_D_{bias_data_cube}_LINE_STRIDE: line_stride
+SDPRDMA_D_{bias_data_cube}_SURFACE_STRIDE: surf_stride
+SDP_D_DP_{bdc}_CFG: bypass, bypass_shift, alu_bypass, alu_bypass_shift, alu_algo, alu_algo_shift, mul_bypass, mul_bypass_shift, mul_prelu, mul_prelu_shift, relu_bypass, relu_bypass_shift
+SDP_D_DP_BS_ALU_CFG: alu_src, alu_src_shift, op_shift, op_shift_shift
+SDP_D_DP_EW_ALU_SRC_VALUE: alu_operand
+SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE: offset
+SDP_D_DP_EW_ALU_CVT_SCALE_VALUE: scale
+SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE: truncate
+SDP_D_DP_BS_ALU_SRC_VALUE: alu_op
+SDP_D_DP_BS_MUL_SRC_VALUE: mul_op
+
+# concerning that these differ
+SDP_D_DP_BS_MUL_CFG: mul_src, mul_src_shift, trunc, trunc_shift
+SDP_D_DP_EW_MUL_CFG: mul_src, mul_src_shift, mul_cvt_bypass, mul_cvt_bypass_shift
+
+SDP_D_DP_EW_MUL_SRC_VALUE: mul_op
+SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE: offset
+SDP_D_DP_EW_MUL_CVT_SCALE_VALUE: scale
+SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE: truncate
+SDP_D_DP_EW_TRUNCATE_VALUE: truncate
+SDPRDMA_D_FEATURE_MODE_CFG: fly_mode, fly_mode_shift
+SDPRDMA_D_BRDMA_CFG: disable, disable_shift
+SDPRDMA_D_NRDMA_CFG: disable, disable_shift
+SDPRDMA_D_ERDMA_CFG: disable, disable_shift
+SDPRDMA_D_FEATURE_MODE_CFG: fly_val, fly_val_shift, win_grad, win_grad_shift, src_precision, src_precision_shift, dest_precision, dest_precision_shift, proc_precision, proc_precision_shift, batch_num, batch_num_shift
+SDP_D_DATA_CUBE_WIDTH: width
+SDP_D_DATA_CUBE_HEIGHT: height
+SDP_D_DATA_CUBE_CHANNEL: channel
+SDPRDMA_D_SRC_BASE_ADDR_LOW: low
+SDPRDMA_D_SRC_BASE_ADDR_HIGH: high
+SDPRDMA_D_SRC_LINE_STRIDE: line_stride
+SDPRDMA_D_SRC_SURFACE_STRIDE: surf_stride
+SDPRDMA_D_SRC_DMA_CFG: ram_type
+SDP_D_DATA_CUBE_WIDTH: width
+SDP_D_DATA_CUBE_HEIGHT: height
+SDP_D_DATA_CUBE_CHANNEL: channel
+SDP_D_DST_BASE_ADDR_HIGH: high
+SDP_D_DST_BASE_ADDR_LOW: low
+SDP_D_DST_LINE_STRIDE: line_stride
+SDP_D_DST_SURFACE_STRIDE: surf_stride
+SDP_D_FEATURE_MODE_CFG: fly_mode, fly_mode_shift, out_dst, out_dst_shift, mode_winograd, mode_winograd_shift, batch_num, batch_num_shift
+SDP_D_DST_DMA_CFG: ram_type
+SDP_D_DST_BATCH_STRIDE: batch_stride
+SDP_D_DATA_FORMAT: proc_precision, proc_precision_shift, dest_precision, dest_precision_shift
+SDP_D_CVT_OFFSET: offset
+SDP_D_CVT_SCALE: scale
+SDP_D_CVT_SHIFT: truncate

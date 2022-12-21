@@ -1,0 +1,274 @@
+{
+    "ops": [
+        {
+            "irfunc_No.": 1,
+            "name": "VirMemWr",
+            "addr": "0x0",
+            "data": "0x5bb7ac38"
+        },
+        {
+            "irfunc_No.": 2,
+            "name": "VirMemWr",
+            "addr": "0x20",
+            "data": "0xa839593a"
+        },
+        {
+            "irfunc_No.": 3,
+            "name": "VirMemWr",
+            "addr": "0x40",
+            "data": "0x58b70e2d"
+        },
+        {
+            "irfunc_No.": 4,
+            "name": "VirMemWr",
+            "addr": "0x60",
+            "data": "0x5bbbb931"
+        },
+        {
+            "irfunc_No.": 5,
+            "name": "INTR_MASK_READ"
+        },
+        {
+            "irfunc_No.": 6,
+            "name": "GLB_INTR_MASK",
+            "sdp_done_mask1": "0x00000000",
+            "sdp_done_mask2": "0x00000001",
+            "curr": "0x00000000"
+        },
+        {
+            "irfunc_No.": 7,
+            "name": "SDPRDMA_D_FEATURE_MODE_CFG",
+            "fly_mode": 0,
+            "fly_mode_shift": 0
+        },
+        {
+            "irfunc_No.": 8,
+            "name": "SDPRDMA_D_BRDMA_CFG",
+            "disable": 0,
+            "disable_shift": 0
+        },
+        {
+            "irfunc_No.": 9,
+            "name": "SDPRDMA_D_NRDMA_CFG",
+            "disable": 0,
+            "disable_shift": 0
+        },
+        {
+            "irfunc_No.": 10,
+            "name": "SDPRDMA_D_ERDMA_CFG",
+            "disable": 0,
+            "disable_shift": 0
+        },
+        {
+            "irfunc_No.": 11,
+            "name": "SDPRDMA_D_FEATURE_MODE_CFG",
+            "fly_mode": 1,
+            "fly_mode_shift": 0,
+            "win_grad": 0,
+            "win_grad_shift": 1,
+            "src_precision": 2,
+            "src_precision_shift": 2,
+            "dest_precision": 2,
+            "dest_precision_shift": 6,
+            "proc_precision": 2,
+            "proc_precision_shift": 4,
+            "batch_num": 0,
+            "batch_num_shift": 8
+        },
+        {
+            "irfunc_No.": 12,
+            "name": "SDP_D_DATA_CUBE_WIDTH",
+            "width": 1
+        },
+        {
+            "irfunc_No.": 13,
+            "name": "SDP_D_DATA_CUBE_HEIGHT",
+            "height": 1
+        },
+        {
+            "irfunc_No.": 14,
+            "name": "SDP_D_DATA_CUBE_CHANNEL",
+            "channel": 0
+        },
+        {
+            "irfunc_No.": 15,
+            "name": "SDPRDMA_D_BRDMA_CFG",
+            "rdma_disable": 0,
+            "rdma_disable_shift": 0,
+            "rdma_to_which_engine": 1,
+            "rdma_to_which_engine_shift": 1,
+            "prec": 1,
+            "prec_shift": 3,
+            "mode": 4,
+            "ram_type": 0,
+            "ram_type_shift": 5
+        },
+        {
+            "irfunc_No.": 16,
+            "name": "SDPRDMA_D_BS_BASE_ADDR_LOW",
+            "low": "0xffffffff"
+        },
+        {
+            "irfunc_No.": 17,
+            "name": "SDPRDMA_D_BS_BASE_ADDR_HIGH",
+            "high": "0xffffffff"
+        },
+        {
+            "irfunc_No.": 18,
+            "name": "SDPRDMA_D_BS_LINE_STRIDE",
+            "line_stride": 2
+        },
+        {
+            "irfunc_No.": 19,
+            "name": "SDPRDMA_D_BS_SURFACE_STRIDE",
+            "surf_stride": 4
+        },
+        {
+            "irfunc_No.": 20,
+            "name": "SDPRDMA_D_NRDMA_CFG",
+            "rdma_disable": 1,
+            "rdma_disable_shift": 0,
+            "rdma_to_which_engine": 0,
+            "rdma_to_which_engine_shift": 1,
+            "prec": 0,
+            "prec_shift": 3,
+            "mode": 4,
+            "ram_type": 0,
+            "ram_type_shift": 5
+        },
+        {
+            "irfunc_No.": 21,
+            "name": "SDPRDMA_D_ERDMA_CFG",
+            "rdma_disable": 1,
+            "rdma_disable_shift": 0,
+            "rdma_to_which_engine": 0,
+            "rdma_to_which_engine_shift": 1,
+            "prec": 0,
+            "prec_shift": 3,
+            "mode": 4,
+            "ram_type": 0,
+            "ram_type_shift": 5
+        },
+        {
+            "irfunc_No.": 22,
+            "name": "SDP_D_DATA_CUBE_WIDTH",
+            "width": 1
+        },
+        {
+            "irfunc_No.": 23,
+            "name": "SDP_D_DATA_CUBE_HEIGHT",
+            "height": 1
+        },
+        {
+            "irfunc_No.": 24,
+            "name": "SDP_D_DATA_CUBE_CHANNEL",
+            "channel": 0
+        },
+        {
+            "irfunc_No.": 25,
+            "name": "SDP_D_DP_BS_CFG",
+            "bypass": 0,
+            "bypass_shift": 0,
+            "alu_bypass": 1,
+            "alu_bypass_shift": 1,
+            "alu_algo": 2,
+            "alu_algo_shift": 2,
+            "mul_bypass": 1,
+            "mul_bypass_shift": 4,
+            "mul_prelu": 0,
+            "mul_prelu_shift": 5,
+            "relu_bypass": 1,
+            "relu_bypass_shift": 6
+        },
+        {
+            "irfunc_No.": 26,
+            "name": "SDP_D_DP_BS_MUL_CFG",
+            "mul_src": 1,
+            "mul_src_shift": 0,
+            "trunc": 0,
+            "trunc_shift": 8
+        },
+        {
+            "irfunc_No.": 27,
+            "name": "SDP_D_DP_BN_CFG",
+            "bypass": 1,
+            "bypass_shift": 0,
+            "alu_bypass": 1,
+            "alu_bypass_shift": 1,
+            "alu_algo": 0,
+            "alu_algo_shift": 2,
+            "mul_bypass": 1,
+            "mul_bypass_shift": 4,
+            "mul_prelu": 0,
+            "mul_prelu_shift": 5,
+            "relu_bypass": 1,
+            "relu_bypass_shift": 6
+        },
+        {
+            "irfunc_No.": 28,
+            "name": "SDP_D_DP_EW_CFG",
+            "bypass": 1,
+            "bypass_shift": 0,
+            "alu_bypass": 1,
+            "alu_bypass_shift": 1,
+            "alu_algo": 0,
+            "alu_algo_shift": 2,
+            "mul_bypass": 1,
+            "mul_bypass_shift": 4,
+            "mul_prelu": 0,
+            "mul_prelu_shift": 5,
+            "relu_bypass": 1,
+            "relu_bypass_shift": 6
+        },
+        {
+            "irfunc_No.": 29,
+            "name": "SDP_D_FEATURE_MODE_CFG",
+            "fly_mode": 1,
+            "fly_mode_shift": 0,
+            "out_dst": 1,
+            "out_dst_shift": 1,
+            "mode_winograd": 0,
+            "mode_winograd_shift": 2,
+            "batch_num": 0,
+            "batch_num_shift": 8
+        },
+        {
+            "irfunc_No.": 30,
+            "name": "SDP_D_DST_DMA_CFG",
+            "ram_type": 0
+        },
+        {
+            "irfunc_No.": 31,
+            "name": "SDP_D_DATA_FORMAT",
+            "proc_precision": 2,
+            "proc_precision_shift": 0,
+            "dest_precision": 2,
+            "dest_precision_shift": 2
+        },
+        {
+            "irfunc_No.": 32,
+            "name": "SDP_D_CVT_OFFSET",
+            "offset": 0
+        },
+        {
+            "irfunc_No.": 33,
+            "name": "SDP_D_CVT_SCALE",
+            "scale": 0
+        },
+        {
+            "irfunc_No.": 34,
+            "name": "SDP_D_CVT_SHIFT",
+            "truncate": 0
+        },
+        {
+            "irfunc_No.": 35,
+            "name": "VirMemRd",
+            "addr": "0x80"
+        },
+        {
+            "irfunc_No.": 36,
+            "name": "VirMemRd",
+            "addr": "0xa0"
+        }
+    ]
+}

@@ -1,25 +1,32 @@
 import numpy as np
+from time import time_ns
 
 
 class Dla_processor_group:
     def __init__(self):
-        self.id = np.uint8(0)
-        self.rdma_id = np.uint8(0)
-        self.active = np.uint8(0)
-        self.events = np.uint8(0)
-        self.roi_index = np.uint8(0)
-        self.is_rdma_needed = True
-        self.pending = np.uint8(0)  # TODO:switch to bool
-        self.lut_index = np.int32(0)
-        self.programming = np.uint8(0)
-        self.start_time = np.uint64(0)  # store time in us
+        # TODO:switch uint8 to bool
+        self.id = np.uint8(0)                       # unused
+        self.rdma_id = np.uint8(0)                  # unused
+        self.active = np.uint8(0)                   # unused
+        self.events = np.uint8(0)                   # unused
+        self.roi_index = np.uint8(0)                # unused
+        self.is_rdma_needed = True                  # unused
+        self.pending = np.uint8(0)                  # unused
 
+        # we load lut index from current op (group.operation_desc.sdp_op)
+        self.lut_index = np.int32(0)
+        self.programming = np.uint8(0)              # unused
+        self.start_time = np.uint64(time_ns()//1000)  # store time in us
+
+        # used if not fly and fly = (sdp_surface.src_data.type == dla_mem_hw)
+        # fly is what will use so probs unused
         self.op_desc = Dla_common_op_desc()
-        self.consumers = [Dla_common_op_desc()
+
+        self.consumers = [Dla_common_op_desc()      # unused
                           for i in range(6)]  # 6 for 6 processors (DLA_OP_NUM)
-        self.fused_parent = Dla_common_op_desc()
-        self.operation_desc = Dla_operation_container()
-        self.surface_desc = Dla_surface_container()
+        self.fused_parent = Dla_common_op_desc()    # unused
+        self.operation_desc = Dla_operation_container()  # only use sdp_op inside this
+        self.surface_desc = Dla_surface_container()  # only use sdp_surface inside this
 
 
 # Notes: __attribute__ ((packed, aligned(4)));
@@ -60,18 +67,19 @@ class Dla_sdp_op_desc:
     def __init__(self):
         # Precision parameters
         # dla_precision
-        self.src_precision = np.uint8(0)
-        self.dst_precision = np.uint8(0)
-        self.lut_index = np.int16(0)
+        self.src_precision = np.uint8(0)  # "INT8", "INT16", "FP16"
+        self.dst_precision = np.uint8(0)  # "INT8", "INT16", "FP16"
+        self.lut_index = np.int16(0)  # dig into dla_read_lut
 
-        self.out_cvt = Dla_cvt_param()
+        self.out_cvt = Dla_cvt_param()  # CVT_OFFSET, CVT_SCALE and CVT_SHIFT regs
 
         # Performance parameters
-        self.conv_mode = np.uint8(0)
-        self.batch_num = np.uint8(0)
-        self.reserved0 = np.uint16(0)
 
-        self.batch_stride = np.uint32(0)  # will be used when batch_num > 1
+        # 0 = regular conv mode, 1 = winograd, for brdma, nrdma, erdma setup and also some bias stuff
+        self.conv_mode = np.uint8(0)
+        self.batch_num = np.uint8(1)     # next will be used if batch_num > 1
+        self.batch_stride = np.uint32(0)  # used for reg D_DST_BATCH_STRIDE
+        self.reserved0 = np.uint16(0)    # unused
 
         # Algorithm parameters
         self.x1_op = Dla_sdp_op()
@@ -114,21 +122,24 @@ class Dla_sdp_op:
     # __packed __aligned(4);
     # all current values are arbitrary
     def __init__(self):
-        self.enable = np.uint8(0)
-        self.alu_type = np.uint8(0)  # dla_sdp_alu_op_type
-        # dla_sdp_op_type (SDP_OP_NONE, MUL, ADD, BOTH)
-        self.type = np.uint8(0)
-        self.mode = np.uint8(0)  # dla_sdp_op_mode
+        self.enable = np.uint8(0)       # used
+
+        self.alu_type = np.uint8(0)  # ("MAX", "MIN", "SUM", "EQL")?
+        self.type = np.uint8(0)  # (SDP_OP_NONE, MUL, ADD, BOTH)
+
+        self.mode = np.uint8(0)  # SDP_OP_PER_LAYER, KERNEL, POINT
 
         self.act = np.uint8(0)  # dla_act_type
         self.shift_value = np.uint8(0)  # left shift
-        self.truncate = np.uint8(0)
+        self.truncate = np.uint8(0)  # ACTIVATION_NONE, RELU, LUT, PRELU
+        # RDMA precision "ONE_BYTE", "TWO_BYTE", "TWO_BYTE" (for int8, int16, fp16)
         self.precision = np.uint8(0)
 
+        # write val to reg DP_??_ALU_SRC_VALUE ... operand value of alu ... maybe this is the value we are adding?
         self.alu_operand = np.int32(0)
-        self.mul_operand = np.int32(0)
+        self.mul_operand = np.int32(0)  # value we are multiplying by
 
-        self.cvt = Dla_sdp_cvt()
+        self.cvt = Dla_sdp_cvt()  # scale, truncate, enable, offset for alu and mul
 
     def __str__(self):
         ret = ""
@@ -226,24 +237,30 @@ class Dla_data_cube:
     # all current values are arbitrary
     def __init__(self):
         # dla engine can read from [External DRAM, CV-SRAM, DLA sub-module]
-        self.type = np.uint16(0)
-        # offset to the actual IOVA in task.address_list
-        self.address = np.int16(0)
-        self.offset = np.uint32(0)  # offset within address
+        # if you would like to write to computer use 2
+        self.type = np.uint16(2)
 
+        # set up of these 2 could occur in dla_get_dma_cube_address but just set manually?
+        # offset to the actual IOVA in task.address_list
+        self.address = np.int16(0)      # high and low used for rdma
+        self.offset = np.uint32(0)      # offset within address  .. unused?
+
+        # unused ... precision in xy_op used for precision so not sure what this is
         self.size = np.uint32(0)
-    # Cube dimensions
-        self.width = np.uint16(0)
-        self.height = np.uint16(0)
-        self.channel = np.uint16(0)
-        self.reserved0 = np.uint16(0)
+
+        # Cube dimensions
+        self.width = np.uint16(0)       # used
+        self.height = np.uint16(0)      # used
+        self.channel = np.uint16(0)     # used
+        self.reserved0 = np.uint16(0)   # unused
 
         # Stride information
-        self.line_stride = np.uint32(0)
-        self.surf_stride = np.uint32(0)
+        self.line_stride = np.uint32(0)  # used
+        # http://nvdla.org/hw/format.html is useful
+        self.surf_stride = np.uint32(0)  # surface stride
 
         # For Rubik only
-        self.plane_stride = np.uint32(0)
+        self.plane_stride = np.uint32(0)  # used for rubik only
 
     def __str__(self):
         ret = "["
@@ -270,37 +287,40 @@ class Dla_consumer:
         self.res = np.uint8(0)
 
 # LUT classes
+
+
 class Dla_lut_param:
-	# all current values are arbitrary
-	def __init__(self):
-		LUT_LINEAR_EXP_TABLE_ENTRY_LOG2 = 6
-		LUT_LINEAR_ONLY_TABLE_ENTRY_LOG2 = 8
-		self.linear_exp_table = np.zeros(
-			(1 << LUT_LINEAR_EXP_TABLE_ENTRY_LOG2)+1, dtype='int16')
-		self.linear_only_table = np.zeros(
-			(1 << LUT_LINEAR_ONLY_TABLE_ENTRY_LOG2)+1, dtype='int16')
+    # all current values are arbitrary
+    def __init__(self):
+        LUT_LINEAR_EXP_TABLE_ENTRY_LOG2 = 6
+        LUT_LINEAR_ONLY_TABLE_ENTRY_LOG2 = 8
+        self.linear_exp_table = np.zeros(
+            (1 << LUT_LINEAR_EXP_TABLE_ENTRY_LOG2)+1, dtype='int16')
+        self.linear_only_table = np.zeros(
+            (1 << LUT_LINEAR_ONLY_TABLE_ENTRY_LOG2)+1, dtype='int16')
 
-		self.linear_exp_offset = Dla_lut_offset()
-		self.linear_only_offset = Dla_lut_offset()
+        self.linear_exp_offset = Dla_lut_offset()
+        self.linear_only_offset = Dla_lut_offset()
 
-		# The start and end point of raw table,
-		# valid when raw_method=LINEAR only
-		self.linear_exp_start = np.uint64()
-		self.linear_exp_end = np.uint64()
-		self.linear_only_start = np.uint64()
-		self.linear_only_end = np.uint64()
+        # The start and end point of raw table,
+        # valid when raw_method=LINEAR only
+        self.linear_exp_start = np.uint64()
+        self.linear_exp_end = np.uint64()
+        self.linear_only_start = np.uint64()
+        self.linear_only_end = np.uint64()
 
-		self.linear_exp_underflow_slope = Dla_slope()
-		self.linear_exp_overflow_slope = Dla_slope()
-		self.linear_only_underflow_slope = Dla_slope()
-		self.linear_only_overflow_slope = Dla_slope()
+        self.linear_exp_underflow_slope = Dla_slope()
+        self.linear_exp_overflow_slope = Dla_slope()
+        self.linear_only_underflow_slope = Dla_slope()
+        self.linear_only_overflow_slope = Dla_slope()
 
-		# dla_lut_priority, when both lut are hit (or one overflow,
-		# the other underflow), which one should be selected as output
-		self.hybrid_priority = np.uint8(0)
-		self.underflow_priority = np.uint8(0)
-		self.overflow_priority = np.uint8(0)
-		self.method = np.uint8(0) # dla_lut_method
+        # dla_lut_priority, when both lut are hit (or one overflow,
+        # the other underflow), which one should be selected as output
+        self.hybrid_priority = np.uint8(0)
+        self.underflow_priority = np.uint8(0)
+        self.overflow_priority = np.uint8(0)
+        self.method = np.uint8(0)  # dla_lut_method
+
 
 class Dla_lut_offset:
     # all current values are arbitrary

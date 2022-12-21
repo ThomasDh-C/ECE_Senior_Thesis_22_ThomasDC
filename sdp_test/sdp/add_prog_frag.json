@@ -1,0 +1,251 @@
+{
+    "ops": [
+        {
+            "instr_No.": 1,
+            "reg_name": "na",
+            "addr": "0x0",
+            "data": "0x5bb7ac38",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 2,
+            "reg_name": "na",
+            "addr": "0x20",
+            "data": "0xa839593a",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 3,
+            "reg_name": "na",
+            "addr": "0x40",
+            "data": "0x58b70e2d",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 4,
+            "reg_name": "na",
+            "addr": "0x60",
+            "data": "0x5bbbb931",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 5,
+            "reg_name": "GLB_S_INTR_MASK_0",
+            "addr": "0x1004",
+            "mode": "R"
+        },
+        {
+            "instr_No.": 6,
+            "reg_name": "GLB_S_INTR_MASK_0",
+            "addr": "0x1004",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 7,
+            "reg_name": "SDP_RDMA_D_FEATURE_MODE_CFG_0",
+            "addr": "0x8070",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 8,
+            "reg_name": "SDP_RDMA_D_BRDMA_CFG_0",
+            "addr": "0x8028",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 9,
+            "reg_name": "SDP_RDMA_D_NRDMA_CFG_0",
+            "addr": "0x8040",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 10,
+            "reg_name": "SDP_RDMA_D_ERDMA_CFG_0",
+            "addr": "0x8058",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 11,
+            "reg_name": "SDP_RDMA_D_FEATURE_MODE_CFG_0",
+            "addr": "0x8070",
+            "data": "0x000000a9",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 12,
+            "reg_name": "SDP_RDMA_D_DATA_CUBE_WIDTH_0",
+            "addr": "0x800c",
+            "data": "0x00000001",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 13,
+            "reg_name": "SDP_RDMA_D_DATA_CUBE_HEIGHT_0",
+            "addr": "0x8010",
+            "data": "0x00000001",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 14,
+            "reg_name": "SDP_RDMA_D_DATA_CUBE_CHANNEL_0",
+            "addr": "0x8014",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 15,
+            "reg_name": "SDP_RDMA_D_BRDMA_CFG_0",
+            "addr": "0x8028",
+            "data": "0x0000001a",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 16,
+            "reg_name": "SDP_RDMA_D_BS_BASE_ADDR_LOW_0",
+            "addr": "0x802c",
+            "data": "0xffffffff",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 17,
+            "reg_name": "SDP_RDMA_D_BS_BASE_ADDR_HIGH_0",
+            "addr": "0x8030",
+            "data": "0xffffffff",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 18,
+            "reg_name": "SDP_RDMA_D_BS_LINE_STRIDE_0",
+            "addr": "0x8034",
+            "data": "0x00000002",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 19,
+            "reg_name": "SDP_RDMA_D_BS_SURFACE_STRIDE_0",
+            "addr": "0x8038",
+            "data": "0x00000004",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 20,
+            "reg_name": "SDP_RDMA_D_NRDMA_CFG_0",
+            "addr": "0x8040",
+            "data": "0x00000011",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 21,
+            "reg_name": "SDP_RDMA_D_ERDMA_CFG_0",
+            "addr": "0x8058",
+            "data": "0x00000011",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 22,
+            "reg_name": "SDP_D_DATA_CUBE_WIDTH_0",
+            "addr": "0x903c",
+            "data": "0x00000001",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 23,
+            "reg_name": "SDP_D_DATA_CUBE_HEIGHT_0",
+            "addr": "0x9040",
+            "data": "0x00000001",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 24,
+            "reg_name": "SDP_D_DATA_CUBE_CHANNEL_0",
+            "addr": "0x9044",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 25,
+            "reg_name": "SDP_D_DP_BS_CFG_0",
+            "addr": "0x9058",
+            "data": "0x0000005a",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 26,
+            "reg_name": "SDP_D_DP_BS_MUL_CFG_0",
+            "addr": "0x9064",
+            "data": "0x00000001",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 27,
+            "reg_name": "SDP_D_DP_BN_CFG_0",
+            "addr": "0x906c",
+            "data": "0x00000053",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 28,
+            "reg_name": "SDP_D_DP_EW_CFG_0",
+            "addr": "0x9080",
+            "data": "0x00000053",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 29,
+            "reg_name": "SDP_D_FEATURE_MODE_CFG_0",
+            "addr": "0x90b0",
+            "data": "0x00000003",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 30,
+            "reg_name": "SDP_D_DST_DMA_CFG_0",
+            "addr": "0x90b4",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 31,
+            "reg_name": "SDP_D_DATA_FORMAT_0",
+            "addr": "0x90bc",
+            "data": "0x0000000a",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 32,
+            "reg_name": "SDP_D_CVT_OFFSET_0",
+            "addr": "0x90c0",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 33,
+            "reg_name": "SDP_D_CVT_SCALE_0",
+            "addr": "0x90c4",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 34,
+            "reg_name": "SDP_D_CVT_SHIFT_0",
+            "addr": "0x90c8",
+            "data": "0x00000000",
+            "mode": "W"
+        },
+        {
+            "instr_No.": 35,
+            "addr": "0x80",
+            "mode": "R"
+        },
+        {
+            "instr_No.": 36,
+            "addr": "0xa0",
+            "mode": "R"
+        }
+    ]
+}

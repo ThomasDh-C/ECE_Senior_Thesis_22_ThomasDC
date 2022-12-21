@@ -25,6 +25,7 @@ def test_conv2d_unpadded():
     k_chan = in_chan
     k_row = 3
     k_col = 3
+    # compilerIR/ compiler intermediate representation
     x = relay.Var("x", type_annotation=relay.TensorType(
         (1, in_chan, in_row, in_col)))  # 1, 30px,30px 3ch
     y = relay.Var("y", type_annotation=relay.TensorType(
@@ -32,6 +33,7 @@ def test_conv2d_unpadded():
     conv_func = relay.Function([x, y], relay.nn.conv2d(x, y))
 
     # with ilacnn acceleration
+    # mod = module
     mod = tvm.IRModule()
     mod["main"] = conv_func
     pattern_table = ilacnn.pattern_table()

@@ -1,0 +1,1 @@
+python3 /root/3la_ILA_tensor_op//nvdla/add_driver.py --in_size_lhs 1 2 2 --in_size_rhs 1 1 2 2 --out_size 1 2 2 --op_name ilanvdla.add
