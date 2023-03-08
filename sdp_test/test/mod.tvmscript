@@ -1,0 +1,5 @@
+#[version = "0.0.5"]
+def @main(%x: Tensor[(1, 2, 3, 2), int16], %y: Tensor[(1, 2, 1, 1), int16]) {
+  nn.conv2d(%x, %y, padding=[0, 0, 0, 0], channels=1, kernel_size=[1, 1])
+}
+

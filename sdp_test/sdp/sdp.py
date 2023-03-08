@@ -252,13 +252,13 @@ def config_bias_data_cubes(xy_op: Dla_sdp_op, xy_name: str, acceleratorIR, MMIO)
                     f"SDP_D_DP_{bdc}_ALU_CFG_0", f"{bdc}_ALU_CVT_BYPASS")]
             reg = (alu_src << alu_src_shift) | (op_shift << op_shift_shift)
             acceleratorIR.append({"irfunc_No.": len(acceleratorIR)+1,
-                                  'name': f"SDP_D_DP_BS_ALU_CFG",
+                                  'name': f"SDP_D_DP_{bdc}_ALU_CFG",
                                   'alu_src': alu_src,
                                   'alu_src_shift': alu_src_shift,
                                   'op_shift': op_shift,
                                   'op_shift_shift': op_shift_shift
                                   })
-            sdp_reg_write("D_DP_BS_ALU_CFG", reg, all_macros, MMIO)
+            sdp_reg_write(f"D_DP_{bdc}_ALU_CFG", reg, all_macros, MMIO)
 
             if yt:
                 if xy_op.mode == sdp_op_per_layer:
@@ -290,16 +290,16 @@ def config_bias_data_cubes(xy_op: Dla_sdp_op, xy_name: str, acceleratorIR, MMIO)
         if not yt:
             if xy_op.mode == sdp_op_per_layer:
                 acceleratorIR.append({"irfunc_No.": len(acceleratorIR)+1,
-                                      'name': f"SDP_D_DP_BS_ALU_SRC_VALUE",
+                                      'name': f"SDP_D_DP_{bdc}_ALU_SRC_VALUE",
                                       'alu_op': xy_op.alu_operand
                                       })
-                sdp_reg_write("D_DP_BS_ALU_SRC_VALUE",
+                sdp_reg_write(f"D_DP_{bdc}_ALU_SRC_VALUE",
                               xy_op.alu_operand, all_macros, MMIO)
                 acceleratorIR.append({"irfunc_No.": len(acceleratorIR)+1,
-                                      'name': f"SDP_D_DP_BS_MUL_SRC_VALUE",
+                                      'name': f"SDP_D_DP_{bdc}_MUL_SRC_VALUE",
                                       'mul_op': xy_op.mul_operand
                                       })
-                sdp_reg_write("D_DP_BS_MUL_SRC_VALUE",
+                sdp_reg_write(f"D_DP_{bdc}_MUL_SRC_VALUE",
                               xy_op.mul_operand, all_macros, MMIO)
 
             # MUL truncate will take effect no matter whether MUL is bypassed or not
@@ -314,13 +314,13 @@ def config_bias_data_cubes(xy_op: Dla_sdp_op, xy_name: str, acceleratorIR, MMIO)
 
             reg = (mul_src << mul_src_shift) | (trunc << trunc_shift)
             acceleratorIR.append({"irfunc_No.": len(acceleratorIR)+1,
-                                  'name': f"SDP_D_DP_BS_MUL_CFG",
+                                  'name': f"SDP_D_DP_{bdc}_MUL_CFG",
                                   'mul_src': mul_src,
                                   'mul_src_shift': mul_src_shift,
                                   'trunc': trunc,
                                   'trunc_shift': trunc_shift
                                   })
-            sdp_reg_write("D_DP_BS_MUL_CFG", reg, all_macros, MMIO)
+            sdp_reg_write(f"D_DP_{bdc}_MUL_CFG", reg, all_macros, MMIO)
         else:
             if (xy_op.type == sdp_op_mul | xy_op.type == sdp_op_both):
                 mul_src = all_macros[field_enum("SDP_D_DP_BS_ALU_CFG_0", "BS_ALU_SRC", ("MEM", "REG")[

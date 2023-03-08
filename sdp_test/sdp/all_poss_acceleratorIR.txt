@@ -1,4 +1,4 @@
-SDP_S_POINTER: group_id, group_id_shift
+SDP_S_POINTER: group_id, group_id_shift 
 SDPRDMA_S_POINTER: rdma_group_id, rdma_group_id_shift
 SDP_D_PERF_ENABLE: dma_stats_enable, dma_stats_enable_shift, lut_stats_enable, lut_stats_enable_shift, sat_stats_enable, sat_stats_enable_shift, nan_stats_enable, nan_stats_enable_shift
 SDPRDMA_D_OP_ENABLE: enable
@@ -16,11 +16,8 @@ SDP_D_DP_EW_ALU_CVT_SCALE_VALUE: scale
 SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE: truncate
 SDP_D_DP_BS_ALU_SRC_VALUE: alu_op
 SDP_D_DP_BS_MUL_SRC_VALUE: mul_op
-
-# concerning that these differ
 SDP_D_DP_BS_MUL_CFG: mul_src, mul_src_shift, trunc, trunc_shift
 SDP_D_DP_EW_MUL_CFG: mul_src, mul_src_shift, mul_cvt_bypass, mul_cvt_bypass_shift
-
 SDP_D_DP_EW_MUL_SRC_VALUE: mul_op
 SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE: offset
 SDP_D_DP_EW_MUL_CVT_SCALE_VALUE: scale
@@ -39,9 +36,6 @@ SDPRDMA_D_SRC_BASE_ADDR_HIGH: high
 SDPRDMA_D_SRC_LINE_STRIDE: line_stride
 SDPRDMA_D_SRC_SURFACE_STRIDE: surf_stride
 SDPRDMA_D_SRC_DMA_CFG: ram_type
-SDP_D_DATA_CUBE_WIDTH: width
-SDP_D_DATA_CUBE_HEIGHT: height
-SDP_D_DATA_CUBE_CHANNEL: channel
 SDP_D_DST_BASE_ADDR_HIGH: high
 SDP_D_DST_BASE_ADDR_LOW: low
 SDP_D_DST_LINE_STRIDE: line_stride

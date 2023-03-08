@@ -139,5 +139,5 @@ def test_conv2d_padded():
 
 
 if __name__ == "__main__":
-    test_conv2d_unpadded()
-    # test_conv2d_padded()
+    # test_conv2d_unpadded()
+    test_conv2d_padded()

@@ -1,0 +1,131 @@
+Couldn't find register matches in excel for the following that appeared in the code:
+	- CACC_D_CYA
+	- CDMA_D_RESERVED_Y_CFG
+	- CDMA_D_RESERVED_X_CFG
+	- CDMA_D_CYA
+	- CDP_D_CYA
+	- CDP_RDMA_D_CYA
+	- CSC_D_CYA
+	- CVIF_CFG_WR_WEIGHT_0
+	- CVIF_CFG_RD_WEIGHT_1
+	- CVIF_CFG_OUTSTANDING_CNT
+	- CVIF_CFG_WR_WEIGHT_1
+	- CVIF_CFG_RD_WEIGHT_2
+	- CVIF_CFG_RD_WEIGHT_0
+	- PDP_RDMA_D_CYA
+	- PDP_D_CYA
+Note CYA does not appear anywhere in the HW arch docs
+
+The following registers did not have documentation in the HW files
+	-GLB_HW_VERSION - HW version of NVDLA
+	-GLB_INTR_SET - Interrupt set control
+	-GLB_INTR_STATUS - Interrupt status
+	-MCIF_STATUS - Idle status of MCIF
+	-SRAMIF_CFG_RD_WEIGHT_0 - Register0 to control the read weight of clients in MCIF
+	-SRAMIF_CFG_RD_WEIGHT_1 - Register1 to control the read weight of clients in MCIF
+	-SRAMIF_CFG_RD_WEIGHT_2 - Register2 to control the read weight of clients in MCIF
+	-SRAMIF_CFG_WR_WEIGHT_0 - Register0 to control the write weight of clients in MCIF
+	-SRAMIF_CFG_WR_WEIGHT_1 - Register1 to control the write weight of clients in MCIF
+	-SRAMIF_CFG_OUTSTANDING_CNT - Outstanding AXI transactions in unit of 64Byte
+	-SRAMIF_STATUS - Idle status of SRAMIF
+	-BDMA_STATUS - Status register: idle status of bdma, group0 and group1
+	-BDMA_STAUS_GRP0_READ_STALL - Counting register of group0 read stall
+	-BDMA_STATUS_GRP0_WRITE_STALL - Counting register of group0 write stall
+	-BDMA_STAUS_GRP1_READ_STALL - Counting register of group1 read stall
+	-BDMA_STATUS_GRP1_WRITE_STALL - Counting register of group1 write stall
+	-CDMA_S_STATUS - Idle status of two register groups
+	-CDMA_S_CBUF_FLUSH_STATUS - Indicates whether CBUF flush is finished after reset.
+	-CDMA_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-CDMA_RESERVED - This address is reserved
+	-CDMA_RESERVED - This address is reserved
+	-CDMA_D_NAN_INPUT_DATA_NUM - Count NaN number in input data cube, update per layer
+	-CDMA_D_NAN_INPUT_WEIGHT_NUM - Count NaN number in weight kernels, update per layer
+	-CDMA_D_INF_INPUT_DATA_NUM - Count infinity number in input data cube, update per layer
+	-CDMA_D_INF_INPUT_WEIGHT_NUM - Count infinity number in weight kernels, update per layer
+	-CDMA_D_PERF_DAT_READ_STALL - Count blocking cycles of read request of input data, update per layer
+	-CDMA_D_PERF_WT_READ_STALL - Count blocking cycles of read request of weight data, update per layer
+	-CDMA_D_PERF_DAT_READ_LATENCY - Count total latency cycles of read response of input data, update per layer
+	-CDMA_D_PERF_WT_READ_LATENCY - Count total latency cycles of read request of weight data, update per layer
+	-CDMA_D_PIXEL_OFFSET - Image-in mode - guessed address
+	-CDMA_D_DAIN_ADDR_HIGH_1 - Image-in mode - guessed address
+	-CDMA_D_DAIN_ADDR_LOW_1 - Image-in mode - guessed address
+	-CDMA_D_MEAN_FORMAT - Image-in mode - guessed address
+	-CDMA_D_MEAN_GLOBAL_0 - Image-in mode - guessed address
+	-CDMA_D_MEAN_GLOBAL_1 - Image-in mode - guessed address
+	-CDMA_D_NAN_FLUSH_TO_ZERO - FP16 data format - guessed address
+	-CDMA_D_NAN_INPUT_DATA_NUM - FP16 data format - guessed address
+	-CDMA_D_NAN_INPUT_WEIGHT_NUM - FP16 data format - guessed address
+	-CDMA_D_INF_INPUT_DATA_NUM - FP16 data format - guessed address
+	-CDMA_D_INF_INPUT_WEIGHT_NUM - FP16 data format - guessed address
+	-CDMA_D_WGS_ADDR_HIGH - Weight compression - guessed address
+	-CDMA_D_WGS_ADDR_LOW - Weight compression - guessed address
+	-CDMA_D_WMB_ADDR_HIGH - Weight compression - guessed address
+	-CDMA_D_WMB_ADDR_LOW - Weight compression - guessed address
+	-CDMA_D_WMB_BYTES - Weight compression - guessed address
+	-CSC_S_STATUS - Idle status of two register groups
+	-CSC_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-CSC_D_POST_Y_EXTENSION - Image-in mode - guessed address
+	-CSC_D_WMB_BYTES - Weight compression - guessed address
+	-CMAC_A_S_STATUS - Idle status of two register groups
+	-CMAC_A_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-CMAC_B_S_STATUS - Idle status of two register groups
+	-CMAC_B_S_POINTER - Pointer for CSB master and data path to access groups
+	-CMAC_B_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-CMAC_B_D_MISC_CFG - Configuration of operation: convolution mode, precision, etc
+	-CACC_S_STATUS - Idle status of two register groups
+	-CACC_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-CACC_D_OUT_SATURATION - Output saturation count
+	-SDP_RDMA_S_STATUS - Idle status of two register groups
+	-SDP_RDMA_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-SDP_RDMA_D_STATUS_NAN_INPUT_NUM - Input NaN element number
+	-SDP_RDMA_D_STATUS_INF_INPUT_NUM - Input Infinity element number
+	-SDP_RDMA_D_PERF_MRDMA_READ_STALL - Count stall cycles of M read DMA for one layer
+	-SDP_RDMA_D_PERF_BRDMA_READ_STALL - Count stall cycles of B read DMA for one layer
+	-SDP_RDMA_D_PERF_NRDMA_READ_STALL - Count stall cycles of N read DMA for one layer
+	-SDP_RDMA_D_PERF_ERDMA_READ_STALL - Count stall cycles of E read DMA for one layer
+	-SDP_S_STATUS - Idle status of two register groups
+	-SDP_S_LUT_ACCESS_DATA - Data register of read or write LUT
+	-SDP_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-SDP_D_STATUS - Output of equal mode
+	-SDP_D_STATUS_NAN_INPUT_NUM - Input NaN element number
+	-SDP_D_STATUS_INF_INPUT_NUM - Input Infinity element number
+	-SDP_D_STATUS_NAN_OUTPUT_NUM - Output NaN element number
+	-SDP_D_PERF_WDMA_WRITE_STALL - Count stall cycles of write DMA for one layer
+	-SDP_D_PERF_LUT_UFLOW - Element number of both table underflow
+	-SDP_D_PERF_LUT_OFLOW - Element number of both table overflow
+	-SDP_D_PERF_OUT_SATURATION - Element number of both table saturation
+	-SDP_D_PERF_LUT_HYBRID - Element number of both hit, or both miss situation that element underflow one table and at the same time overflow the other.
+	-SDP_D_PERF_LUT_LE_HIT - Element number of only LE table hit
+	-SDP_D_PERF_LUT_LO_HIT - Element number of only LO table hit
+	-PDP_RDMA_S_STATUS - Idle status of two register groups
+	-PDP_RDMA_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-PDP_RDMA_D_PERF_READ_STALL - Element number that for both LUT underflow.
+	-PDP_S_STATUS - Idle status of two register groups
+	-PDP_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-PDP_D_INF_INPUT_NUM - Input infinity element number
+	-PDP_D_NAN_INPUT_NUM - Input NaN element number
+	-PDP_D_NAN_OUTPUT_NUM - Output NaN element number
+	-PDP_D_PERF_WRITE_STALL - Counting stalls of write requests
+	-CDP_RDMA_S_STATUS - Idle status of two register groups
+	-CDP_RDMA_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-CDP_RDMA_D_SRC_COMPRESSION_EN - This register is not used in OpenDLA 1.0
+	-CDP_RDMA_D_OPERATION_MODE - Split number
+	-CDP_RDMA_D_PERF_READ_STALL - Counting stalls of read requests
+	-CDP_S_STATUS - Idle status of two register groups
+	-CDP_S_LUT_ACCESS_DATA - Data register of read or write LUT
+	-CDP_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-CDP_D_DST_COMPRESSION_EN - This register is not used in OpenDLA 1.0
+	-CDP_D_NAN_INPUT_NUM - input NaN element number
+	-CDP_D_INF_INPUT_NUM - input Infinity element number
+	-CDP_D_NAN_OUTPUT_NUM - output NaN element number
+	-CDP_D_OUT_SATURATION - saturated element number.
+	-CDP_D_PERF_WRITE_STALL - Element number that for both LUT under-flow
+	-CDP_D_PERF_LUT_UFLOW - Element number that for both LUT under-flow
+	-CDP_D_PERF_LUT_OFLOW - Element number that for both LUT over-flow
+	-CDP_D_PERF_LUT_HYBRID - Element number that for both LUT miss, one is over-flow and the other is overflow
+	-CDP_D_PERF_LUT_LE_HIT - Element number that for LE_lut hit only
+	-CDP_D_PERF_LUT_LO_HIT - Element number that for LO_lut hit only
+	-RUBIK_S_STATUS - Idle status of two register groups
+	-RUBIK_D_OP_ENABLE - Set it to 1 to kick off operation for current register group
+	-RUBIK_D_PERF_READ_STALL - RD_STALL Count stall cycles of read DMA for one layer
+	-RUBIK_D_PERF_WRITE_STALL - WR_STALL Count stall cycles of write DMA for one layer

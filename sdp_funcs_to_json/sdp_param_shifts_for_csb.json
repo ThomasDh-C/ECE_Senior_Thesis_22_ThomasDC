@@ -1,0 +1,666 @@
+{
+    "SDP_S_STATUS": {
+        "addr": "0x000",
+        "shifts": {
+            "UNKNOWN": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_S_POINTER": {
+        "addr": "0x004",
+        "shifts": {
+            "NVDLA_SDP_S_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_S_LUT_ACCESS_CFG": {
+        "addr": "0x008",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_ADDR": [
+                0,
+                9
+            ],
+            "NVDLA_SDP_S_LUT_TABLE_ID": [
+                16,
+                16
+            ],
+            "NVDLA_SDP_S_LUT_ACCESS_TYPE": [
+                17,
+                17
+            ]
+        }
+    },
+    "SDP_S_LUT_ACCESS_DATA": {
+        "addr": "0x00c",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_ACCESS_DATA": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_S_LUT_CFG": {
+        "addr": "0x010",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LE_FUNCTION": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_S_LUT_UFLOW_PRIORITY": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_S_LUT_OFLOW_PRIORITY": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_S_LUT_HYBRID_PRIORITY": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_S_LUT_INFO": {
+        "addr": "0x014",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LE_INDEX_OFFSET": [
+                0,
+                7
+            ],
+            "NVDLA_SDP_S_LUT_LE_INDEX_SELECT": [
+                8,
+                15
+            ],
+            "NVDLA_SDP_S_LUT_LO_INDEX_SELECT": [
+                16,
+                23
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_START": {
+        "addr": "0x018",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LE_START": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_END": {
+        "addr": "0x01c",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LE_END": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_START": {
+        "addr": "0x020",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LO_START": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_END": {
+        "addr": "0x024",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LO_END": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_SLOPE_SCALE": {
+        "addr": "0x028",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LE_SLOPE_UFLOW_SCALE": [
+                0,
+                15
+            ],
+            "NVDLA_SDP_S_LUT_LE_SLOPE_OFLOW_SCALE": [
+                16,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_SLOPE_SHIFT": {
+        "addr": "0x02c",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LE_SLOPE_UFLOW_SHIFT": [
+                0,
+                4
+            ],
+            "NVDLA_SDP_S_LUT_LE_SLOPE_OFLOW_SHIFT": [
+                5,
+                9
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_SLOPE_SCALE": {
+        "addr": "0x030",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LO_SLOPE_UFLOW_SCALE": [
+                0,
+                15
+            ],
+            "NVDLA_SDP_S_LUT_LO_SLOPE_OFLOW_SCALE": [
+                16,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_SLOPE_SHIFT": {
+        "addr": "0x034",
+        "shifts": {
+            "NVDLA_SDP_S_LUT_LO_SLOPE_UFLOW_SHIFT": [
+                0,
+                4
+            ],
+            "NVDLA_SDP_S_LUT_LO_SLOPE_OFLOW_SHIFT": [
+                5,
+                9
+            ]
+        }
+    },
+    "SDP_D_OP_ENABLE": {
+        "addr": "0x038",
+        "shifts": {
+            "NVDLA_SDP_D_OP_ENABLE": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_D_DATA_CUBE_WIDTH": {
+        "addr": "0x03c",
+        "shifts": {
+            "NVDLA_SDP_D_DATA_CUBE_WIDTH": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_D_DATA_CUBE_HEIGHT": {
+        "addr": "0x040",
+        "shifts": {
+            "NVDLA_SDP_D_DATA_CUBE_HEIGHT": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_D_DATA_CUBE_CHANNEL": {
+        "addr": "0x044",
+        "shifts": {
+            "NVDLA_SDP_D_DATA_CUBE_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_D_DST_BASE_ADDR_LOW": {
+        "addr": "0x048",
+        "shifts": {
+            "NVDLA_SDP_D_DST_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DST_BASE_ADDR_HIGH": {
+        "addr": "0x04c",
+        "shifts": {
+            "NVDLA_SDP_D_DST_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DST_LINE_STRIDE": {
+        "addr": "0x050",
+        "shifts": {
+            "NVDLA_SDP_D_DST_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DST_SURFACE_STRIDE": {
+        "addr": "0x054",
+        "shifts": {
+            "NVDLA_SDP_D_DST_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_BS_CFG": {
+        "addr": "0x058",
+        "shifts": {
+            "NVDLA_SDP_D_BS_BYPASS": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_BS_ALU_BYPASS": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_D_BS_ALU_ALGO": [
+                2,
+                3
+            ],
+            "NVDLA_SDP_D_BS_MUL_BYPASS": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_D_BS_MUL_PRELU": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_D_BS_RELU_BYPASS": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_D_DP_BS_ALU_CFG": {
+        "addr": "0x05c",
+        "shifts": {
+            "NVDLA_SDP_D_BS_ALU_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_BS_ALU_SHIFT_VALUE": [
+                8,
+                13
+            ]
+        }
+    },
+    "SDP_D_DP_BS_ALU_SRC_VALUE": {
+        "addr": "0x060",
+        "shifts": {
+            "NVDLA_SDP_D_DP_BS_ALU_SRC_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BS_MUL_CFG": {
+        "addr": "0x064",
+        "shifts": {
+            "NVDLA_SDP_D_BS_MUL_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_BS_MUL_SHIFT_VALUE": [
+                8,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BS_MUL_SRC_VALUE": {
+        "addr": "0x068",
+        "shifts": {
+            "NVDLA_SDP_D_DP_BS_MUL_SRC_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BN_CFG": {
+        "addr": "0x06c",
+        "shifts": {
+            "NVDLA_SDP_D_BN_BYPASS": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_BN_ALU_BYPASS": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_D_BN_ALU_ALGO": [
+                2,
+                3
+            ],
+            "NVDLA_SDP_D_BN_MUL_BYPASS": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_D_BN_MUL_PRELU": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_D_BN_RELU_BYPASS": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_D_DP_BN_ALU_CFG": {
+        "addr": "0x070",
+        "shifts": {
+            "NVDLA_SDP_D_BN_ALU_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_BN_ALU_SHIFT_VALUE": [
+                8,
+                13
+            ]
+        }
+    },
+    "SDP_D_DP_BN_ALU_SRC_VALUE": {
+        "addr": "0x074",
+        "shifts": {
+            "NVDLA_SDP_D_DP_BN_ALU_SRC_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BN_MUL_CFG": {
+        "addr": "0x078",
+        "shifts": {
+            "NVDLA_SDP_D_BN_MUL_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_BN_MUL_SHIFT_VALUE": [
+                8,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BN_MUL_SRC_VALUE": {
+        "addr": "0x07c",
+        "shifts": {
+            "NVDLA_SDP_D_DP_BN_MUL_SRC_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_EW_CFG": {
+        "addr": "0x080",
+        "shifts": {
+            "NVDLA_SDP_D_EW_BYPASS": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_EW_ALU_BYPASS": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_D_EW_ALU_ALGO": [
+                2,
+                3
+            ],
+            "NVDLA_SDP_D_EW_MUL_BYPASS": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_D_EW_MUL_PRELU": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_D_EW_LUT_BYPASS": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CFG": {
+        "addr": "0x084",
+        "shifts": {
+            "NVDLA_SDP_D_EW_ALU_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_EW_ALU_CVT_BYPASS": [
+                1,
+                1
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_SRC_VALUE": {
+        "addr": "0x088",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_ALU_SRC_VALUE": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE": {
+        "addr": "0x08c",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CVT_SCALE_VALUE": {
+        "addr": "0x090",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_ALU_CVT_SCALE_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE": {
+        "addr": "0x094",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE": [
+                0,
+                5
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CFG": {
+        "addr": "0x098",
+        "shifts": {
+            "NVDLA_SDP_D_EW_MUL_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_EW_MUL_CVT_BYPASS": [
+                1,
+                1
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_SRC_VALUE": {
+        "addr": "0x09c",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_MUL_SRC_VALUE": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE": {
+        "addr": "0x0a0",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CVT_SCALE_VALUE": {
+        "addr": "0x0a4",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_MUL_CVT_SCALE_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE": {
+        "addr": "0x0a8",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE": [
+                0,
+                5
+            ]
+        }
+    },
+    "SDP_D_DP_EW_TRUNCATE_VALUE": {
+        "addr": "0x0ac",
+        "shifts": {
+            "NVDLA_SDP_D_DP_EW_TRUNCATE_VALUE": [
+                0,
+                9
+            ]
+        }
+    },
+    "SDP_D_FEATURE_MODE_CFG": {
+        "addr": "0x0b0",
+        "shifts": {
+            "NVDLA_SDP_D_FLYING_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_OUTPUT_DST": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_D_WINOGRAD": [
+                2,
+                2
+            ],
+            "NVDLA_SDP_D_NAN_TO_ZERO": [
+                3,
+                3
+            ],
+            "NVDLA_SDP_D_BATCH_NUMBER": [
+                8,
+                12
+            ]
+        }
+    },
+    "SDP_D_DST_DMA_CFG": {
+        "addr": "0x0b4",
+        "shifts": {
+            "NVDLA_SDP_D_DST_DMA_CFG": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_D_DST_BATCH_STRIDE": {
+        "addr": "0x0b8",
+        "shifts": {
+            "NVDLA_SDP_D_DST_BATCH_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DATA_FORMAT": {
+        "addr": "0x0bc",
+        "shifts": {
+            "NVDLA_SDP_D_PROC_PRECISION": [
+                0,
+                1
+            ],
+            "NVDLA_SDP_D_OUT_PRECISION": [
+                2,
+                3
+            ]
+        }
+    },
+    "SDP_D_CVT_OFFSET": {
+        "addr": "0x0c0",
+        "shifts": {
+            "NVDLA_SDP_D_CVT_OFFSET": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_CVT_SCALE": {
+        "addr": "0x0c4",
+        "shifts": {
+            "NVDLA_SDP_D_CVT_SCALE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_CVT_SHIFT": {
+        "addr": "0x0c8",
+        "shifts": {
+            "NVDLA_SDP_D_CVT_SHIFT": [
+                0,
+                5
+            ]
+        }
+    },
+    "SDP_D_STATUS": {
+        "addr": "0x0cc",
+        "shifts": {
+            "UNKNOWN": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_D_STATUS_NAN_INPUT_NUM": {
+        "addr": "0x0d0",
+        "shifts": {
+            "UNKNOWN": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_D_STATUS_INF_INPUT_NUM": {
+        "addr": "0x0d4",
+        "shifts": {
+            "UNKNOWN": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_D_STATUS_NAN_OUTPUT_NUM": {
+        "addr": "0x0d8",
+        "shifts": {
+            "UNKNOWN": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_D_PERF_ENABLE": {
+        "addr": "0x0dc",
+        "shifts": {
+            "NVDLA_SDP_D_PERF_DMA_EN": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_D_PERF_LUT_EN": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_D_PERF_SAT_EN": [
+                2,
+                2
+            ],
+            "NVDLA_SDP_D_PERF_NAN_INF_COUNT_EN": [
+                3,
+                3
+            ]
+        }
+    }
+}

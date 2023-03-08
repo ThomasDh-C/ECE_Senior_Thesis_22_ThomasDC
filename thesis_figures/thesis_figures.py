@@ -1,0 +1,42 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+range_nums = np.arange(-2, 3, .1)
+plt.plot(range_nums, [max(0, num) for num in range_nums])
+plt.ylabel("RELU(x)")
+plt.xlabel("x")
+plt.title("RELU Activation function")
+plt.grid()
+plt.legend(["RELU"], loc='upper right')
+plt.savefig("relu_high_level.pdf")
+plt.show()
+
+a = 3
+plt.plot(range_nums, [(num*a, num)[num > 0] for num in range_nums])
+plt.ylabel("PRELU(x)")
+plt.xlabel("x")
+plt.title("PRELU Activation function")
+plt.grid()
+plt.legend([f"PRELU (a = {a})"], loc='upper right')
+plt.savefig("prelu_high_level.pdf")
+plt.show()
+
+range_nums = np.arange(-5, 5, .1)
+plt.plot(range_nums, [1/(1+np.exp(-1*num)) for num in range_nums])
+plt.ylabel("Sigmoid(x)")
+plt.xlabel("x")
+plt.title("Sigmoid Activation function")
+plt.grid()
+plt.legend([f"Sigmoid"])
+plt.savefig("sigmoid_high_level.pdf")
+plt.show()
+
+plt.plot(range_nums, [(1-np.exp(-2*num))/(1+np.exp(-2*num))
+         for num in range_nums])
+plt.ylabel("Hyperbolic Tangent(x)")
+plt.xlabel("x")
+plt.title("Hyperbolic Tangent Activation function")
+plt.grid()
+plt.legend([f"Hyperbolic Tangent"])
+plt.savefig("hyp_tan_high_level.pdf")
+plt.show()

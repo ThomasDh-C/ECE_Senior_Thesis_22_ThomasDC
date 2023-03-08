@@ -1,0 +1,3328 @@
+{
+    "GLB_INTR_MASK": {
+        "addr": "0x0004",
+        "shifts": {
+            "NVDLA_GLB_SDP_DONE_MASK0": [
+                0,
+                0
+            ],
+            "NVDLA_GLB_SDP_DONE_MASK1": [
+                1,
+                1
+            ],
+            "NVDLA_GLB_CDP_DONE_MASK0": [
+                2,
+                2
+            ],
+            "NVDLA_GLB_CDP_DONE_MASK1": [
+                3,
+                3
+            ],
+            "NVDLA_GLB_PDP_DONE_MASK0": [
+                4,
+                4
+            ],
+            "NVDLA_GLB_PDP_DONE_MASK1": [
+                5,
+                5
+            ],
+            "NVDLA_GLB_BDMA_DONE_MASK0": [
+                6,
+                6
+            ],
+            "NVDLA_GLB_BDMA_DONE_MASK1": [
+                7,
+                7
+            ],
+            "NVDLA_GLB_RUBIK_DONE_MASK0": [
+                8,
+                8
+            ],
+            "NVDLA_GLB_RUBIK_DONE_MASK1": [
+                9,
+                9
+            ],
+            "NVDLA_GLB_CDMA_DAT_DONE_MASK0": [
+                16,
+                16
+            ],
+            "NVDLA_GLB_CDMA_DAT_DONE_MASK1": [
+                17,
+                17
+            ],
+            "NVDLA_GLB_CDMA_WT_DONE_MASK0": [
+                18,
+                18
+            ],
+            "NVDLA_GLB_CDMA_WT_DONE_MASK1": [
+                19,
+                19
+            ],
+            "NVDLA_GLB_CACC_DONE_MASK0": [
+                20,
+                20
+            ],
+            "NVDLA_GLB_CACC_DONE_MASK1": [
+                21,
+                21
+            ]
+        }
+    },
+    "MCIF_CFG_RD_WEIGHT_0": {
+        "addr": "0x2000",
+        "shifts": {
+            "NVDLA_MCIF_RD_WEIGHT_BDMA": [
+                0,
+                7
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_SDP": [
+                8,
+                15
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_PDP": [
+                16,
+                23
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_CDP": [
+                24,
+                31
+            ]
+        }
+    },
+    "MCIF_CFG_RD_WEIGHT_1": {
+        "addr": "0x2004",
+        "shifts": {
+            "NVDLA_MCIF_RD_WEIGHT_SDP_B": [
+                0,
+                7
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_SDP_N": [
+                8,
+                15
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_SDP_E": [
+                16,
+                23
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_CDMA_DAT": [
+                24,
+                31
+            ]
+        }
+    },
+    "MCIF_CFG_RD_WEIGHT_2": {
+        "addr": "0x2008",
+        "shifts": {
+            "NVDLA_MCIF_RD_WEIGHT_CDMA_WT": [
+                0,
+                7
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_RBK": [
+                8,
+                15
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_RSV_1": [
+                16,
+                23
+            ],
+            "NVDLA_MCIF_RD_WEIGHT_RSV_0": [
+                24,
+                31
+            ]
+        }
+    },
+    "MCIF_CFG_WR_WEIGHT_0": {
+        "addr": "0x200c",
+        "shifts": {
+            "NVDLA_MCIF_WR_WEIGHT_BDMA": [
+                0,
+                7
+            ],
+            "NVDLA_MCIF_WR_WEIGHT_SDP": [
+                8,
+                15
+            ],
+            "NVDLA_MCIF_WR_WEIGHT_PDP": [
+                16,
+                23
+            ],
+            "NVDLA_MCIF_WR_WEIGHT_CDP": [
+                24,
+                31
+            ]
+        }
+    },
+    "MCIF_CFG_WR_WEIGHT_1": {
+        "addr": "0x2010",
+        "shifts": {
+            "NVDLA_MCIF_WR_WEIGHT_RBK": [
+                0,
+                7
+            ],
+            "NVDLA_MCIF_WR_WEIGHT_RSV_2": [
+                8,
+                15
+            ],
+            "NVDLA_MCIF_WR_WEIGHT_RSV_1": [
+                16,
+                23
+            ],
+            "NVDLA_MCIF_WR_WEIGHT_RSV_0": [
+                24,
+                31
+            ]
+        }
+    },
+    "MCIF_CFG_OUTSTANDING_CNT": {
+        "addr": "0x2014",
+        "shifts": {
+            "NVDLA_MCIF_RD_OS_CNT": [
+                0,
+                7
+            ],
+            "NVDLA_MCIF_WR_OS_CNT": [
+                8,
+                15
+            ]
+        }
+    },
+    "BDMA_CFG_SRC_ADDR_LOW": {
+        "addr": "0x4000",
+        "shifts": {
+            "NVDLA_BDMA_V32": [
+                5,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_SRC_ADDR_HIGH": {
+        "addr": "0x4004",
+        "shifts": {
+            "NVDLA_BDMA_V8": [
+                0,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_DST_ADDR_LOW": {
+        "addr": "0x4008",
+        "shifts": {
+            "NVDLA_BDMA_V32": [
+                5,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_DST_ADDR_HIGH": {
+        "addr": "0x400c",
+        "shifts": {
+            "NVDLA_BDMA_V8": [
+                0,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_LINE": {
+        "addr": "0x4010",
+        "shifts": {
+            "NVDLA_BDMA_SIZE": [
+                0,
+                12
+            ]
+        }
+    },
+    "BDMA_CFG_CMD": {
+        "addr": "0x4014",
+        "shifts": {
+            "NVDLA_BDMA_SRC_RAM_TYPE": [
+                0,
+                0
+            ],
+            "NVDLA_BDMA_DST_RAM_TYPE": [
+                1,
+                1
+            ]
+        }
+    },
+    "BDMA_CFG_LINE_REPEAT": {
+        "addr": "0x4018",
+        "shifts": {
+            "NVDLA_BDMA_NUMBER": [
+                0,
+                23
+            ]
+        }
+    },
+    "BDMA_CFG_SRC_LINE": {
+        "addr": "0x401c",
+        "shifts": {
+            "NVDLA_BDMA_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_DST_LINE": {
+        "addr": "0x4020",
+        "shifts": {
+            "NVDLA_BDMA_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_SURF_REPEAT": {
+        "addr": "0x4024",
+        "shifts": {
+            "NVDLA_BDMA_NUMBER": [
+                0,
+                23
+            ]
+        }
+    },
+    "BDMA_CFG_SRC_SURF": {
+        "addr": "0x4028",
+        "shifts": {
+            "NVDLA_BDMA_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_DST_SURF": {
+        "addr": "0x402c",
+        "shifts": {
+            "NVDLA_BDMA_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "BDMA_CFG_OP": {
+        "addr": "0x4030",
+        "shifts": {
+            "NVDLA_BDMA_EN": [
+                0,
+                0
+            ]
+        }
+    },
+    "BDMA_CFG_LAUNCH0": {
+        "addr": "0x4034",
+        "shifts": {
+            "NVDLA_BDMA_GRP0_LAUNCH": [
+                0,
+                0
+            ]
+        }
+    },
+    "BDMA_CFG_LAUNCH1": {
+        "addr": "0x4038",
+        "shifts": {
+            "NVDLA_BDMA_GRP1_LAUNCH": [
+                0,
+                0
+            ]
+        }
+    },
+    "BDMA_CFG_STATUS": {
+        "addr": "0x403c",
+        "shifts": {
+            "NVDLA_BDMA_STALL_COUNT_EN": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDMA_S_POINTER": {
+        "addr": "0x5004",
+        "shifts": {
+            "NVDLA_CDMA_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDMA_S_ARBITER": {
+        "addr": "0x5008",
+        "shifts": {
+            "NVDLA_CDMA_ARB_WEIGHT": [
+                0,
+                3
+            ],
+            "NVDLA_CDMA_ARB_WMB": [
+                16,
+                19
+            ]
+        }
+    },
+    "CDMA_D_MISC_CFG": {
+        "addr": "0x5014",
+        "shifts": {
+            "NVDLA_CDMA_CONV_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_CDMA_IN_PRECISION": [
+                8,
+                9
+            ],
+            "NVDLA_CDMA_PROC_PRECISION": [
+                12,
+                13
+            ],
+            "NVDLA_CDMA_DATA_REUSE": [
+                16,
+                16
+            ],
+            "NVDLA_CDMA_WEIGHT_REUSE": [
+                20,
+                20
+            ],
+            "NVDLA_CDMA_SKIP_DATA_RLS": [
+                24,
+                24
+            ],
+            "NVDLA_CDMA_SKIP_WEIGHT_RLS": [
+                28,
+                28
+            ]
+        }
+    },
+    "CDMA_D_DATAIN_FORMAT": {
+        "addr": "0x5018",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_FORMAT": [
+                0,
+                0
+            ],
+            "NVDLA_CDMA_PIXEL_FORMAT": [
+                8,
+                13
+            ],
+            "NVDLA_CDMA_PIXEL_MAPPING": [
+                16,
+                16
+            ],
+            "NVDLA_CDMA_PIXEL_SIGN_OVERRIDE": [
+                20,
+                20
+            ]
+        }
+    },
+    "CDMA_D_DATAIN_SIZE_0": {
+        "addr": "0x501c",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_WIDTH": [
+                0,
+                12
+            ],
+            "NVDLA_CDMA_DATAIN_HEIGHT": [
+                16,
+                28
+            ]
+        }
+    },
+    "CDMA_D_DATAIN_SIZE_1": {
+        "addr": "0x5020",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "CDMA_D_DATAIN_SIZE_EXT_0": {
+        "addr": "0x5024",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_WIDTH_EXT": [
+                0,
+                12
+            ],
+            "NVDLA_CDMA_DATAIN_HEIGHT_EXT": [
+                16,
+                28
+            ]
+        }
+    },
+    "CDMA_D_PIXEL_OFFSET": {
+        "addr": "0x5028",
+        "shifts": {
+            "NVDLA_CDMA_PIXEL_X_OFFSET": [
+                0,
+                4
+            ],
+            "NVDLA_CDMA_PIXEL_Y_OFFSET": [
+                16,
+                18
+            ]
+        }
+    },
+    "CDMA_D_DAIN_RAM_TYPE": {
+        "addr": "0x502c",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDMA_D_DAIN_ADDR_HIGH_0": {
+        "addr": "0x5030",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_ADDR_HIGH_0": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDMA_D_DAIN_ADDR_LOW_0": {
+        "addr": "0x5034",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_ADDR_LOW_0": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_DAIN_ADDR_HIGH_1": {
+        "addr": "0x5038",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_ADDR_HIGH_1": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDMA_D_DAIN_ADDR_LOW_1": {
+        "addr": "0x503c",
+        "shifts": {
+            "NVDLA_CDMA_DATAIN_ADDR_LOW_1": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_LINE_STRIDE": {
+        "addr": "0x5040",
+        "shifts": {
+            "NVDLA_CDMA_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_LINE_UV_STRIDE": {
+        "addr": "0x5044",
+        "shifts": {
+            "NVDLA_CDMA_UV_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_SURF_STRIDE": {
+        "addr": "0x5048",
+        "shifts": {
+            "NVDLA_CDMA_SURF_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_DAIN_MAP": {
+        "addr": "0x504c",
+        "shifts": {
+            "NVDLA_CDMA_LINE_PACKED": [
+                0,
+                0
+            ],
+            "NVDLA_CDMA_SURF_PACKED": [
+                16,
+                16
+            ]
+        }
+    },
+    "CDMA_D_BATCH_NUMBER": {
+        "addr": "0x5058",
+        "shifts": {
+            "NVDLA_CDMA_BATCHES": [
+                0,
+                4
+            ]
+        }
+    },
+    "CDMA_D_BATCH_STRIDE": {
+        "addr": "0x505c",
+        "shifts": {
+            "NVDLA_CDMA_BATCH_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_ENTRY_PER_SLICE": {
+        "addr": "0x5060",
+        "shifts": {
+            "NVDLA_CDMA_ENTRIES": [
+                0,
+                11
+            ]
+        }
+    },
+    "CDMA_D_FETCH_GRAIN": {
+        "addr": "0x5064",
+        "shifts": {
+            "NVDLA_CDMA_GRAINS": [
+                0,
+                11
+            ]
+        }
+    },
+    "CDMA_D_WEIGHT_FORMAT": {
+        "addr": "0x5068",
+        "shifts": {
+            "NVDLA_CDMA_WEIGHT_FORMAT": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDMA_D_WEIGHT_SIZE_0": {
+        "addr": "0x506c",
+        "shifts": {
+            "NVDLA_CDMA_BYTE_PER_KERNEL": [
+                0,
+                17
+            ]
+        }
+    },
+    "CDMA_D_WEIGHT_SIZE_1": {
+        "addr": "0x5070",
+        "shifts": {
+            "NVDLA_CDMA_WEIGHT_KERNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "CDMA_D_WEIGHT_RAM_TYPE": {
+        "addr": "0x5074",
+        "shifts": {
+            "NVDLA_CDMA_WEIGHT_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDMA_D_WEIGHT_ADDR_HIGH": {
+        "addr": "0x5078",
+        "shifts": {
+            "NVDLA_CDMA_WEIGHT_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDMA_D_WEIGHT_ADDR_LOW": {
+        "addr": "0x507c",
+        "shifts": {
+            "NVDLA_CDMA_WEIGHT_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_WEIGHT_BYTES": {
+        "addr": "0x5080",
+        "shifts": {
+            "NVDLA_CDMA_WEIGHT_BYTES": [
+                7,
+                31
+            ]
+        }
+    },
+    "CDMA_D_WGS_ADDR_HIGH": {
+        "addr": "0x5084",
+        "shifts": {
+            "NVDLA_CDMA_WGS_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDMA_D_WGS_ADDR_LOW": {
+        "addr": "0x5088",
+        "shifts": {
+            "NVDLA_CDMA_WGS_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_WMB_ADDR_HIGH": {
+        "addr": "0x508c",
+        "shifts": {
+            "NVDLA_CDMA_WMB_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDMA_D_WMB_ADDR_LOW": {
+        "addr": "0x5090",
+        "shifts": {
+            "NVDLA_CDMA_WMB_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDMA_D_WMB_BYTES": {
+        "addr": "0x5094",
+        "shifts": {
+            "NVDLA_CDMA_WMB_BYTES": [
+                7,
+                27
+            ]
+        }
+    },
+    "CDMA_D_MEAN_FORMAT": {
+        "addr": "0x5098",
+        "shifts": {
+            "NVDLA_CDMA_MEAN_FORMAT": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDMA_D_MEAN_GLOBAL_0": {
+        "addr": "0x509c",
+        "shifts": {
+            "NVDLA_CDMA_MEAN_RY": [
+                0,
+                15
+            ],
+            "NVDLA_CDMA_MEAN_GU": [
+                16,
+                31
+            ]
+        }
+    },
+    "CDMA_D_MEAN_GLOBAL_1": {
+        "addr": "0x50a0",
+        "shifts": {
+            "NVDLA_CDMA_MEAN_BV": [
+                0,
+                15
+            ],
+            "NVDLA_CDMA_MEAN_AX": [
+                16,
+                31
+            ]
+        }
+    },
+    "CDMA_D_CVT_CFG": {
+        "addr": "0x50a4",
+        "shifts": {
+            "NVDLA_CDMA_CVT_EN": [
+                0,
+                0
+            ],
+            "NVDLA_CDMA_CVT_TRUNCATE": [
+                4,
+                9
+            ]
+        }
+    },
+    "CDMA_D_CVT_OFFSET": {
+        "addr": "0x50a8",
+        "shifts": {
+            "NVDLA_CDMA_CVT_OFFSET": [
+                0,
+                15
+            ]
+        }
+    },
+    "CDMA_D_CVT_SCALE": {
+        "addr": "0x50ac",
+        "shifts": {
+            "NVDLA_CDMA_CVT_SCALE": [
+                0,
+                15
+            ]
+        }
+    },
+    "CDMA_D_CONV_STRIDE": {
+        "addr": "0x50b0",
+        "shifts": {
+            "NVDLA_CDMA_CONV_X_STRIDE": [
+                0,
+                2
+            ],
+            "NVDLA_CDMA_CONV_Y_STRIDE": [
+                16,
+                18
+            ]
+        }
+    },
+    "CDMA_D_ZERO_PADDING": {
+        "addr": "0x50b4",
+        "shifts": {
+            "NVDLA_CDMA_PAD_LEFT": [
+                0,
+                4
+            ],
+            "NVDLA_CDMA_PAD_RIGHT": [
+                8,
+                13
+            ],
+            "NVDLA_CDMA_PAD_TOP": [
+                16,
+                20
+            ],
+            "NVDLA_CDMA_PAD_BOTTOM": [
+                24,
+                29
+            ]
+        }
+    },
+    "CDMA_D_ZERO_PADDING_VALUE": {
+        "addr": "0x50b8",
+        "shifts": {
+            "NVDLA_CDMA_PAD_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "CDMA_D_BANK": {
+        "addr": "0x50bc",
+        "shifts": {
+            "NVDLA_CDMA_DATA_BANK": [
+                0,
+                3
+            ],
+            "NVDLA_CDMA_WEIGHT_BANK": [
+                16,
+                19
+            ]
+        }
+    },
+    "CDMA_D_NAN_FLUSH_TO_ZERO": {
+        "addr": "0x50c0",
+        "shifts": {
+            "NVDLA_CDMA_NAN_TO_ZERO": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDMA_D_PERF_ENABLE": {
+        "addr": "0x50d4",
+        "shifts": {
+            "NVDLA_CDMA_DMA_EN": [
+                0,
+                0
+            ]
+        }
+    },
+    "CSC_S_POINTER": {
+        "addr": "0x6004",
+        "shifts": {
+            "NVDLA_CSC_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "CSC_D_MISC_CFG": {
+        "addr": "0x600c",
+        "shifts": {
+            "NVDLA_CSC_CONV_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_CSC_IN_PRECISION": [
+                8,
+                9
+            ],
+            "NVDLA_CSC_PROC_PRECISION": [
+                12,
+                13
+            ],
+            "NVDLA_CSC_DATA_REUSE": [
+                16,
+                16
+            ],
+            "NVDLA_CSC_WEIGHT_REUSE": [
+                20,
+                20
+            ],
+            "NVDLA_CSC_SKIP_DATA_RLS": [
+                24,
+                24
+            ],
+            "NVDLA_CSC_SKIP_WEIGHT_RLS": [
+                28,
+                28
+            ]
+        }
+    },
+    "CSC_D_DATAIN_FORMAT": {
+        "addr": "0x6010",
+        "shifts": {
+            "NVDLA_CSC_DATAIN_FORMAT": [
+                0,
+                0
+            ]
+        }
+    },
+    "CSC_D_DATAIN_SIZE_EXT_0": {
+        "addr": "0x6014",
+        "shifts": {
+            "NVDLA_CSC_DATAIN_WIDTH_EXT": [
+                0,
+                12
+            ],
+            "NVDLA_CSC_DATAIN_HEIGHT_EXT": [
+                16,
+                28
+            ]
+        }
+    },
+    "CSC_D_DATAIN_SIZE_EXT_1": {
+        "addr": "0x6018",
+        "shifts": {
+            "NVDLA_CSC_DATAIN_CHANNEL_EXT": [
+                0,
+                12
+            ]
+        }
+    },
+    "CSC_D_BATCH_NUMBER": {
+        "addr": "0x601c",
+        "shifts": {
+            "NVDLA_CSC_BATCHES": [
+                0,
+                4
+            ]
+        }
+    },
+    "CSC_D_POST_Y_EXTENSION": {
+        "addr": "0x6020",
+        "shifts": {
+            "NVDLA_CSC_Y_EXTENSION": [
+                0,
+                1
+            ]
+        }
+    },
+    "CSC_D_ENTRY_PER_SLICE": {
+        "addr": "0x6024",
+        "shifts": {
+            "NVDLA_CSC_ENTRIES": [
+                0,
+                11
+            ]
+        }
+    },
+    "CSC_D_WEIGHT_FORMAT": {
+        "addr": "0x6028",
+        "shifts": {
+            "NVDLA_CSC_WEIGHT_FORMAT": [
+                0,
+                0
+            ]
+        }
+    },
+    "CSC_D_WEIGHT_SIZE_EXT_0": {
+        "addr": "0x602c",
+        "shifts": {
+            "NVDLA_CSC_WEIGHT_WIDTH_EXT": [
+                0,
+                4
+            ],
+            "NVDLA_CSC_WEIGHT_HEIGHT_EXT": [
+                16,
+                20
+            ]
+        }
+    },
+    "CSC_D_WEIGHT_SIZE_EXT_1": {
+        "addr": "0x6030",
+        "shifts": {
+            "NVDLA_CSC_WEIGHT_CHANNEL_EXT": [
+                0,
+                12
+            ],
+            "NVDLA_CSC_WEIGHT_KERNEL": [
+                16,
+                28
+            ]
+        }
+    },
+    "CSC_D_WEIGHT_BYTES": {
+        "addr": "0x6034",
+        "shifts": {
+            "NVDLA_CSC_WEIGHT_BYTES": [
+                7,
+                31
+            ]
+        }
+    },
+    "CSC_D_WMB_BYTES": {
+        "addr": "0x6038",
+        "shifts": {
+            "NVDLA_CSC_WMB_BYTES": [
+                7,
+                27
+            ]
+        }
+    },
+    "CSC_D_DATAOUT_SIZE_0": {
+        "addr": "0x603c",
+        "shifts": {
+            "NVDLA_CSC_DATAOUT_WIDTH": [
+                0,
+                12
+            ],
+            "NVDLA_CSC_DATAOUT_HEIGHT": [
+                16,
+                28
+            ]
+        }
+    },
+    "CSC_D_DATAOUT_SIZE_1": {
+        "addr": "0x6040",
+        "shifts": {
+            "NVDLA_CSC_DATAOUT_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "CSC_D_ATOMICS": {
+        "addr": "0x6044",
+        "shifts": {
+            "NVDLA_CSC_ATOMICS": [
+                0,
+                20
+            ]
+        }
+    },
+    "CSC_D_RELEASE": {
+        "addr": "0x6048",
+        "shifts": {
+            "NVDLA_CSC_RLS_SLICES": [
+                0,
+                11
+            ]
+        }
+    },
+    "CSC_D_CONV_STRIDE_EXT": {
+        "addr": "0x604c",
+        "shifts": {
+            "NVDLA_CSC_CONV_X_STRIDE_EXT": [
+                0,
+                2
+            ],
+            "NVDLA_CSC_CONV_Y_STRIDE_EXT": [
+                16,
+                18
+            ]
+        }
+    },
+    "CSC_D_DILATION_EXT": {
+        "addr": "0x6050",
+        "shifts": {
+            "NVDLA_CSC_X_DILATION_EXT": [
+                0,
+                4
+            ],
+            "NVDLA_CSC_Y_DILATION_EXT": [
+                16,
+                20
+            ]
+        }
+    },
+    "CSC_D_ZERO_PADDING": {
+        "addr": "0x6054",
+        "shifts": {
+            "NVDLA_CSC_PAD_LEFT": [
+                0,
+                4
+            ],
+            "NVDLA_CSC_PAD_TOP": [
+                16,
+                20
+            ]
+        }
+    },
+    "CSC_D_ZERO_PADDING_VALUE": {
+        "addr": "0x6058",
+        "shifts": {
+            "NVDLA_CSC_PAD_VALUE": [
+                0,
+                15
+            ]
+        }
+    },
+    "CSC_D_BANK": {
+        "addr": "0x605c",
+        "shifts": {
+            "NVDLA_CSC_DATA_BANK": [
+                0,
+                3
+            ],
+            "NVDLA_CSC_WEIGHT_BANK": [
+                16,
+                19
+            ]
+        }
+    },
+    "CSC_D_PRA_CFG": {
+        "addr": "0x6060",
+        "shifts": {
+            "NVDLA_CSC_PRA_TRUNCATE": [
+                0,
+                1
+            ]
+        }
+    },
+    "CMAC_A_S_POINTER": {
+        "addr": "0x7004",
+        "shifts": {
+            "NVDLA_CMAC_A_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "CMAC_A_D_OP_ENABLE": {
+        "addr": "0x7008",
+        "shifts": {
+            "NVDLA_CMAC_A_D_OP_ENABLE": [
+                0,
+                0
+            ]
+        }
+    },
+    "CMAC_A_D_MISC_CFG": {
+        "addr": "0x700c",
+        "shifts": {
+            "NVDLA_CMAC_A_CONV_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_CMAC_A_PROC_PRECISION": [
+                12,
+                13
+            ]
+        }
+    },
+    "CMAC_B_S_POINTER": {
+        "addr": "0x8004",
+        "shifts": {
+            "NVDLA_CMAC_B_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "CMAC_B_D_OP_ENABLE": {
+        "addr": "0x8008",
+        "shifts": {
+            "NVDLA_CMAC_B_D_OP_ENABLE": [
+                0,
+                0
+            ]
+        }
+    },
+    "CMAC_B_D_MISC_CFG": {
+        "addr": "0x800c",
+        "shifts": {
+            "NVDLA_CMAC_B_CONV_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_CMAC_B_PROC_PRECISION": [
+                12,
+                13
+            ]
+        }
+    },
+    "CACC_S_POINTER": {
+        "addr": "0x9004",
+        "shifts": {
+            "NVDLA_CACC_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "CACC_D_MISC_CFG": {
+        "addr": "0x900c",
+        "shifts": {
+            "NVDLA_CACC_CONV_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_CACC_PROC_PRECISION": [
+                12,
+                13
+            ]
+        }
+    },
+    "CACC_D_DATAOUT_SIZE_0": {
+        "addr": "0x9010",
+        "shifts": {
+            "NVDLA_CACC_DATAOUT_WIDTH": [
+                0,
+                12
+            ],
+            "NVDLA_CACC_DATAOUT_HEIGHT": [
+                16,
+                28
+            ]
+        }
+    },
+    "CACC_D_DATAOUT_SIZE_1": {
+        "addr": "0x9014",
+        "shifts": {
+            "NVDLA_CACC_DATAOUT_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "CACC_D_DATAOUT_ADDR": {
+        "addr": "0x9018",
+        "shifts": {
+            "NVDLA_CACC_DATAOUT_ADDR": [
+                5,
+                31
+            ]
+        }
+    },
+    "CACC_D_BATCH_NUMBER": {
+        "addr": "0x901c",
+        "shifts": {
+            "NVDLA_CACC_BATCHES": [
+                0,
+                4
+            ]
+        }
+    },
+    "CACC_D_LINE_STRIDE": {
+        "addr": "0x9020",
+        "shifts": {
+            "NVDLA_CACC_LINE_STRIDE": [
+                5,
+                23
+            ]
+        }
+    },
+    "CACC_D_SURF_STRIDE": {
+        "addr": "0x9024",
+        "shifts": {
+            "NVDLA_CACC_SURF_STRIDE": [
+                5,
+                23
+            ]
+        }
+    },
+    "CACC_D_DATAOUT_MAP": {
+        "addr": "0x9028",
+        "shifts": {
+            "NVDLA_CACC_LINE_PACKED": [
+                0,
+                0
+            ],
+            "NVDLA_CACC_SURF_PACKED": [
+                16,
+                16
+            ]
+        }
+    },
+    "CACC_D_CLIP_CFG": {
+        "addr": "0x902c",
+        "shifts": {
+            "NVDLA_CACC_CLIP_TRUNCATE": [
+                0,
+                4
+            ]
+        }
+    },
+    "SDP_RDMA_S_POINTER": {
+        "addr": "0xa004",
+        "shifts": {
+            "NVDLA_SDP_RDMA_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_RDMA_D_DATA_CUBE_WIDTH": {
+        "addr": "0xa00c",
+        "shifts": {
+            "NVDLA_SDP_RDMA_WIDTH": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_RDMA_D_DATA_CUBE_HEIGHT": {
+        "addr": "0xa010",
+        "shifts": {
+            "NVDLA_SDP_RDMA_HEIGHT": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_RDMA_D_DATA_CUBE_CHANNEL": {
+        "addr": "0xa014",
+        "shifts": {
+            "NVDLA_SDP_RDMA_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_RDMA_D_SRC_BASE_ADDR_LOW": {
+        "addr": "0xa018",
+        "shifts": {
+            "NVDLA_SDP_RDMA_SRC_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_SRC_BASE_ADDR_HIGH": {
+        "addr": "0xa01c",
+        "shifts": {
+            "NVDLA_SDP_RDMA_SRC_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_SRC_LINE_STRIDE": {
+        "addr": "0xa020",
+        "shifts": {
+            "NVDLA_SDP_RDMA_SRC_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_SRC_SURFACE_STRIDE": {
+        "addr": "0xa024",
+        "shifts": {
+            "NVDLA_SDP_RDMA_SRC_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BRDMA_CFG": {
+        "addr": "0xa028",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BRDMA_DISABLE": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_RDMA_BRDMA_DATA_USE": [
+                1,
+                2
+            ],
+            "NVDLA_SDP_RDMA_BRDMA_DATA_SIZE": [
+                3,
+                3
+            ],
+            "NVDLA_SDP_RDMA_BRDMA_DATA_MODE": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_RDMA_BRDMA_RAM_TYPE": [
+                5,
+                5
+            ]
+        }
+    },
+    "SDP_RDMA_D_BS_BASE_ADDR_LOW": {
+        "addr": "0xa02c",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BS_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BS_BASE_ADDR_HIGH": {
+        "addr": "0xa030",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BS_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BS_LINE_STRIDE": {
+        "addr": "0xa034",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BS_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BS_SURFACE_STRIDE": {
+        "addr": "0xa038",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BS_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BS_BATCH_STRIDE": {
+        "addr": "0xa03c",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BS_BATCH_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_NRDMA_CFG": {
+        "addr": "0xa040",
+        "shifts": {
+            "NVDLA_SDP_RDMA_NRDMA_DISABLE": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_RDMA_NRDMA_DATA_USE": [
+                1,
+                2
+            ],
+            "NVDLA_SDP_RDMA_NRDMA_DATA_SIZE": [
+                3,
+                3
+            ],
+            "NVDLA_SDP_RDMA_NRDMA_DATA_MODE": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_RDMA_NRDMA_RAM_TYPE": [
+                5,
+                5
+            ]
+        }
+    },
+    "SDP_RDMA_D_BN_BASE_ADDR_LOW": {
+        "addr": "0xa044",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BN_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BN_BASE_ADDR_HIGH": {
+        "addr": "0xa048",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BN_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BN_LINE_STRIDE": {
+        "addr": "0xa04c",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BN_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BN_SURFACE_STRIDE": {
+        "addr": "0xa050",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BN_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_BN_BATCH_STRIDE": {
+        "addr": "0xa054",
+        "shifts": {
+            "NVDLA_SDP_RDMA_BN_BATCH_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_ERDMA_CFG": {
+        "addr": "0xa058",
+        "shifts": {
+            "NVDLA_SDP_RDMA_ERDMA_DISABLE": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_RDMA_ERDMA_DATA_USE": [
+                1,
+                2
+            ],
+            "NVDLA_SDP_RDMA_ERDMA_DATA_SIZE": [
+                3,
+                3
+            ],
+            "NVDLA_SDP_RDMA_ERDMA_DATA_MODE": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_RDMA_ERDMA_RAM_TYPE": [
+                5,
+                5
+            ]
+        }
+    },
+    "SDP_RDMA_D_EW_BASE_ADDR_LOW": {
+        "addr": "0xa05c",
+        "shifts": {
+            "NVDLA_SDP_RDMA_EW_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_EW_BASE_ADDR_HIGH": {
+        "addr": "0xa060",
+        "shifts": {
+            "NVDLA_SDP_RDMA_EW_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_EW_LINE_STRIDE": {
+        "addr": "0xa064",
+        "shifts": {
+            "NVDLA_SDP_RDMA_EW_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_EW_SURFACE_STRIDE": {
+        "addr": "0xa068",
+        "shifts": {
+            "NVDLA_SDP_RDMA_EW_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_EW_BATCH_STRIDE": {
+        "addr": "0xa06c",
+        "shifts": {
+            "NVDLA_SDP_RDMA_EW_BATCH_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_RDMA_D_FEATURE_MODE_CFG": {
+        "addr": "0xa070",
+        "shifts": {
+            "NVDLA_SDP_RDMA_FLYING_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_RDMA_WINOGRAD": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_RDMA_IN_PRECISION": [
+                2,
+                3
+            ],
+            "NVDLA_SDP_RDMA_PROC_PRECISION": [
+                4,
+                5
+            ],
+            "NVDLA_SDP_RDMA_OUT_PRECISION": [
+                6,
+                7
+            ],
+            "NVDLA_SDP_RDMA_BATCH_NUMBER": [
+                8,
+                12
+            ]
+        }
+    },
+    "SDP_RDMA_D_SRC_DMA_CFG": {
+        "addr": "0xa074",
+        "shifts": {
+            "NVDLA_SDP_RDMA_SRC_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_RDMA_D_PERF_ENABLE": {
+        "addr": "0xa080",
+        "shifts": {
+            "NVDLA_SDP_RDMA_PERF_DMA_EN": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_RDMA_PERF_NAN_INF_COUNT_EN": [
+                1,
+                1
+            ]
+        }
+    },
+    "SDP_S_POINTER": {
+        "addr": "0xb004",
+        "shifts": {
+            "NVDLA_SDP_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_S_LUT_ACCESS_CFG": {
+        "addr": "0xb008",
+        "shifts": {
+            "NVDLA_SDP_LUT_ADDR": [
+                0,
+                9
+            ],
+            "NVDLA_SDP_LUT_TABLE_ID": [
+                16,
+                16
+            ],
+            "NVDLA_SDP_LUT_ACCESS_TYPE": [
+                17,
+                17
+            ]
+        }
+    },
+    "SDP_S_LUT_CFG": {
+        "addr": "0xb010",
+        "shifts": {
+            "NVDLA_SDP_LUT_LE_FUNCTION": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_LUT_UFLOW_PRIORITY": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_LUT_OFLOW_PRIORITY": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_LUT_HYBRID_PRIORITY": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_S_LUT_INFO": {
+        "addr": "0xb014",
+        "shifts": {
+            "NVDLA_SDP_LUT_LE_INDEX_OFFSET": [
+                0,
+                7
+            ],
+            "NVDLA_SDP_LUT_LE_INDEX_SELECT": [
+                8,
+                15
+            ],
+            "NVDLA_SDP_LUT_LO_INDEX_SELECT": [
+                16,
+                23
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_START": {
+        "addr": "0xb018",
+        "shifts": {
+            "NVDLA_SDP_LUT_LE_START": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_END": {
+        "addr": "0xb01c",
+        "shifts": {
+            "NVDLA_SDP_LUT_LE_END": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_START": {
+        "addr": "0xb020",
+        "shifts": {
+            "NVDLA_SDP_LUT_LO_START": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_END": {
+        "addr": "0xb024",
+        "shifts": {
+            "NVDLA_SDP_LUT_LO_END": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_SLOPE_SCALE": {
+        "addr": "0xb028",
+        "shifts": {
+            "NVDLA_SDP_LUT_LE_SLOPE_UFLOW_SCALE": [
+                0,
+                15
+            ],
+            "NVDLA_SDP_LUT_LE_SLOPE_OFLOW_SCALE": [
+                16,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LE_SLOPE_SHIFT": {
+        "addr": "0xb02c",
+        "shifts": {
+            "NVDLA_SDP_LUT_LE_SLOPE_UFLOW_SHIFT": [
+                0,
+                4
+            ],
+            "NVDLA_SDP_LUT_LE_SLOPE_OFLOW_SHIFT": [
+                5,
+                9
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_SLOPE_SCALE": {
+        "addr": "0xb030",
+        "shifts": {
+            "NVDLA_SDP_LUT_LO_SLOPE_UFLOW_SCALE": [
+                0,
+                15
+            ],
+            "NVDLA_SDP_LUT_LO_SLOPE_OFLOW_SCALE": [
+                16,
+                31
+            ]
+        }
+    },
+    "SDP_S_LUT_LO_SLOPE_SHIFT": {
+        "addr": "0xb034",
+        "shifts": {
+            "NVDLA_SDP_LUT_LO_SLOPE_UFLOW_SHIFT": [
+                0,
+                4
+            ],
+            "NVDLA_SDP_LUT_LO_SLOPE_OFLOW_SHIFT": [
+                5,
+                9
+            ]
+        }
+    },
+    "SDP_D_DATA_CUBE_WIDTH": {
+        "addr": "0xb03c",
+        "shifts": {
+            "NVDLA_SDP_WIDTH": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_D_DATA_CUBE_HEIGHT": {
+        "addr": "0xb040",
+        "shifts": {
+            "NVDLA_SDP_HEIGHT": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_D_DATA_CUBE_CHANNEL": {
+        "addr": "0xb044",
+        "shifts": {
+            "NVDLA_SDP_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "SDP_D_DST_BASE_ADDR_LOW": {
+        "addr": "0xb048",
+        "shifts": {
+            "NVDLA_SDP_DST_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DST_BASE_ADDR_HIGH": {
+        "addr": "0xb04c",
+        "shifts": {
+            "NVDLA_SDP_DST_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DST_LINE_STRIDE": {
+        "addr": "0xb050",
+        "shifts": {
+            "NVDLA_SDP_DST_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DST_SURFACE_STRIDE": {
+        "addr": "0xb054",
+        "shifts": {
+            "NVDLA_SDP_DST_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_BS_CFG": {
+        "addr": "0xb058",
+        "shifts": {
+            "NVDLA_SDP_BS_BYPASS": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_BS_ALU_BYPASS": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_BS_ALU_ALGO": [
+                2,
+                3
+            ],
+            "NVDLA_SDP_BS_MUL_BYPASS": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_BS_MUL_PRELU": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_BS_RELU_BYPASS": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_D_DP_BS_ALU_CFG": {
+        "addr": "0xb05c",
+        "shifts": {
+            "NVDLA_SDP_BS_ALU_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_BS_ALU_SHIFT_VALUE": [
+                8,
+                13
+            ]
+        }
+    },
+    "SDP_D_DP_BS_ALU_SRC_VALUE": {
+        "addr": "0xb060",
+        "shifts": {
+            "NVDLA_SDP_BS_ALU_OPERAND": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BS_MUL_CFG": {
+        "addr": "0xb064",
+        "shifts": {
+            "NVDLA_SDP_BS_MUL_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_BS_MUL_SHIFT_VALUE": [
+                8,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BS_MUL_SRC_VALUE": {
+        "addr": "0xb068",
+        "shifts": {
+            "NVDLA_SDP_BS_MUL_OPERAND": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BN_CFG": {
+        "addr": "0xb06c",
+        "shifts": {
+            "NVDLA_SDP_BN_BYPASS": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_BN_ALU_BYPASS": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_BN_ALU_ALGO": [
+                2,
+                3
+            ],
+            "NVDLA_SDP_BN_MUL_BYPASS": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_BN_MUL_PRELU": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_BN_RELU_BYPASS": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_D_DP_BN_ALU_CFG": {
+        "addr": "0xb070",
+        "shifts": {
+            "NVDLA_SDP_BN_ALU_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_BN_ALU_SHIFT_VALUE": [
+                8,
+                13
+            ]
+        }
+    },
+    "SDP_D_DP_BN_ALU_SRC_VALUE": {
+        "addr": "0xb074",
+        "shifts": {
+            "NVDLA_SDP_BN_ALU_OPERAND": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BN_MUL_CFG": {
+        "addr": "0xb078",
+        "shifts": {
+            "NVDLA_SDP_BN_MUL_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_BN_MUL_SHIFT_VALUE": [
+                8,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_BN_MUL_SRC_VALUE": {
+        "addr": "0xb07c",
+        "shifts": {
+            "NVDLA_SDP_BN_MUL_OPERAND": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_EW_CFG": {
+        "addr": "0xb080",
+        "shifts": {
+            "NVDLA_SDP_EW_BYPASS": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_EW_ALU_BYPASS": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_EW_ALU_ALGO": [
+                2,
+                3
+            ],
+            "NVDLA_SDP_EW_MUL_BYPASS": [
+                4,
+                4
+            ],
+            "NVDLA_SDP_EW_MUL_PRELU": [
+                5,
+                5
+            ],
+            "NVDLA_SDP_EW_LUT_BYPASS": [
+                6,
+                6
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CFG": {
+        "addr": "0xb084",
+        "shifts": {
+            "NVDLA_SDP_EW_ALU_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_EW_ALU_CVT_BYPASS": [
+                1,
+                1
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_SRC_VALUE": {
+        "addr": "0xb088",
+        "shifts": {
+            "NVDLA_SDP_EW_ALU_OPERAND": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE": {
+        "addr": "0xb08c",
+        "shifts": {
+            "NVDLA_SDP_EW_ALU_CVT_OFFSET": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CVT_SCALE_VALUE": {
+        "addr": "0xb090",
+        "shifts": {
+            "NVDLA_SDP_EW_ALU_CVT_SCALE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_EW_ALU_CVT_TRUNCATE_VALUE": {
+        "addr": "0xb094",
+        "shifts": {
+            "NVDLA_SDP_EW_ALU_CVT_TRUNCATE": [
+                0,
+                5
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CFG": {
+        "addr": "0xb098",
+        "shifts": {
+            "NVDLA_SDP_EW_MUL_SRC": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_EW_MUL_CVT_BYPASS": [
+                1,
+                1
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_SRC_VALUE": {
+        "addr": "0xb09c",
+        "shifts": {
+            "NVDLA_SDP_EW_MUL_OPERAND": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE": {
+        "addr": "0xb0a0",
+        "shifts": {
+            "NVDLA_SDP_EW_MUL_CVT_OFFSET": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CVT_SCALE_VALUE": {
+        "addr": "0xb0a4",
+        "shifts": {
+            "NVDLA_SDP_EW_MUL_CVT_SCALE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_DP_EW_MUL_CVT_TRUNCATE_VALUE": {
+        "addr": "0xb0a8",
+        "shifts": {
+            "NVDLA_SDP_EW_MUL_CVT_TRUNCATE": [
+                0,
+                5
+            ]
+        }
+    },
+    "SDP_D_DP_EW_TRUNCATE_VALUE": {
+        "addr": "0xb0ac",
+        "shifts": {
+            "NVDLA_SDP_EW_TRUNCATE": [
+                0,
+                9
+            ]
+        }
+    },
+    "SDP_D_FEATURE_MODE_CFG": {
+        "addr": "0xb0b0",
+        "shifts": {
+            "NVDLA_SDP_FLYING_MODE": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_OUTPUT_DST": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_WINOGRAD": [
+                2,
+                2
+            ],
+            "NVDLA_SDP_NAN_TO_ZERO": [
+                3,
+                3
+            ],
+            "NVDLA_SDP_BATCH_NUMBER": [
+                8,
+                12
+            ]
+        }
+    },
+    "SDP_D_DST_DMA_CFG": {
+        "addr": "0xb0b4",
+        "shifts": {
+            "NVDLA_SDP_DST_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "SDP_D_DST_BATCH_STRIDE": {
+        "addr": "0xb0b8",
+        "shifts": {
+            "NVDLA_SDP_DST_BATCH_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "SDP_D_DATA_FORMAT": {
+        "addr": "0xb0bc",
+        "shifts": {
+            "NVDLA_SDP_PROC_PRECISION": [
+                0,
+                1
+            ],
+            "NVDLA_SDP_OUT_PRECISION": [
+                2,
+                3
+            ]
+        }
+    },
+    "SDP_D_CVT_OFFSET": {
+        "addr": "0xb0c0",
+        "shifts": {
+            "NVDLA_SDP_CVT_OFFSET": [
+                0,
+                31
+            ]
+        }
+    },
+    "SDP_D_CVT_SCALE": {
+        "addr": "0xb0c4",
+        "shifts": {
+            "NVDLA_SDP_CVT_SCALE": [
+                0,
+                15
+            ]
+        }
+    },
+    "SDP_D_CVT_SHIFT": {
+        "addr": "0xb0c8",
+        "shifts": {
+            "NVDLA_SDP_CVT_SHIFT": [
+                0,
+                5
+            ]
+        }
+    },
+    "SDP_D_PERF_ENABLE": {
+        "addr": "0xb0dc",
+        "shifts": {
+            "NVDLA_SDP_PERF_DMA_EN": [
+                0,
+                0
+            ],
+            "NVDLA_SDP_PERF_LUT_EN": [
+                1,
+                1
+            ],
+            "NVDLA_SDP_PERF_SAT_EN": [
+                2,
+                2
+            ],
+            "NVDLA_SDP_PERF_NAN_INF_COUNT_EN": [
+                3,
+                3
+            ]
+        }
+    },
+    "PDP_RDMA_S_POINTER": {
+        "addr": "0xc004",
+        "shifts": {
+            "NVDLA_PDP_RDMA_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "PDP_RDMA_D_DATA_CUBE_IN_WIDTH": {
+        "addr": "0xc00c",
+        "shifts": {
+            "NVDLA_PDP_RDMA_CUBE_IN_WIDTH": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_RDMA_D_DATA_CUBE_IN_HEIGHT": {
+        "addr": "0xc010",
+        "shifts": {
+            "NVDLA_PDP_RDMA_CUBE_IN_HEIGHT": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_RDMA_D_DATA_CUBE_IN_CHANNEL": {
+        "addr": "0xc014",
+        "shifts": {
+            "NVDLA_PDP_RDMA_CUBE_IN_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_RDMA_D_FLYING_MODE": {
+        "addr": "0xc018",
+        "shifts": {
+            "NVDLA_PDP_RDMA_FLYING_MODE": [
+                0,
+                0
+            ]
+        }
+    },
+    "PDP_RDMA_D_SRC_BASE_ADDR_LOW": {
+        "addr": "0xc01c",
+        "shifts": {
+            "NVDLA_PDP_RDMA_SRC_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_RDMA_D_SRC_BASE_ADDR_HIGH": {
+        "addr": "0xc020",
+        "shifts": {
+            "NVDLA_PDP_RDMA_SRC_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "PDP_RDMA_D_SRC_LINE_STRIDE": {
+        "addr": "0xc024",
+        "shifts": {
+            "NVDLA_PDP_RDMA_SRC_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_RDMA_D_SRC_SURFACE_STRIDE": {
+        "addr": "0xc028",
+        "shifts": {
+            "NVDLA_PDP_RDMA_SRC_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_RDMA_D_SRC_RAM_CFG": {
+        "addr": "0xc02c",
+        "shifts": {
+            "NVDLA_PDP_RDMA_SRC_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "PDP_RDMA_D_DATA_FORMAT": {
+        "addr": "0xc030",
+        "shifts": {
+            "NVDLA_PDP_RDMA_INPUT_DATA": [
+                0,
+                1
+            ]
+        }
+    },
+    "PDP_RDMA_D_OPERATION_MODE_CFG": {
+        "addr": "0xc034",
+        "shifts": {
+            "NVDLA_PDP_RDMA_SPLIT_NUM": [
+                0,
+                7
+            ]
+        }
+    },
+    "PDP_RDMA_D_POOLING_KERNEL_CFG": {
+        "addr": "0xc038",
+        "shifts": {
+            "NVDLA_PDP_RDMA_KERNEL_WIDTH": [
+                0,
+                3
+            ],
+            "NVDLA_PDP_RDMA_KERNEL_STRIDE_WIDTH": [
+                4,
+                7
+            ]
+        }
+    },
+    "PDP_RDMA_D_POOLING_PADDING_CFG": {
+        "addr": "0xc03c",
+        "shifts": {
+            "NVDLA_PDP_RDMA_PAD_WIDTH": [
+                0,
+                3
+            ]
+        }
+    },
+    "PDP_RDMA_D_PARTIAL_WIDTH_IN": {
+        "addr": "0xc040",
+        "shifts": {
+            "NVDLA_PDP_RDMA_PARTIAL_WIDTH_IN_FIRST": [
+                0,
+                9
+            ],
+            "NVDLA_PDP_RDMA_PARTIAL_WIDTH_IN_LAST": [
+                10,
+                19
+            ],
+            "NVDLA_PDP_RDMA_PARTIAL_WIDTH_IN_MID": [
+                20,
+                29
+            ]
+        }
+    },
+    "PDP_RDMA_D_PERF_ENABLE": {
+        "addr": "0xc044",
+        "shifts": {
+            "NVDLA_PDP_RDMA_DMA_EN": [
+                0,
+                0
+            ]
+        }
+    },
+    "PDP_S_POINTER": {
+        "addr": "0xd004",
+        "shifts": {
+            "NVDLA_PDP_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "PDP_D_DATA_CUBE_IN_WIDTH": {
+        "addr": "0xd00c",
+        "shifts": {
+            "NVDLA_PDP_CUBE_IN_WIDTH": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_D_DATA_CUBE_IN_HEIGHT": {
+        "addr": "0xd010",
+        "shifts": {
+            "NVDLA_PDP_CUBE_IN_HEIGHT": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_D_DATA_CUBE_IN_CHANNEL": {
+        "addr": "0xd014",
+        "shifts": {
+            "NVDLA_PDP_CUBE_IN_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_D_DATA_CUBE_OUT_WIDTH": {
+        "addr": "0xd018",
+        "shifts": {
+            "NVDLA_PDP_CUBE_OUT_WIDTH": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_D_DATA_CUBE_OUT_HEIGHT": {
+        "addr": "0xd01c",
+        "shifts": {
+            "NVDLA_PDP_CUBE_OUT_HEIGHT": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_D_DATA_CUBE_OUT_CHANNEL": {
+        "addr": "0xd020",
+        "shifts": {
+            "NVDLA_PDP_CUBE_OUT_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "PDP_D_OPERATION_MODE_CFG": {
+        "addr": "0xd024",
+        "shifts": {
+            "NVDLA_PDP_POOLING_METHOD": [
+                0,
+                1
+            ],
+            "NVDLA_PDP_FLYING_MODE": [
+                4,
+                4
+            ],
+            "NVDLA_PDP_SPLIT_NUM": [
+                8,
+                15
+            ]
+        }
+    },
+    "PDP_D_NAN_FLUSH_TO_ZERO": {
+        "addr": "0xd028",
+        "shifts": {
+            "NVDLA_PDP_NAN_TO_ZERO": [
+                0,
+                0
+            ]
+        }
+    },
+    "PDP_D_PARTIAL_WIDTH_IN": {
+        "addr": "0xd02c",
+        "shifts": {
+            "NVDLA_PDP_PARTIAL_WIDTH_IN_FIRST": [
+                0,
+                9
+            ],
+            "NVDLA_PDP_PARTIAL_WIDTH_IN_LAST": [
+                10,
+                19
+            ],
+            "NVDLA_PDP_PARTIAL_WIDTH_IN_MID": [
+                20,
+                29
+            ]
+        }
+    },
+    "PDP_D_PARTIAL_WIDTH_OUT": {
+        "addr": "0xd030",
+        "shifts": {
+            "NVDLA_PDP_PARTIAL_WIDTH_OUT_FIRST": [
+                0,
+                9
+            ],
+            "NVDLA_PDP_PARTIAL_WIDTH_OUT_LAST": [
+                10,
+                19
+            ],
+            "NVDLA_PDP_PARTIAL_WIDTH_OUT_MID": [
+                20,
+                29
+            ]
+        }
+    },
+    "PDP_D_POOLING_KERNEL_CFG": {
+        "addr": "0xd034",
+        "shifts": {
+            "NVDLA_PDP_KERNEL_WIDTH": [
+                0,
+                3
+            ],
+            "NVDLA_PDP_KERNEL_HEIGHT": [
+                8,
+                11
+            ],
+            "NVDLA_PDP_KERNEL_STRIDE_WIDTH": [
+                16,
+                19
+            ],
+            "NVDLA_PDP_KERNEL_STRIDE_HEIGHT": [
+                20,
+                23
+            ]
+        }
+    },
+    "PDP_D_RECIP_KERNEL_WIDTH": {
+        "addr": "0xd038",
+        "shifts": {
+            "NVDLA_PDP_RECIP_KERNEL_WIDTH": [
+                0,
+                16
+            ]
+        }
+    },
+    "PDP_D_RECIP_KERNEL_HEIGHT": {
+        "addr": "0xd03c",
+        "shifts": {
+            "NVDLA_PDP_RECIP_KERNEL_HEIGHT": [
+                0,
+                16
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_CFG": {
+        "addr": "0xd040",
+        "shifts": {
+            "NVDLA_PDP_PAD_LEFT": [
+                0,
+                2
+            ],
+            "NVDLA_PDP_PAD_TOP": [
+                4,
+                6
+            ],
+            "NVDLA_PDP_PAD_RIGHT": [
+                8,
+                10
+            ],
+            "NVDLA_PDP_PAD_BOTTOM": [
+                12,
+                14
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_VALUE_1_CFG": {
+        "addr": "0xd044",
+        "shifts": {
+            "NVDLA_PDP_PAD_VALUE_1X": [
+                0,
+                18
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_VALUE_2_CFG": {
+        "addr": "0xd048",
+        "shifts": {
+            "NVDLA_PDP_PAD_VALUE_2X": [
+                0,
+                18
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_VALUE_3_CFG": {
+        "addr": "0xd04c",
+        "shifts": {
+            "NVDLA_PDP_PAD_VALUE_3X": [
+                0,
+                18
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_VALUE_4_CFG": {
+        "addr": "0xd050",
+        "shifts": {
+            "NVDLA_PDP_PAD_VALUE_4X": [
+                0,
+                18
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_VALUE_5_CFG": {
+        "addr": "0xd054",
+        "shifts": {
+            "NVDLA_PDP_PAD_VALUE_5X": [
+                0,
+                18
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_VALUE_6_CFG": {
+        "addr": "0xd058",
+        "shifts": {
+            "NVDLA_PDP_PAD_VALUE_6X": [
+                0,
+                18
+            ]
+        }
+    },
+    "PDP_D_POOLING_PADDING_VALUE_7_CFG": {
+        "addr": "0xd05c",
+        "shifts": {
+            "NVDLA_PDP_PAD_VALUE_7X": [
+                0,
+                18
+            ]
+        }
+    },
+    "PDP_D_SRC_BASE_ADDR_LOW": {
+        "addr": "0xd060",
+        "shifts": {
+            "NVDLA_PDP_SRC_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_D_SRC_BASE_ADDR_HIGH": {
+        "addr": "0xd064",
+        "shifts": {
+            "NVDLA_PDP_SRC_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "PDP_D_SRC_LINE_STRIDE": {
+        "addr": "0xd068",
+        "shifts": {
+            "NVDLA_PDP_SRC_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_D_SRC_SURFACE_STRIDE": {
+        "addr": "0xd06c",
+        "shifts": {
+            "NVDLA_PDP_SRC_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_D_DST_BASE_ADDR_LOW": {
+        "addr": "0xd070",
+        "shifts": {
+            "NVDLA_PDP_DST_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_D_DST_BASE_ADDR_HIGH": {
+        "addr": "0xd074",
+        "shifts": {
+            "NVDLA_PDP_DST_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "PDP_D_DST_LINE_STRIDE": {
+        "addr": "0xd078",
+        "shifts": {
+            "NVDLA_PDP_DST_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_D_DST_SURFACE_STRIDE": {
+        "addr": "0xd07c",
+        "shifts": {
+            "NVDLA_PDP_DST_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "PDP_D_DST_RAM_CFG": {
+        "addr": "0xd080",
+        "shifts": {
+            "NVDLA_PDP_DST_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "PDP_D_DATA_FORMAT": {
+        "addr": "0xd084",
+        "shifts": {
+            "NVDLA_PDP_INPUT_DATA": [
+                0,
+                1
+            ]
+        }
+    },
+    "PDP_D_PERF_ENABLE": {
+        "addr": "0xd094",
+        "shifts": {
+            "NVDLA_PDP_DMA_EN": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_RDMA_S_POINTER": {
+        "addr": "0xe004",
+        "shifts": {
+            "NVDLA_CDP_RDMA_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_RDMA_D_DATA_CUBE_WIDTH": {
+        "addr": "0xe00c",
+        "shifts": {
+            "NVDLA_CDP_RDMA_WIDTH": [
+                0,
+                12
+            ]
+        }
+    },
+    "CDP_RDMA_D_DATA_CUBE_HEIGHT": {
+        "addr": "0xe010",
+        "shifts": {
+            "NVDLA_CDP_RDMA_HEIGHT": [
+                0,
+                12
+            ]
+        }
+    },
+    "CDP_RDMA_D_DATA_CUBE_CHANNEL": {
+        "addr": "0xe014",
+        "shifts": {
+            "NVDLA_CDP_RDMA_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "CDP_RDMA_D_SRC_BASE_ADDR_LOW": {
+        "addr": "0xe018",
+        "shifts": {
+            "NVDLA_CDP_RDMA_SRC_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDP_RDMA_D_SRC_BASE_ADDR_HIGH": {
+        "addr": "0xe01c",
+        "shifts": {
+            "NVDLA_CDP_RDMA_SRC_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDP_RDMA_D_SRC_LINE_STRIDE": {
+        "addr": "0xe020",
+        "shifts": {
+            "NVDLA_CDP_RDMA_SRC_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDP_RDMA_D_SRC_SURFACE_STRIDE": {
+        "addr": "0xe024",
+        "shifts": {
+            "NVDLA_CDP_RDMA_SRC_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDP_RDMA_D_SRC_DMA_CFG": {
+        "addr": "0xe028",
+        "shifts": {
+            "NVDLA_CDP_RDMA_SRC_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_RDMA_D_DATA_FORMAT": {
+        "addr": "0xe034",
+        "shifts": {
+            "NVDLA_CDP_RDMA_INPUT_DATA": [
+                0,
+                1
+            ]
+        }
+    },
+    "CDP_RDMA_D_PERF_ENABLE": {
+        "addr": "0xe038",
+        "shifts": {
+            "NVDLA_CDP_RDMA_DMA_EN": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_S_POINTER": {
+        "addr": "0xf004",
+        "shifts": {
+            "NVDLA_CDP_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_S_LUT_ACCESS_CFG": {
+        "addr": "0xf008",
+        "shifts": {
+            "NVDLA_CDP_LUT_TABLE_ID": [
+                16,
+                16
+            ],
+            "NVDLA_CDP_LUT_ACCESS_TYPE": [
+                17,
+                17
+            ]
+        }
+    },
+    "CDP_S_LUT_CFG": {
+        "addr": "0xf010",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_FUNCTION": [
+                0,
+                0
+            ],
+            "NVDLA_CDP_LUT_UFLOW_PRIORITY": [
+                4,
+                4
+            ],
+            "NVDLA_CDP_LUT_OFLOW_PRIORITY": [
+                5,
+                5
+            ],
+            "NVDLA_CDP_LUT_HYBRID_PRIORITY": [
+                6,
+                6
+            ]
+        }
+    },
+    "CDP_S_LUT_INFO": {
+        "addr": "0xf014",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_INDEX_OFFSET": [
+                0,
+                7
+            ],
+            "NVDLA_CDP_LUT_LE_INDEX_SELECT": [
+                8,
+                15
+            ],
+            "NVDLA_CDP_LUT_LO_INDEX_SELECT": [
+                16,
+                23
+            ]
+        }
+    },
+    "CDP_S_LUT_LE_START_LOW": {
+        "addr": "0xf018",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_START_LOW": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDP_S_LUT_LE_START_HIGH": {
+        "addr": "0xf01c",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_START_HIGH": [
+                0,
+                5
+            ]
+        }
+    },
+    "CDP_S_LUT_LE_END_LOW": {
+        "addr": "0xf020",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_END_LOW": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDP_S_LUT_LE_END_HIGH": {
+        "addr": "0xf024",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_END_HIGH": [
+                0,
+                5
+            ]
+        }
+    },
+    "CDP_S_LUT_LO_START_LOW": {
+        "addr": "0xf028",
+        "shifts": {
+            "NVDLA_CDP_LUT_LO_START_LOW": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDP_S_LUT_LO_START_HIGH": {
+        "addr": "0xf02c",
+        "shifts": {
+            "NVDLA_CDP_LUT_LO_START_HIGH": [
+                0,
+                5
+            ]
+        }
+    },
+    "CDP_S_LUT_LO_END_LOW": {
+        "addr": "0xf030",
+        "shifts": {
+            "NVDLA_CDP_LUT_LO_END_LOW": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDP_S_LUT_LO_END_HIGH": {
+        "addr": "0xf034",
+        "shifts": {
+            "NVDLA_CDP_LUT_LO_END_HIGH": [
+                0,
+                5
+            ]
+        }
+    },
+    "CDP_S_LUT_LE_SLOPE_SCALE": {
+        "addr": "0xf038",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_SLOPE_UFLOW_SCALE": [
+                0,
+                15
+            ],
+            "NVDLA_CDP_LUT_LE_SLOPE_OFLOW_SCALE": [
+                16,
+                31
+            ]
+        }
+    },
+    "CDP_S_LUT_LE_SLOPE_SHIFT": {
+        "addr": "0xf03c",
+        "shifts": {
+            "NVDLA_CDP_LUT_LE_SLOPE_UFLOW_SHIFT": [
+                0,
+                4
+            ],
+            "NVDLA_CDP_LUT_LE_SLOPE_OFLOW_SHIFT": [
+                5,
+                9
+            ]
+        }
+    },
+    "CDP_S_LUT_LO_SLOPE_SCALE": {
+        "addr": "0xf040",
+        "shifts": {
+            "NVDLA_CDP_LUT_LO_SLOPE_UFLOW_SCALE": [
+                0,
+                15
+            ],
+            "NVDLA_CDP_LUT_LO_SLOPE_OFLOW_SCALE": [
+                16,
+                31
+            ]
+        }
+    },
+    "CDP_S_LUT_LO_SLOPE_SHIFT": {
+        "addr": "0xf044",
+        "shifts": {
+            "NVDLA_CDP_LUT_LO_SLOPE_UFLOW_SHIFT": [
+                0,
+                4
+            ],
+            "NVDLA_CDP_LUT_LO_SLOPE_OFLOW_SHIFT": [
+                5,
+                9
+            ]
+        }
+    },
+    "CDP_D_FUNC_BYPASS": {
+        "addr": "0xf04c",
+        "shifts": {
+            "NVDLA_CDP_SQSUM_BYPASS": [
+                0,
+                0
+            ],
+            "NVDLA_CDP_MUL_BYPASS": [
+                1,
+                1
+            ]
+        }
+    },
+    "CDP_D_DST_BASE_ADDR_LOW": {
+        "addr": "0xf050",
+        "shifts": {
+            "NVDLA_CDP_DST_BASE_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDP_D_DST_BASE_ADDR_HIGH": {
+        "addr": "0xf054",
+        "shifts": {
+            "NVDLA_CDP_DST_BASE_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDP_D_DST_LINE_STRIDE": {
+        "addr": "0xf058",
+        "shifts": {
+            "NVDLA_CDP_DST_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDP_D_DST_SURFACE_STRIDE": {
+        "addr": "0xf05c",
+        "shifts": {
+            "NVDLA_CDP_DST_SURFACE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "CDP_D_DST_DMA_CFG": {
+        "addr": "0xf060",
+        "shifts": {
+            "NVDLA_CDP_DST_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_D_DATA_FORMAT": {
+        "addr": "0xf068",
+        "shifts": {
+            "NVDLA_CDP_INPUT_DATA_TYPE": [
+                0,
+                1
+            ]
+        }
+    },
+    "CDP_D_NAN_FLUSH_TO_ZERO": {
+        "addr": "0xf06c",
+        "shifts": {
+            "NVDLA_CDP_NAN_TO_ZERO": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_D_LRN_CFG": {
+        "addr": "0xf070",
+        "shifts": {
+            "NVDLA_CDP_NORMALZ_LEN": [
+                0,
+                1
+            ]
+        }
+    },
+    "CDP_D_DATIN_OFFSET": {
+        "addr": "0xf074",
+        "shifts": {
+            "NVDLA_CDP_DATIN_OFFSET": [
+                0,
+                15
+            ]
+        }
+    },
+    "CDP_D_DATIN_SCALE": {
+        "addr": "0xf078",
+        "shifts": {
+            "NVDLA_CDP_DATIN_SCALE": [
+                0,
+                15
+            ]
+        }
+    },
+    "CDP_D_DATIN_SHIFTER": {
+        "addr": "0xf07c",
+        "shifts": {
+            "NVDLA_CDP_DATIN_SHIFTER": [
+                0,
+                4
+            ]
+        }
+    },
+    "CDP_D_DATOUT_OFFSET": {
+        "addr": "0xf080",
+        "shifts": {
+            "NVDLA_CDP_DATOUT_OFFSET": [
+                0,
+                31
+            ]
+        }
+    },
+    "CDP_D_DATOUT_SCALE": {
+        "addr": "0xf084",
+        "shifts": {
+            "NVDLA_CDP_DATOUT_SCALE": [
+                0,
+                15
+            ]
+        }
+    },
+    "CDP_D_DATOUT_SHIFTER": {
+        "addr": "0xf088",
+        "shifts": {
+            "NVDLA_CDP_DATOUT_SHIFTER": [
+                0,
+                5
+            ]
+        }
+    },
+    "CDP_D_PERF_ENABLE": {
+        "addr": "0xf09c",
+        "shifts": {
+            "NVDLA_CDP_DMA_EN": [
+                0,
+                0
+            ],
+            "NVDLA_CDP_LUT_EN": [
+                1,
+                1
+            ]
+        }
+    },
+    "RUBIK_S_POINTER": {
+        "addr": "0x10004",
+        "shifts": {
+            "NVDLA_RUBIK_PRODUCER": [
+                0,
+                0
+            ]
+        }
+    },
+    "RUBIK_D_MISC_CFG": {
+        "addr": "0x1000c",
+        "shifts": {
+            "NVDLA_RUBIK_RUBIK_MODE": [
+                0,
+                1
+            ],
+            "NVDLA_RUBIK_IN_PRECISION": [
+                8,
+                9
+            ]
+        }
+    },
+    "RUBIK_D_DAIN_RAM_TYPE": {
+        "addr": "0x10010",
+        "shifts": {
+            "NVDLA_RUBIK_DATAIN_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "RUBIK_D_DATAIN_SIZE_0": {
+        "addr": "0x10014",
+        "shifts": {
+            "NVDLA_RUBIK_DATAIN_WIDTH": [
+                0,
+                12
+            ],
+            "NVDLA_RUBIK_DATAIN_HEIGHT": [
+                16,
+                28
+            ]
+        }
+    },
+    "RUBIK_D_DATAIN_SIZE_1": {
+        "addr": "0x10018",
+        "shifts": {
+            "NVDLA_RUBIK_DATAIN_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "RUBIK_D_DAIN_ADDR_HIGH": {
+        "addr": "0x1001c",
+        "shifts": {
+            "NVDLA_RUBIK_DAIN_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAIN_ADDR_LOW": {
+        "addr": "0x10020",
+        "shifts": {
+            "NVDLA_RUBIK_DAIN_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAIN_LINE_STRIDE": {
+        "addr": "0x10024",
+        "shifts": {
+            "NVDLA_RUBIK_DAIN_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAIN_SURF_STRIDE": {
+        "addr": "0x10028",
+        "shifts": {
+            "NVDLA_RUBIK_DAIN_SURF_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAIN_PLANAR_STRIDE": {
+        "addr": "0x1002c",
+        "shifts": {
+            "NVDLA_RUBIK_DAIN_PLANAR_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAOUT_RAM_TYPE": {
+        "addr": "0x10030",
+        "shifts": {
+            "NVDLA_RUBIK_DATAOUT_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "RUBIK_D_DATAOUT_SIZE_1": {
+        "addr": "0x10034",
+        "shifts": {
+            "NVDLA_RUBIK_DATAOUT_CHANNEL": [
+                0,
+                12
+            ]
+        }
+    },
+    "RUBIK_D_DAOUT_ADDR_HIGH": {
+        "addr": "0x10038",
+        "shifts": {
+            "NVDLA_RUBIK_DAOUT_ADDR_HIGH": [
+                0,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAOUT_ADDR_LOW": {
+        "addr": "0x1003c",
+        "shifts": {
+            "NVDLA_RUBIK_DAOUT_ADDR_LOW": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAOUT_LINE_STRIDE": {
+        "addr": "0x10040",
+        "shifts": {
+            "NVDLA_RUBIK_DAOUT_LINE_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_CONTRACT_STRIDE_0": {
+        "addr": "0x10044",
+        "shifts": {
+            "NVDLA_RUBIK_CONTRACT_STRIDE_0": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_CONTRACT_STRIDE_1": {
+        "addr": "0x10048",
+        "shifts": {
+            "NVDLA_RUBIK_CONTRACT_STRIDE_1": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAOUT_SURF_STRIDE": {
+        "addr": "0x1004c",
+        "shifts": {
+            "NVDLA_RUBIK_DAOUT_SURF_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DAOUT_PLANAR_STRIDE": {
+        "addr": "0x10050",
+        "shifts": {
+            "NVDLA_RUBIK_DAOUT_PLANAR_STRIDE": [
+                5,
+                31
+            ]
+        }
+    },
+    "RUBIK_D_DECONV_STRIDE": {
+        "addr": "0x10054",
+        "shifts": {
+            "NVDLA_RUBIK_DECONV_X_STRIDE": [
+                0,
+                4
+            ],
+            "NVDLA_RUBIK_DECONV_Y_STRIDE": [
+                16,
+                20
+            ]
+        }
+    },
+    "RUBIK_D_PERF_ENABLE": {
+        "addr": "0x10058",
+        "shifts": {
+            "NVDLA_RUBIK_PERF_EN": [
+                0,
+                0
+            ]
+        }
+    }
+}
