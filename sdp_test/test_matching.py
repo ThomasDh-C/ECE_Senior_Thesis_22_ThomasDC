@@ -44,8 +44,11 @@ def compile_and_run(relay_func, args, with_nvdla=True, print_output=True):
         mod = tvm.relay.transform.AnnotateTarget(["ilanvdla"])(mod)
         mod = tvm.relay.transform.PartitionGraph()(mod)
 
-    # with open("./test/mod.tvmscript", 'w') as fout:
-    #     print(mod.astext(), file=fout)
+        with open("./test/mod.tvmscript", 'w') as fout:
+            print(mod.astext(), file=fout)
+    else:
+        with open("./test/mod_wo_acc.tvmscript", 'w') as fout:
+            print(mod.astext(), file=fout)
 
     with tvm.transform.PassContext(opt_level=3):
         device = tvm.cpu()
@@ -208,13 +211,13 @@ def channel_batch_norm(with_nvdla=True):
 
     func_params = [data, gamma, beta, moving_mean, moving_var]
     interior_func = relay.nn.batch_norm(
-        data, gamma, beta, moving_mean, moving_var, axis=3, epsilon=0)[0]
-
-    print(type(interior_func))
+        data, gamma, beta, moving_mean, moving_var, axis=3, epsilon=0)
+    out = relay.TupleGetItem(interior_func.astuple(), 0)
     batch_norm_func = relay.Function(
-        func_params, body=interior_func)
+        func_params, body=out)
 
-    data_inp = np.zeros((n, h, w, c), 'float32')  # only int16 supported by sim
+    # only int16 supported by sim so internally converts
+    data_inp = np.zeros((n, h, w, c), 'float32')
     idx = 0
     for n_h in range(h):
         for n_w in range(w):
@@ -223,10 +226,15 @@ def channel_batch_norm(with_nvdla=True):
                 idx += 10
     gamma_inp = np.zeros(c, dtype='float32') + 1
     beta_inp = np.zeros(c, dtype='float32')
-    moving_mean_inp = np.zeros((c,), dtype='float32')
-    moving_var_inp = np.zeros((c,), dtype='float32')
-    test_correctness(batch_norm_func, [
-        data_inp, gamma_inp, beta_inp, moving_mean_inp, moving_var_inp])
+    moving_mean_inp = np.array(
+        [np.mean(data_inp[:, :, :, idx_c]) for idx_c in range(c)], dtype='float32')
+    moving_var_inp = np.array([np.var(data_inp[:, :, :, idx_c])
+                              for idx_c in range(c)], dtype='float32')
+    # np.zeros((c,), dtype='float32')
+    compile_and_run(batch_norm_func, [data_inp, gamma_inp, beta_inp, moving_mean_inp,
+                    moving_var_inp], with_nvdla=with_nvdla, print_output=True)
+    # test_correctness(batch_norm_func, [
+    #     data_inp, gamma_inp, beta_inp, moving_mean_inp, moving_var_inp])
 
 
 def conv2d(with_nvdla=True):
@@ -285,9 +293,9 @@ if __name__ == "__main__":
     # channel_bias_add()
     # elemwise_max()
     # elemwise_min()
-    # elemwise_equal() # broken - error in size of elements
+    # elemwise_equal()
     # elemwise_mul()
     # channel_prelu()
-    # channel_batch_norm(with_nvdla=False) # not fully implemented in c++
-    conv2d(with_nvdla=True)
+    channel_batch_norm(with_nvdla=True)  # not fully implemented in c++
+    # conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)
