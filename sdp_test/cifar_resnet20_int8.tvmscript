@@ -1,0 +1,554 @@
+#[version = "0.0.5"]
+def @main(%serving_default_input_1:0: Tensor[(1, 32, 32, 3), int8], %v_param_1: Tensor[(3, 3, 3, 16), int8], %v_param_2: Tensor[(16), int32], %v_param_3: Tensor[(3, 3, 16, 16), int8], %v_param_4: Tensor[(16), int32], %v_param_5: Tensor[(3, 3, 16, 16), int8], %v_param_6: Tensor[(16), int32], %v_param_7: Tensor[(3, 3, 16, 16), int8], %v_param_8: Tensor[(16), int32], %v_param_9: Tensor[(3, 3, 16, 16), int8], %v_param_10: Tensor[(16), int32], %v_param_11: Tensor[(3, 3, 16, 16), int8], %v_param_12: Tensor[(16), int32], %v_param_13: Tensor[(3, 3, 16, 16), int8], %v_param_14: Tensor[(16), int32], %v_param_15: Tensor[(3, 3, 16, 32), int8], %v_param_16: Tensor[(32), int32], %v_param_17: Tensor[(3, 3, 32, 32), int8], %v_param_18: Tensor[(32), int32], %v_param_19: Tensor[(3, 3, 32, 32), int8], %v_param_20: Tensor[(32), int32], %v_param_21: Tensor[(3, 3, 32, 32), int8], %v_param_22: Tensor[(32), int32], %v_param_23: Tensor[(3, 3, 32, 32), int8], %v_param_24: Tensor[(32), int32], %v_param_25: Tensor[(3, 3, 32, 32), int8], %v_param_26: Tensor[(32), int32], %v_param_27: Tensor[(3, 3, 32, 64), int8], %v_param_28: Tensor[(64), int32], %v_param_29: Tensor[(3, 3, 64, 64), int8], %v_param_30: Tensor[(64), int32], %v_param_31: Tensor[(3, 3, 64, 64), int8], %v_param_32: Tensor[(64), int32], %v_param_33: Tensor[(3, 3, 64, 64), int8], %v_param_34: Tensor[(64), int32], %v_param_35: Tensor[(3, 3, 64, 64), int8], %v_param_36: Tensor[(64), int32], %v_param_37: Tensor[(3, 3, 64, 64), int8], %v_param_38: Tensor[(64), int32], %v_param_39: Tensor[(10, 64), int8], %v_param_40: Tensor[(10), int32]) {
+  %0 = qnn.conv2d(%serving_default_input_1:0, %v_param_1, -8, 0, 0.0203247f, meta[relay.Constant][0], padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %1 = nn.bias_add(%0, %v_param_2, axis=3);
+  %2 = qnn.requantize(%1, meta[relay.Constant][1], 0, 0.0428077f, -128, axis=3, out_dtype="int8");
+  %3 = clip(%2, a_min=-128f, a_max=127f);
+  %4 = qnn.conv2d(%3, %v_param_3, -128, 0, 0.0428077f, meta[relay.Constant][2], padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %5 = nn.bias_add(%4, %v_param_4, axis=3);
+  %6 = qnn.requantize(%5, meta[relay.Constant][3], 0, 0.0680602f, -128, axis=3, out_dtype="int8");
+  %7 = clip(%6, a_min=-128f, a_max=127f);
+  %8 = qnn.conv2d(%7, %v_param_5, -128, 0, 0.0680602f, meta[relay.Constant][4], padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %9 = nn.bias_add(%8, %v_param_6, axis=3);
+  %10 = qnn.requantize(%9, meta[relay.Constant][5], 0, 0.106393f, 9, axis=3, out_dtype="int8");
+  %11 = qnn.add(%3, %10, 0.0428077f, -128, 0.106393f, 9, 0.0627025f, -128);
+  %12 = clip(%11, a_min=-128f, a_max=127f);
+  %13 = qnn.conv2d(%12, %v_param_7, -128, 0, 0.0627025f, meta[relay.Constant][6], padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %14 = nn.bias_add(%13, %v_param_8, axis=3);
+  %15 = qnn.requantize(%14, meta[relay.Constant][7], 0, 0.0554803f, -128, axis=3, out_dtype="int8");
+  %16 = clip(%15, a_min=-128f, a_max=127f);
+  %17 = qnn.conv2d(%16, %v_param_9, -128, 0, 0.0554803f, meta[relay.Constant][8], padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %18 = nn.bias_add(%17, %v_param_10, axis=3);
+  %19 = qnn.requantize(%18, meta[relay.Constant][9], 0, 0.0701395f, -7, axis=3, out_dtype="int8");
+  %20 = qnn.add(%12, %19, 0.0627025f, -128, 0.0701395f, -7, 0.0650857f, -128);
+  %21 = clip(%20, a_min=-128f, a_max=127f);
+  %22 = qnn.conv2d(%21, %v_param_11, -128, 0, 0.0650857f, meta[relay.Constant][10], padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %23 = nn.bias_add(%22, %v_param_12, axis=3);
+  %24 = qnn.requantize(%23, meta[relay.Constant][11], 0, 0.0536342f, -128, axis=3, out_dtype="int8");
+  %25 = clip(%24, a_min=-128f, a_max=127f);
+  %26 = qnn.conv2d(%25, %v_param_13, -128, 0, 0.0536342f, meta[relay.Constant][12], padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %27 = nn.bias_add(%26, %v_param_14, axis=3);
+  %28 = qnn.requantize(%27, meta[relay.Constant][13], 0, 0.0898118f, 32, axis=3, out_dtype="int8");
+  %29 = qnn.add(%21, %28, 0.0650857f, -128, 0.0898118f, 32, 0.0549561f, -128);
+  %30 = clip(%29, a_min=-128f, a_max=127f);
+  %31 = nn.max_pool2d(%30, pool_size=[1, 1], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC");
+  %32 = qnn.conv2d(%30, %v_param_15, -128, 0, 0.0549561f, meta[relay.Constant][14], strides=[2, 2], padding=[0, 0, 1, 1], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %33 = nn.bias_add(%32, %v_param_16, axis=3);
+  %34 = qnn.requantize(%33, meta[relay.Constant][15], 0, 0.042062f, -128, axis=3, out_dtype="int8");
+  %35 = clip(%34, a_min=-128f, a_max=127f);
+  %36 = qnn.conv2d(%35, %v_param_17, -128, 0, 0.042062f, meta[relay.Constant][16], padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %37 = nn.bias_add(%36, %v_param_18, axis=3);
+  %38 = nn.pad(%31, -128f, pad_width=[[0, 0], [0, 0], [0, 0], [0, 16]]);
+  %39 = qnn.requantize(%37, meta[relay.Constant][17], 0, 0.0952821f, -5, axis=3, out_dtype="int8");
+  %40 = qnn.add(%38, %39, 0.0549561f, -128, 0.0952821f, -5, 0.069808f, -128);
+  %41 = clip(%40, a_min=-128f, a_max=127f);
+  %42 = qnn.conv2d(%41, %v_param_19, -128, 0, 0.069808f, meta[relay.Constant][18], padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %43 = nn.bias_add(%42, %v_param_20, axis=3);
+  %44 = qnn.requantize(%43, meta[relay.Constant][19], 0, 0.0263157f, -128, axis=3, out_dtype="int8");
+  %45 = clip(%44, a_min=-128f, a_max=127f);
+  %46 = qnn.conv2d(%45, %v_param_21, -128, 0, 0.0263157f, meta[relay.Constant][20], padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %47 = nn.bias_add(%46, %v_param_22, axis=3);
+  %48 = qnn.requantize(%47, meta[relay.Constant][21], 0, 0.0827107f, 3, axis=3, out_dtype="int8");
+  %49 = qnn.add(%41, %48, 0.069808f, -128, 0.0827107f, 3, 0.0628522f, -128);
+  %50 = clip(%49, a_min=-128f, a_max=127f);
+  %51 = qnn.conv2d(%50, %v_param_23, -128, 0, 0.0628522f, meta[relay.Constant][22], padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %52 = nn.bias_add(%51, %v_param_24, axis=3);
+  %53 = qnn.requantize(%52, meta[relay.Constant][23], 0, 0.033515f, -128, axis=3, out_dtype="int8");
+  %54 = clip(%53, a_min=-128f, a_max=127f);
+  %55 = qnn.conv2d(%54, %v_param_25, -128, 0, 0.033515f, meta[relay.Constant][24], padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %56 = nn.bias_add(%55, %v_param_26, axis=3);
+  %57 = qnn.requantize(%56, meta[relay.Constant][25], 0, 0.0971871f, -45, axis=3, out_dtype="int8");
+  %58 = qnn.add(%50, %57, 0.0628522f, -128, 0.0971871f, -45, 0.0913129f, -128);
+  %59 = clip(%58, a_min=-128f, a_max=127f);
+  %60 = nn.max_pool2d(%59, pool_size=[1, 1], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC");
+  %61 = qnn.conv2d(%59, %v_param_27, -128, 0, 0.0913129f, meta[relay.Constant][26], strides=[2, 2], padding=[0, 0, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %62 = nn.bias_add(%61, %v_param_28, axis=3);
+  %63 = qnn.requantize(%62, meta[relay.Constant][27], 0, 0.0451674f, -128, axis=3, out_dtype="int8");
+  %64 = clip(%63, a_min=-128f, a_max=127f);
+  %65 = qnn.conv2d(%64, %v_param_29, -128, 0, 0.0451674f, meta[relay.Constant][28], padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %66 = nn.bias_add(%65, %v_param_30, axis=3);
+  %67 = nn.pad(%60, -128f, pad_width=[[0, 0], [0, 0], [0, 0], [0, 32]]);
+  %68 = qnn.requantize(%66, meta[relay.Constant][29], 0, 0.118268f, -13, axis=3, out_dtype="int8");
+  %69 = qnn.add(%67, %68, 0.0913129f, -128, 0.118268f, -13, 0.111113f, -128);
+  %70 = clip(%69, a_min=-128f, a_max=127f);
+  %71 = qnn.conv2d(%70, %v_param_31, -128, 0, 0.111113f, meta[relay.Constant][30], padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %72 = nn.bias_add(%71, %v_param_32, axis=3);
+  %73 = qnn.requantize(%72, meta[relay.Constant][31], 0, 0.0297252f, -128, axis=3, out_dtype="int8");
+  %74 = clip(%73, a_min=-128f, a_max=127f);
+  %75 = qnn.conv2d(%74, %v_param_33, -128, 0, 0.0297252f, meta[relay.Constant][32], padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %76 = nn.bias_add(%75, %v_param_34, axis=3);
+  %77 = qnn.requantize(%76, meta[relay.Constant][33], 0, 0.114821f, 5, axis=3, out_dtype="int8");
+  %78 = qnn.add(%70, %77, 0.111113f, -128, 0.114821f, 5, 0.111022f, -128);
+  %79 = clip(%78, a_min=-128f, a_max=127f);
+  %80 = qnn.conv2d(%79, %v_param_35, -128, 0, 0.111022f, meta[relay.Constant][34], padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %81 = nn.bias_add(%80, %v_param_36, axis=3);
+  %82 = qnn.requantize(%81, meta[relay.Constant][35], 0, 0.0483682f, -128, axis=3, out_dtype="int8");
+  %83 = clip(%82, a_min=-128f, a_max=127f);
+  %84 = qnn.conv2d(%83, %v_param_37, -128, 0, 0.0483682f, meta[relay.Constant][36], padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32");
+  %85 = nn.bias_add(%84, %v_param_38, axis=3);
+  %86 = qnn.requantize(%85, meta[relay.Constant][37], 0, 0.170556f, -25, axis=3, out_dtype="int8");
+  %87 = qnn.add(%79, %86, 0.111022f, -128, 0.170556f, -25, 0.157927f, -128);
+  %88 = clip(%87, a_min=-128f, a_max=127f);
+  %89 = cast(%88, dtype="int32");
+  %90 = mean(%89, axis=[1, 2]);
+  %91 = qnn.requantize(%90, 0.157927f, -128, 0.0281836f, -128, out_dtype="int8");
+  %92 = reshape(%91, newshape=[-1, 64]);
+  %93 = qnn.dense(%92, %v_param_39, -128, 0, 0.0281836f, 0.00978166f, units=10, out_dtype="int32");
+  %94 = nn.bias_add(%93, %v_param_40);
+  qnn.requantize(%94, 0.000275682f, 0, 0.161988f, -57, out_dtype="int8")
+}
+
+#[metadata]
+{
+  "root": 1, 
+  "nodes": [
+    {
+      "type_key": ""
+    }, 
+    {
+      "type_key": "Map", 
+      "keys": [
+        "relay.Constant"
+      ], 
+      "data": [2]
+    }, 
+    {
+      "type_key": "Array", 
+      "data": [
+        3, 
+        6, 
+        7, 
+        8, 
+        9, 
+        10, 
+        11, 
+        12, 
+        13, 
+        14, 
+        15, 
+        16, 
+        17, 
+        18, 
+        19, 
+        20, 
+        21, 
+        22, 
+        23, 
+        24, 
+        25, 
+        26, 
+        27, 
+        28, 
+        29, 
+        30, 
+        31, 
+        32, 
+        33, 
+        34, 
+        35, 
+        36, 
+        37, 
+        38, 
+        39, 
+        40, 
+        41, 
+        42
+      ]
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "0", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "VirtualDevice", 
+      "attrs": {
+        "device_type_int": "-1", 
+        "memory_scope": "5", 
+        "target": "0", 
+        "virtual_device_id": "-1"
+      }
+    }, 
+    {
+      "type_key": "runtime.String"
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "1", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "2", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "3", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "4", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "5", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "6", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "7", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "8", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "9", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "10", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "11", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "12", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "13", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "14", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "15", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "16", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "17", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "18", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "19", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "20", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "21", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "22", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "23", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "24", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "25", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "26", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "27", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "28", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "29", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "30", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "31", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "32", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "33", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "34", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "35", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "36", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }, 
+    {
+      "type_key": "relay.Constant", 
+      "attrs": {
+        "_checked_type_": "0", 
+        "data": "37", 
+        "span": "0", 
+        "virtual_device_": "4"
+      }
+    }
+  ], 
+  "b64ndarrays": [
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAAEBlOzAdLTs2U+E7Gq4eOy27VzwghrQ6RQruOju7tju6zxg73t7TOi6Yszr2txg8SDkmO+IYuDr7LEs7ZcViOw==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAGhqVOO4uYTiYjBI5b2hOODdPjDlu0uo3p9EaOIKx7TgtxkY4bswJOOqc6TdDp0Y5ejhYOFR47ze8JIQ4XH2TOA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAWcONO5RIBTzKuwQ7lEEyO61b4jobKoA7dMpvO0/lqzvTkz47Z15LO4KMFDszPII6sXroO8LP4zsPZ8Y6FRIGOw==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAkTFCOfKTtjkW07U4/C70OLQJmzjNkC85AD0kOYF4aznphwI5vkoLOTV9yzjyZjI4/TqfOY0InDn444c4+ae3OA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAsy68Or2dkzpJEys7T7zAOuaSIztf3Ho6cMMqOk8RSDtt7Qo7GsSSOrWUiTu/H906Wi4uOusYAjuL1sA6cIJtOg==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAc+zMOJ2/oDhuSzo5weHRODQgMjnLlog4e/Q5OL3dWTlsSRc5ntKfOAnSlTm5y/A4Oq09ONCrDTlT/tE4y1GBOA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAizT3Ok8LqDrJ4F46oanDOo6swjpLAQI7KewIOw3/KDtc0dQ6o+/WOhNIgzpV5eE6mmm3OpKr6TrFaxo7xhbUOg==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAigH4OKmWqDicmV844kvEOP1NwzgabQI5tF0JOTGLKTnXgdU44KHXOPG0gziooOI4sgG4OFht6jjT6xo5psbUOA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAX3ivOmn/rjreExU73oqoOhmhnzrUry06ygztOQh6EDstXik6SakkOmRzBDuQHi47w+7OOjwMsjrWRdA6KYyaOg==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAH8ObOL9Xmzh6VQQ5z5yVOFGzjTjbLRo49GzSN+4/ADliWBY40ioSOCMm6zgnkBo54bC3ON8Mnjhs4bg4fzCJOA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAvWH3OoPPyDr++5k6xvIVOx8RqTqVAIE6Ozj9Op9c8DrtRJE6R/DaOtSaujrCt5o6PoTxOut/0jrcWL86WJOwOg==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAA3s4AOUce0TjUWqA43SYcObIPsDjVVoY4B9kDOUZO+jh2R5c4Cf/jOCVTwjhcHqE4H4L7OE012zhmQ8c4ceG3OA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAAOn2qOp5w9DpEfdc67x7zOgXdqzpZJ6M63OaTOmT9PTt9nHs6BVMROgF/7jpt/Ao7e/8ZO2HfADsFV8M6ZKKPOg==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAQAAAAAAAAAEAAAAAAAAAADU6SOPzD0Tjz67g4M6LQOPF7kziOAow429d9OBEKIzlu61c4YGv5NzeqzDiGiu44LCcEOfQu3Thpoac424R2OA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAmxXCOmvgBDv4Cns6/JCGOhfOjzq6zOo6uPFdOhTtazob7Kk6g+ahOqPajTplHaM6HxPrOurlnToV5OY61yOkOkISlTpC/cA6s1CyOo1GNTu3WrY69YJ/Oq8lCTuq27E6NXv3OvJcuDogA8o6Tq60OoekrjohnZc6nIrhOoYGpzo=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAc6iqOCGt6TjQvVw416VsOBvlfDh6dc44tCdDOAZzTziNaZU41VuOOMV2eTgxbY84YLPOOOjWijidBcs49VOQOP4Tgzjxsak4zsqcOC9lHzkEWKA4uKtgOL4v8TjmY5w4GpzZOC0cojgAobE4UN+eOB2QmThOUIU4cFHGOHvdkjg=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAA+RPOOmUplTpmv9I6OawaO7y4BzsAGo46x6xdOqC8kjrR6tA6BWaLOn7pqzrSCgg7jwJvOvgPBDsXTXo6tsrpOomf2zp0HdI6C9KnOpp1Czs/ng47/XDxOjDmqDrqAfQ6JKmjOgyoCTvgjRc7H4HOOkrm9jqsye46tdoTO68VFDs=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAATrCKON/ESDjR1I040i/QOM2ttjgmRD84bi8VOFOBRTh3mYw4waA7OAFkZzhKHLc4BNogOO/AsThScyg4AVedOPLNkzjUZ404KOJhOLq1uzgm9r846HyiONdVYzgDN6Q40UhcOHxIuThC/cs4w/mKOEcppji7s6A4YwLHOMVRxzg=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAtO0uOpPnSTrcxZ86ssYsOnrQLjp6J0w6zowmOsfAgjoQRkE6r9ctOsO3fDqcnTM6ieciOtbBgjqzvDk6+bNkOkaGZjrBLFo6nq5ROmTXJTouGnQ6UlSGOmh0FjrCzyw6OaFFOt7wSTpYgoE6U9BIOtuNbToyUDc6T/OWOjpxjzo=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAA92FDOFSDYTh1dLI4h/pAOFJBQziSBmQ4RAY6OLQKkjh231c4cCtCOEYijTgsnkg43/M1OOILkjiAdE8453F/OF29gDiJr3M4LjNqOKQ7OTiJUog4TAmWOBMMKDimBEE4BL1cOLWNYTgJp5A4bUtgOF6qhDhxv0w40ZmoOP02oDg=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAh1/fOsHizjrOhu8623wJO20t+zrL1ho7GtHkOn/AIDsXTjM7SHjSOt+WFDuTOhs7nufdOmQ7+jrkNv86kAMgOy80Gjt06Fk7SEERO8PxsDq2Swk7m8tLO1Jt6TrED/s6iXAVO/0XVTv8i5A7jIY4OzXavTpsxe86IC4MO+UKwTo=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAATho8OP03LjigtEk4nY5nOEuEUzjeY4I41q9AOI9ehzgy/pY4ozwxOCRBejjkt4I4wN06OHq4UjiT6lY4db+GOO/agTgkgLc4hqN0OEoBFTjYO2c4w52rOLORRDhRa1M4u697OEhyszgvcvM4oGObOPffHzhb6Uk4exdsOLOPIjg=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAn8tWOpU2Sjou55060tYPOreDOzrRK0E6PYVNOu0gLzqukIQ6dxjxOV8CYjrlTHI6xr9gOilP0zou0JU6CmxBOj1ScDrhTQA64U7WOh0KXDr8R4o6vwbtOqVlQzoq8GI6m2eYOhtQbzozk3A6BJiZOuSbnTrXYCc6WwFHOtXS2Dk=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAfwFYOE5aSzj7yp44VaYQODySPDh/QkI4vK1OOJQdMDjtT4U4SHTyN21IYzhzqnM4AgRiOAKA1DhPqJY4FYNCOPGscTj6BgE4DYTXOI5HXTh6D4s4slzuOIl/RDiPN2Q4eUOZOFqpcDhE7nE4mXWaOER/njhPUig4dCBIOKIL2jc=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAfMxkO8hmKTvznXA79gukO0NlWTvPxZM7IUORO7iVJDuWlTs7/VKOOtkSIzu+3lw7FGn0OjsjNDsghak6kApMO+LnJzsFAE476uWuOo2htzrbO3E7YKUcO5ZSnzp7GCE7RTzbOp4dITuAwIc70e5KO+LOwzrzXv46ZZBvOxqzkzo=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQAgAAAAAAAAAIAAAAAAAAAAzGH1OP2ttThGBwE50O8vOf0m6Tizex45cMobOY6DsDgsLsk4yKMYOKXkrjjw4Ow4CBCDOKUxwTiIzjU4gdTaOFYTtDhO7tw4HJM7OMnwRDjzWwE56P+nOMjeKjiTxaw4IiBrOBXLrDhZlxE5MaTZOA8AUjhfZ4g4unYAOaNnHjg=", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAFyJ6OsZKNDpD6jc68yBpOl/KYDoX7Uk6qLtMOnaTdToCDjE67NFEOsKGVzpUpXM6YCdqOnd+Ozqsr0o6bPqEOuTPXjqdKFI62MZdOppYijppn5I6/z0gOvHTNDrsW4c6e0JlOsM5XzrqMB465cM1Oif5ZzoU1GY6l/ASOt4GOzoS4lQ6KqRhOi6LaDqeCTM6e0hdOgKULzr/EP85raQmOqX+hTouoWU6CppROuKpejpbNWw6dDaWOsOEOjqGVyQ6JNmIOuZDfjrJYSM6/dopOhGpTDoRoEU629VsOinafTpaOCM6TcxPOjrJNDq2I0U63Rl7OixmQjr2mmQ6k5l5Og==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAGrm2ODS0gzi9WYY4Hk2qOM01pDj2gZM44I6VOOBkszjKVoE4EsePOFVxnTjp+7E40gyrOAf3iDgbEJQ4MEjCONHDojiEhZk4MwKiOOAfyjh3N9Y4ZB1qOGgYhDiswsU4lHmnOCgRozg+Hmc4sceEOAl1qTjynqg4Eq5WOKmfiDgCg5s45tSkOLbfqTiZyYI45KWhOKlCgDioUzo4g3dzOGDEwzjBvqc4XR2ZOEwctzgNjaw4MXbbOJ5AiDjBGnA4ou/HONW9uTi7s2446ih4OEyBlTipXZA4TAKtOJdwuTgyd244EMyXOJQQhDjSApA4GW63OFgCjjg0/6Y4YFW2OA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAApTJSO94+FzscfDc7FJwWO1/z0jrSUTs7mvZNO7+ONDtmd0M7QXffOr6NvzqkAB87O1rOOteCkTue0Q47EtMEO+AGQDubtxI74E/qOgrWATvRsgY78tcoO1fPyzr5eqo6Nj2OOqs5CDspeNE6KpjjOufqaDpys7c6UCK4OuwtazrTEmg7s5z9OlTISTuBp1k7X7gcO9giQjsAVRc7PQIgO3y7SjsHvUY7EtsdOxkeNztUWhY7gDw2O1gtOjuSyyY7h987O8VfOzv9jUg7Yh8SO2IKJjtMAVM7uU5RO03RRTu9rg87ap8jO3oxLjttVkA7QkX7OmSxETtZ7ww74tgjOw==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAyucXOZOa2ji6mQQ5Sa/ZOBFzmDgwXwc5YNgUOS58AjlkQg05cn6hOIRuiji60OU4YCCVOMBQUjmUbM44kfq/OA7GCjkHD9Q4DFWpONOouzj4r8I4BQr0OP1JkziqZ3Y4FJZNOOTkxDgFYZc4QHqkOBJTKDi4wYQ41xGFOIT1KTjrtic5rUe3OOnSETlISx05QITiOEdMDDmRuto4DEXnOKKCEjm6nw85aijkOMlVBDlBUNk4wbIDOdKLBjkcFPE4mcUHOUVpBzm+7xA5AzPTOOP87zgifRg5E0MXOV/1DjkurM84QX7sOHvF+ziM/wo5eZa1OAmU0jiHs8s4UtHsOA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAqoVhOi+CIDqOn0I6pL8xOi3viDpxTAg6sSvZOTj0Ljovvjo6wXhEOkRbLDqSkzQ6w64+OqDgDDqoMgg61XU3OgfUSTph+wY6I0d2OvM1STriOio61lqSOhFzSzqddn86JPj5OdGjKzr4ZSU6nwFDOpAsLzodNzI6KnonOgAPUDqZUUs6OQdKOozZXTparEI6b+VlOuBmBDpfDD06cGgYOoevKzo+3TQ6efwuOrdPojqUh/w5rI4qOhcrhzps+io6H9RfOq0fVTrFBj46fRwbOtS4ODpO4RQ66qZSOoAVNjqovlg6rhhQOu9lMzrcxhg61vMfOstOSDozr446L1ZPOg==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAlXfIOCitjjhFAK04SgCeOEBx8zjwT3I4IwtBOFmEmzgG/6U45qSuOEU1mTjLg6A4jX+pONpzejgZInI4CRSjONNnszi1+G84vuraOE/bsjheUZc4WxgCOcHYtDj5FOM4wjJeODSSmDjfBZM4cVetOG+2mzh9ap448d6UOJrxuDgBu7Q4VZWzOOkzxTilC60481rMOHZiazilC6g4zXmHOJ2cmDhHxaA4r4ubOGpHEDlheWA42ZuXOIdN8Dig+5c4NfbGODhyvTg56qg49+CJOCUzpDgBV4Q4wT+7ONjaoTg3qsA4NPq4OKp3nzi7zYc4oC6OONYNsjg4qv04UU24OA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAzsNXO0rghTsjU4Y7EBCMO+vpjju/J5I7aFl9O9eAnzslV607FaKKO/VVFjvIyJU72gseO10SoDvMwpI7o893O6/cLDtkVJA7kLQvO/VRnTuG8l070LonOx41UjupV+c6xRIIO4BeoTtTrIY7rMeNO9v7wTp9F2w7udabO/wn2DrrlYQ7ZXR9O8FhyTtNVoA7HtxgOyBEkzudK3Y7AQdMO/2Jyzs2/EA7xK5gOzEknjti53A7rlGUO2nxazt7TaQ7Xm8nOwGwjTuTRHY7WutYO4U1cDuJrl47QxJ+O3TKdDuMhzw7GSOJO47gXjt6/X07JSmDO4gcXju8tYQ781w1Ow==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAljzNOPWv/jhyiv84eToFObfwBzkNBgs5tPzwOGm4Fzne4SQ5Wt4DOQsAjzjBeQ45n1WWONVCGDmKmQs5HbjrOGJtpDiASQk5vyGnOMykFTkTHtM4n4ufOFHzxzjaDVw4BG+BOMN+GTkPGgA5otwGObaEODhbkuA4ETwUOeCbTTh1O/w4YBbxODOOPzldJvQ4SuPVOI4UDDmVKOo4ZxLCOH2bQTmLkbc4JrjVOMZsFjkkJuU49RQNOSNu4DgZSRw53EOfOB7GBjlUQOo4tlXOOPV85Djq0NM4iqzxOKjY6DiJVLM4DnICOX4A1DjEmPE4goX5OAhG0zj8d/w4dYOsOA==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAM49SOktIMzrP6kU6jMpKOnwlNjrVo6U6lbysOuu0mDoMFpQ6mgdpOqfVYjp63406Nz1oOuuRSzqdKYg6KuXiOQjJizr1eIY6UCBLOlZjSjo7Q2c6R45IOjaCfDq2oHM6nlumOtkGUDouWGI6zqkgOqcQADqEOVw6L4Z8OiabSTrGi3w6FywhOrK4iTpXrk86DId8OgjhMzr6yog6dosXOkeJRTqOyzw6JGQaOo5eOzqZGZ06C0MiOvDSFzoDFo069buJOq40ZjrfZZQ6njxcOiFNSzqsH746FpNMOj6TWjqmrj8662QjOvco1jnymzc6ZvJrOgcKgzp24Fs6GhaROg==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAhQO7OPs7nzgJya84Px20OC/HoTgPHhM5p2sZOWOhBznKhgM5qvjOOBB4yTgqBPw46UTOOFPOtDhh3/E414VJOM1O+DjV3u44bGm0OJTBszjhZs04+CCyOKZF4DhiYtg4S8ETOavDuDifCMk4gLKOOBN9YzgmmcM4LkngOMYPszglTuA4NyaPOEqk9DgPdbg48kngOKPDnzgF/vI4MZmGOGlyrzjrrqc4YyCJOLxqpjhMiAs5+R2QOK3YhjhLnvo4Fqr0OJV2zDiwzQM555vDODqRtDgB3Sg5vLK1OBgiwjhdP6o4bx+RODY2PjjFE6M49I/ROIvF6DgNSsM4uNwAOQ==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAmjFqO3yAVTteA2o77x2iO1NqgzuGPJo7dAE6OwridjsvmVU7gfGHOyhCZTvkIHw7H5+SO1PMlzv550U7yJesO2UneDudWoY7OiN4O5UebDt+GZ47xPJcO6FgkTsQK687CrKGOwVVeDuI34w7G9hnO5L9GTsUOZ07qliIO8W7OjtrmYg7xReTO7cjgTvEXGI7i6bQO8E3eDtVyT07ss+WO35aYzutu5o7lSubOz9cLDt4BoM7u32KO9E7YjuBCok7qaxVOyYTozuu2Wg7wqBzO/YmZTuh04U7CXxLO45MnDt6cJ47Pf2UO8KAgTu/IJk7KYhmO5pafzte2lM7WOW8Ow==", 
+    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAAIgAQBAAAAAAAAAAAABAAAAAAAAmT01OTQ6JTnRGTU5Aux6OQlnSzl+uW45wfIPOYkPPzlRTSU5MWlSOdRrMTnCHkM5PvBiOV7zajluKBk5d5GFOVQLQDlq8085GghAORy7Njk0tHQ5df0qOUkDYTmtj4c5u3pQOaMuQDmKClo5G2wzOQ5Y7jjcWHM53QhTOfGCEDkXbVM5+6pjOUjhRzkSLi85E3mhOf0XQDnK3xI5W2xpOW7yLzlMfm85gStwOWRjBTl7zEo5s1pWOZMULzkfHFQ5ZFwlOYxnfDlwMzQ5q4o8OchWMTl9Ik85mXkdOcbqcTnWOnU5YZpmOUtxSDlFAm05H2gyOcWdRTmH8yM5WS+SOQ=="
+  ], 
+  "attrs": {"tvm_version": "0.9.dev0"}
+}
