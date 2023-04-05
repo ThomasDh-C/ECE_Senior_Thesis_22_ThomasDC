@@ -1,2386 +1,747 @@
 #[version = "0.0.5"]
-def @main(%serving_default_input_1:0: Tensor[(1, 32, 32, 3), float32], %v_param_1: Tensor[(3, 3, 3, 16), int8], %v_param_2: Tensor[(16), int32], %v_param_3: Tensor[(3, 3, 16, 16), int8], %v_param_4: Tensor[(16), int32], %v_param_5: Tensor[(3, 3, 16, 16), int8], %v_param_6: Tensor[(16), int32], %v_param_7: Tensor[(3, 3, 16, 16), int8], %v_param_8: Tensor[(16), int32], %v_param_9: Tensor[(3, 3, 16, 16), int8], %v_param_10: Tensor[(16), int32], %v_param_11: Tensor[(3, 3, 16, 16), int8], %v_param_12: Tensor[(16), int32], %v_param_13: Tensor[(3, 3, 16, 16), int8], %v_param_14: Tensor[(16), int32], %v_param_15: Tensor[(3, 3, 16, 32), int8], %v_param_16: Tensor[(32), int32], %v_param_17: Tensor[(3, 3, 32, 32), int8], %v_param_18: Tensor[(32), int32], %v_param_19: Tensor[(3, 3, 32, 32), int8], %v_param_20: Tensor[(32), int32], %v_param_21: Tensor[(3, 3, 32, 32), int8], %v_param_22: Tensor[(32), int32], %v_param_23: Tensor[(3, 3, 32, 32), int8], %v_param_24: Tensor[(32), int32], %v_param_25: Tensor[(3, 3, 32, 32), int8], %v_param_26: Tensor[(32), int32], %v_param_27: Tensor[(3, 3, 32, 64), int8], %v_param_28: Tensor[(64), int32], %v_param_29: Tensor[(3, 3, 64, 64), int8], %v_param_30: Tensor[(64), int32], %v_param_31: Tensor[(3, 3, 64, 64), int8], %v_param_32: Tensor[(64), int32], %v_param_33: Tensor[(3, 3, 64, 64), int8], %v_param_34: Tensor[(64), int32], %v_param_35: Tensor[(3, 3, 64, 64), int8], %v_param_36: Tensor[(64), int32], %v_param_37: Tensor[(3, 3, 64, 64), int8], %v_param_38: Tensor[(64), int32], %v_param_39: Tensor[(10, 64), int8], %v_param_40: Tensor[(10), int32]) -> Tensor[(1, 10), float32] {
-  %0 = divide(%serving_default_input_1:0, 0.0203247f /* ty=float32 */) /* ty=Tensor[(1, 32, 32, 3), float32] */;
-  %1 = cast(-8 /* ty=int32 */, dtype="float32") /* ty=float32 */;
-  %2 = add(%0, %1) /* ty=Tensor[(1, 32, 32, 3), float32] */;
-  %3 = clip(%2, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 3), float32] */;
-  %4 = round(%3) /* ty=Tensor[(1, 32, 32, 3), float32] */;
-  %5 = cast(%4, dtype="int8") /* ty=Tensor[(1, 32, 32, 3), int8] */;
-  %6 = nn.pad(%5, -8 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 34, 34, 3), int8] */;
-  %7 = cast(%v_param_1, dtype="int32") /* ty=Tensor[(3, 3, 3, 16), int32] */;
-  %8 = sum(%7, axis=[0, 1, 2]) /* ty=Tensor[(16), int32] */;
-  %9 = reshape(%8, newshape=[1, 1, 1, 16]) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %10 = nn.conv2d(%6, %v_param_1, padding=[0, 0, 0, 0], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %11 = multiply(-8 /* ty=int32 */, %9) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %12 = subtract(%10, %11) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %13 = nn.bias_add(%12, %v_param_2, axis=3) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %14 = cast(%13, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %15 = cast(%14, dtype="int64") /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %16 = multiply(%15, meta[relay.Constant][0] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %17 = add(%16, meta[relay.Constant][1] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %18 = right_shift(%17, meta[relay.Constant][2] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %19 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %20 = cast(%18, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %21 = add(%19, %20) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %22 = clip(%21, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %23 = cast(%22, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %24 = clip(%23, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %25 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %26 = expand_dims(%25, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %27 = cast(%24, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %28 = cast(%26, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %29 = subtract(%27, %28) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %30 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %31 = fixed_point_multiply(%29, multiplier=1520454153, shift=0) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %32 = nn.pad(%24, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 34, 34, 16), int8] */;
-  %33 = cast(%v_param_3, dtype="int32") /* ty=Tensor[(3, 3, 16, 16), int32] */;
-  %34 = sum(%33, axis=[0, 1, 2]) /* ty=Tensor[(16), int32] */;
-  %35 = reshape(%34, newshape=[1, 1, 1, 16]) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %36 = nn.conv2d(%32, %v_param_3, padding=[0, 0, 0, 0], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %37 = multiply(-128 /* ty=int32 */, %35) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %38 = subtract(%36, %37) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %39 = nn.bias_add(%38, %v_param_4, axis=3) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %40 = cast(%39, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %41 = cast(%40, dtype="int64") /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %42 = multiply(%41, meta[relay.Constant][3] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %43 = add(%42, meta[relay.Constant][4] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %44 = right_shift(%43, meta[relay.Constant][5] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %45 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %46 = cast(%44, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %47 = add(%45, %46) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %48 = clip(%47, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %49 = cast(%48, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %50 = clip(%49, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %51 = nn.pad(%50, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 34, 34, 16), int8] */;
-  %52 = cast(%v_param_5, dtype="int32") /* ty=Tensor[(3, 3, 16, 16), int32] */;
-  %53 = sum(%52, axis=[0, 1, 2]) /* ty=Tensor[(16), int32] */;
-  %54 = reshape(%53, newshape=[1, 1, 1, 16]) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %55 = nn.conv2d(%51, %v_param_5, padding=[0, 0, 0, 0], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %56 = multiply(-128 /* ty=int32 */, %54) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %57 = subtract(%55, %56) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %58 = nn.bias_add(%57, %v_param_6, axis=3) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %59 = cast(%58, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %60 = cast(%59, dtype="int64") /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %61 = multiply(%60, meta[relay.Constant][6] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %62 = add(%61, meta[relay.Constant][7] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %63 = right_shift(%62, meta[relay.Constant][8] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %64 = cast(-1 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %65 = cast(%63, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %66 = add(%64, %65) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %67 = clip(%66, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %68 = cast(%67, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %69 = reshape(-1 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %70 = expand_dims(%69, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %71 = cast(%68, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %72 = cast(%70, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %73 = subtract(%71, %72) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %74 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %75 = fixed_point_multiply(%73, multiplier=1838094621, shift=1) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %76 = add(%30, %31) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %77 = add(%74, %75) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %78 = add(%76, %77) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %79 = subtract(%78, -128 /* ty=int32 */) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %80 = clip(%79, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %81 = cast(%80, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %82 = clip(%81, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %83 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %84 = expand_dims(%83, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %85 = cast(%82, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %86 = cast(%84, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %87 = subtract(%85, %86) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %88 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %89 = fixed_point_multiply(%87, multiplier=1083266204, shift=1) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %90 = nn.pad(%82, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 34, 34, 16), int8] */;
-  %91 = cast(%v_param_7, dtype="int32") /* ty=Tensor[(3, 3, 16, 16), int32] */;
-  %92 = sum(%91, axis=[0, 1, 2]) /* ty=Tensor[(16), int32] */;
-  %93 = reshape(%92, newshape=[1, 1, 1, 16]) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %94 = nn.conv2d(%90, %v_param_7, padding=[0, 0, 0, 0], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %95 = multiply(-128 /* ty=int32 */, %93) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %96 = subtract(%94, %95) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %97 = nn.bias_add(%96, %v_param_8, axis=3) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %98 = cast(%97, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %99 = cast(%98, dtype="int64") /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %100 = multiply(%99, meta[relay.Constant][9] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %101 = add(%100, meta[relay.Constant][10] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %102 = right_shift(%101, meta[relay.Constant][11] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %103 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %104 = cast(%102, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %105 = add(%103, %104) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %106 = clip(%105, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %107 = cast(%106, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %108 = clip(%107, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %109 = nn.pad(%108, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 34, 34, 16), int8] */;
-  %110 = cast(%v_param_9, dtype="int32") /* ty=Tensor[(3, 3, 16, 16), int32] */;
-  %111 = sum(%110, axis=[0, 1, 2]) /* ty=Tensor[(16), int32] */;
-  %112 = reshape(%111, newshape=[1, 1, 1, 16]) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %113 = nn.conv2d(%109, %v_param_9, padding=[0, 0, 0, 0], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %114 = multiply(-128 /* ty=int32 */, %112) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %115 = subtract(%113, %114) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %116 = nn.bias_add(%115, %v_param_10, axis=3) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %117 = cast(%116, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %118 = cast(%117, dtype="int64") /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %119 = multiply(%118, meta[relay.Constant][12] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %120 = add(%119, meta[relay.Constant][13] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %121 = right_shift(%120, meta[relay.Constant][14] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %122 = cast(10 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %123 = cast(%121, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %124 = add(%122, %123) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %125 = clip(%124, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %126 = cast(%125, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %127 = reshape(10 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %128 = expand_dims(%127, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %129 = cast(%126, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %130 = cast(%128, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %131 = subtract(%129, %130) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %132 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %133 = fixed_point_multiply(%131, multiplier=2009183692, shift=0) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %134 = add(%88, %89) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %135 = add(%132, %133) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %136 = add(%134, %135) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %137 = subtract(%136, -128 /* ty=int32 */) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %138 = clip(%137, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %139 = cast(%138, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %140 = clip(%139, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %141 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %142 = expand_dims(%141, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %143 = cast(%140, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %144 = cast(%142, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %145 = subtract(%143, %144) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %146 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %147 = fixed_point_multiply(%145, multiplier=1349334673, shift=1) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %148 = nn.pad(%140, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 34, 34, 16), int8] */;
-  %149 = cast(%v_param_11, dtype="int32") /* ty=Tensor[(3, 3, 16, 16), int32] */;
-  %150 = sum(%149, axis=[0, 1, 2]) /* ty=Tensor[(16), int32] */;
-  %151 = reshape(%150, newshape=[1, 1, 1, 16]) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %152 = nn.conv2d(%148, %v_param_11, padding=[0, 0, 0, 0], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %153 = multiply(-128 /* ty=int32 */, %151) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %154 = subtract(%152, %153) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %155 = nn.bias_add(%154, %v_param_12, axis=3) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %156 = cast(%155, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %157 = cast(%156, dtype="int64") /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %158 = multiply(%157, meta[relay.Constant][15] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %159 = add(%158, meta[relay.Constant][16] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %160 = right_shift(%159, meta[relay.Constant][17] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %161 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %162 = cast(%160, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %163 = add(%161, %162) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %164 = clip(%163, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %165 = cast(%164, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %166 = clip(%165, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %167 = nn.pad(%166, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 34, 34, 16), int8] */;
-  %168 = cast(%v_param_13, dtype="int32") /* ty=Tensor[(3, 3, 16, 16), int32] */;
-  %169 = sum(%168, axis=[0, 1, 2]) /* ty=Tensor[(16), int32] */;
-  %170 = reshape(%169, newshape=[1, 1, 1, 16]) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %171 = nn.conv2d(%167, %v_param_13, padding=[0, 0, 0, 0], channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %172 = multiply(-128 /* ty=int32 */, %170) /* ty=Tensor[(1, 1, 1, 16), int32] */;
-  %173 = subtract(%171, %172) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %174 = nn.bias_add(%173, %v_param_14, axis=3) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %175 = cast(%174, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %176 = cast(%175, dtype="int64") /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %177 = multiply(%176, meta[relay.Constant][18] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %178 = add(%177, meta[relay.Constant][19] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %179 = right_shift(%178, meta[relay.Constant][20] /* ty=Tensor[(16), int64] */) /* ty=Tensor[(1, 32, 32, 16), int64] */;
-  %180 = cast(38 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %181 = cast(%179, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %182 = add(%180, %181) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %183 = clip(%182, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %184 = cast(%183, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %185 = reshape(38 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %186 = expand_dims(%185, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %187 = cast(%184, dtype="int32") /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %188 = cast(%186, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %189 = subtract(%187, %188) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %190 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %191 = fixed_point_multiply(%189, multiplier=1929168299, shift=1) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %192 = add(%146, %147) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %193 = add(%190, %191) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %194 = add(%192, %193) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %195 = subtract(%194, -128 /* ty=int32 */) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %196 = clip(%195, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int32] */;
-  %197 = cast(%196, dtype="int8") /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %198 = clip(%197, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 16), int8] */;
-  %199 = nn.max_pool2d(%198, pool_size=[1, 1], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC") /* ty=Tensor[(1, 16, 16, 16), int8] */;
-  %200 = nn.pad(%199, -128f /* ty=float32 */, pad_width=[[0, 0], [0, 0], [0, 0], [0, 16]]) /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %201 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %202 = expand_dims(%201, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %203 = cast(%200, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %204 = cast(%202, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %205 = subtract(%203, %204) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %206 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %207 = fixed_point_multiply(%205, multiplier=1514053960, shift=0) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %208 = nn.pad(%198, -128 /* ty=int32 */, pad_width=[[0, 0], [0, 1], [0, 1], [0, 0]]) /* ty=Tensor[(1, 33, 33, 16), int8] */;
-  %209 = cast(%v_param_15, dtype="int32") /* ty=Tensor[(3, 3, 16, 32), int32] */;
-  %210 = sum(%209, axis=[0, 1, 2]) /* ty=Tensor[(32), int32] */;
-  %211 = reshape(%210, newshape=[1, 1, 1, 32]) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %212 = nn.conv2d(%208, %v_param_15, strides=[2, 2], padding=[0, 0, 0, 0], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %213 = multiply(-128 /* ty=int32 */, %211) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %214 = subtract(%212, %213) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %215 = nn.bias_add(%214, %v_param_16, axis=3) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %216 = cast(%215, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %217 = cast(%216, dtype="int64") /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %218 = multiply(%217, meta[relay.Constant][21] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %219 = add(%218, meta[relay.Constant][22] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %220 = right_shift(%219, meta[relay.Constant][23] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %221 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %222 = cast(%220, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %223 = add(%221, %222) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %224 = clip(%223, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %225 = cast(%224, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %226 = clip(%225, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %227 = nn.pad(%226, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 18, 18, 32), int8] */;
-  %228 = cast(%v_param_17, dtype="int32") /* ty=Tensor[(3, 3, 32, 32), int32] */;
-  %229 = sum(%228, axis=[0, 1, 2]) /* ty=Tensor[(32), int32] */;
-  %230 = reshape(%229, newshape=[1, 1, 1, 32]) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %231 = nn.conv2d(%227, %v_param_17, padding=[0, 0, 0, 0], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %232 = multiply(-128 /* ty=int32 */, %230) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %233 = subtract(%231, %232) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %234 = nn.bias_add(%233, %v_param_18, axis=3) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %235 = cast(%234, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %236 = cast(%235, dtype="int64") /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %237 = multiply(%236, meta[relay.Constant][24] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %238 = add(%237, meta[relay.Constant][25] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %239 = right_shift(%238, meta[relay.Constant][26] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %240 = cast(5 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %241 = cast(%239, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %242 = add(%240, %241) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %243 = clip(%242, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %244 = cast(%243, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %245 = reshape(5 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %246 = expand_dims(%245, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %247 = cast(%244, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %248 = cast(%246, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %249 = subtract(%247, %248) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %250 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %251 = fixed_point_multiply(%249, multiplier=1414035714, shift=1) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %252 = add(%206, %207) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %253 = add(%250, %251) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %254 = add(%252, %253) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %255 = subtract(%254, -128 /* ty=int32 */) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %256 = clip(%255, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %257 = cast(%256, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %258 = clip(%257, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %259 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %260 = expand_dims(%259, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %261 = cast(%258, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %262 = cast(%260, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %263 = subtract(%261, %262) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %264 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %265 = fixed_point_multiply(%263, multiplier=1147704770, shift=1) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %266 = nn.pad(%258, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 18, 18, 32), int8] */;
-  %267 = cast(%v_param_19, dtype="int32") /* ty=Tensor[(3, 3, 32, 32), int32] */;
-  %268 = sum(%267, axis=[0, 1, 2]) /* ty=Tensor[(32), int32] */;
-  %269 = reshape(%268, newshape=[1, 1, 1, 32]) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %270 = nn.conv2d(%266, %v_param_19, padding=[0, 0, 0, 0], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %271 = multiply(-128 /* ty=int32 */, %269) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %272 = subtract(%270, %271) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %273 = nn.bias_add(%272, %v_param_20, axis=3) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %274 = cast(%273, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %275 = cast(%274, dtype="int64") /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %276 = multiply(%275, meta[relay.Constant][27] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %277 = add(%276, meta[relay.Constant][28] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %278 = right_shift(%277, meta[relay.Constant][29] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %279 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %280 = cast(%278, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %281 = add(%279, %280) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %282 = clip(%281, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %283 = cast(%282, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %284 = clip(%283, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %285 = nn.pad(%284, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 18, 18, 32), int8] */;
-  %286 = cast(%v_param_21, dtype="int32") /* ty=Tensor[(3, 3, 32, 32), int32] */;
-  %287 = sum(%286, axis=[0, 1, 2]) /* ty=Tensor[(32), int32] */;
-  %288 = reshape(%287, newshape=[1, 1, 1, 32]) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %289 = nn.conv2d(%285, %v_param_21, padding=[0, 0, 0, 0], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %290 = multiply(-128 /* ty=int32 */, %288) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %291 = subtract(%289, %290) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %292 = nn.bias_add(%291, %v_param_22, axis=3) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %293 = cast(%292, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %294 = cast(%293, dtype="int64") /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %295 = multiply(%294, meta[relay.Constant][30] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %296 = add(%295, meta[relay.Constant][31] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %297 = right_shift(%296, meta[relay.Constant][32] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %298 = cast(14 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %299 = cast(%297, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %300 = add(%298, %299) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %301 = clip(%300, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %302 = cast(%301, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %303 = reshape(14 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %304 = expand_dims(%303, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %305 = cast(%302, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %306 = cast(%304, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %307 = subtract(%305, %306) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %308 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %309 = fixed_point_multiply(%307, multiplier=2078426559, shift=0) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %310 = add(%264, %265) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %311 = add(%308, %309) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %312 = add(%310, %311) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %313 = subtract(%312, -128 /* ty=int32 */) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %314 = clip(%313, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %315 = cast(%314, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %316 = clip(%315, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %317 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %318 = expand_dims(%317, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %319 = cast(%316, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %320 = cast(%318, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %321 = subtract(%319, %320) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %322 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %323 = fixed_point_multiply(%321, multiplier=1363168483, shift=0) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %324 = nn.pad(%316, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 18, 18, 32), int8] */;
-  %325 = cast(%v_param_23, dtype="int32") /* ty=Tensor[(3, 3, 32, 32), int32] */;
-  %326 = sum(%325, axis=[0, 1, 2]) /* ty=Tensor[(32), int32] */;
-  %327 = reshape(%326, newshape=[1, 1, 1, 32]) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %328 = nn.conv2d(%324, %v_param_23, padding=[0, 0, 0, 0], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %329 = multiply(-128 /* ty=int32 */, %327) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %330 = subtract(%328, %329) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %331 = nn.bias_add(%330, %v_param_24, axis=3) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %332 = cast(%331, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %333 = cast(%332, dtype="int64") /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %334 = multiply(%333, meta[relay.Constant][33] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %335 = add(%334, meta[relay.Constant][34] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %336 = right_shift(%335, meta[relay.Constant][35] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %337 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %338 = cast(%336, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %339 = add(%337, %338) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %340 = clip(%339, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %341 = cast(%340, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %342 = clip(%341, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %343 = nn.pad(%342, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 18, 18, 32), int8] */;
-  %344 = cast(%v_param_25, dtype="int32") /* ty=Tensor[(3, 3, 32, 32), int32] */;
-  %345 = sum(%344, axis=[0, 1, 2]) /* ty=Tensor[(32), int32] */;
-  %346 = reshape(%345, newshape=[1, 1, 1, 32]) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %347 = nn.conv2d(%343, %v_param_25, padding=[0, 0, 0, 0], channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %348 = multiply(-128 /* ty=int32 */, %346) /* ty=Tensor[(1, 1, 1, 32), int32] */;
-  %349 = subtract(%347, %348) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %350 = nn.bias_add(%349, %v_param_26, axis=3) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %351 = cast(%350, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %352 = cast(%351, dtype="int64") /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %353 = multiply(%352, meta[relay.Constant][36] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %354 = add(%353, meta[relay.Constant][37] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %355 = right_shift(%354, meta[relay.Constant][38] /* ty=Tensor[(32), int64] */) /* ty=Tensor[(1, 16, 16, 32), int64] */;
-  %356 = cast(-59 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %357 = cast(%355, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %358 = add(%356, %357) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %359 = clip(%358, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %360 = cast(%359, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %361 = reshape(-59 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %362 = expand_dims(%361, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %363 = cast(%360, dtype="int32") /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %364 = cast(%362, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %365 = subtract(%363, %364) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %366 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %367 = fixed_point_multiply(%365, multiplier=1127882282, shift=1) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %368 = add(%322, %323) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %369 = add(%366, %367) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %370 = add(%368, %369) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %371 = subtract(%370, -128 /* ty=int32 */) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %372 = clip(%371, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int32] */;
-  %373 = cast(%372, dtype="int8") /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %374 = clip(%373, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 32), int8] */;
-  %375 = nn.max_pool2d(%374, pool_size=[1, 1], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC") /* ty=Tensor[(1, 8, 8, 32), int8] */;
-  %376 = nn.pad(%375, -128f /* ty=float32 */, pad_width=[[0, 0], [0, 0], [0, 0], [0, 32]]) /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %377 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %378 = expand_dims(%377, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %379 = cast(%376, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %380 = cast(%378, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %381 = subtract(%379, %380) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %382 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %383 = fixed_point_multiply(%381, multiplier=1325985887, shift=0) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %384 = nn.pad(%374, -128 /* ty=int32 */, pad_width=[[0, 0], [0, 1], [0, 1], [0, 0]]) /* ty=Tensor[(1, 17, 17, 32), int8] */;
-  %385 = cast(%v_param_27, dtype="int32") /* ty=Tensor[(3, 3, 32, 64), int32] */;
-  %386 = sum(%385, axis=[0, 1, 2]) /* ty=Tensor[(64), int32] */;
-  %387 = reshape(%386, newshape=[1, 1, 1, 64]) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %388 = nn.conv2d(%384, %v_param_27, strides=[2, 2], padding=[0, 0, 0, 0], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %389 = multiply(-128 /* ty=int32 */, %387) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %390 = subtract(%388, %389) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %391 = nn.bias_add(%390, %v_param_28, axis=3) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %392 = cast(%391, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %393 = cast(%392, dtype="int64") /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %394 = multiply(%393, meta[relay.Constant][39] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %395 = add(%394, meta[relay.Constant][40] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %396 = right_shift(%395, meta[relay.Constant][41] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %397 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %398 = cast(%396, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %399 = add(%397, %398) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %400 = clip(%399, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %401 = cast(%400, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %402 = clip(%401, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %403 = nn.pad(%402, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 10, 10, 64), int8] */;
-  %404 = cast(%v_param_29, dtype="int32") /* ty=Tensor[(3, 3, 64, 64), int32] */;
-  %405 = sum(%404, axis=[0, 1, 2]) /* ty=Tensor[(64), int32] */;
-  %406 = reshape(%405, newshape=[1, 1, 1, 64]) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %407 = nn.conv2d(%403, %v_param_29, padding=[0, 0, 0, 0], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %408 = multiply(-128 /* ty=int32 */, %406) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %409 = subtract(%407, %408) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %410 = nn.bias_add(%409, %v_param_30, axis=3) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %411 = cast(%410, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %412 = cast(%411, dtype="int64") /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %413 = multiply(%412, meta[relay.Constant][42] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %414 = add(%413, meta[relay.Constant][43] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %415 = right_shift(%414, meta[relay.Constant][44] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %416 = cast(-22 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %417 = cast(%415, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %418 = add(%416, %417) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %419 = clip(%418, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %420 = cast(%419, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %421 = reshape(-22 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %422 = expand_dims(%421, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %423 = cast(%420, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %424 = cast(%422, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %425 = subtract(%423, %424) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %426 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %427 = fixed_point_multiply(%425, multiplier=1403594544, shift=0) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %428 = add(%382, %383) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %429 = add(%426, %427) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %430 = add(%428, %429) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %431 = subtract(%430, -128 /* ty=int32 */) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %432 = clip(%431, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %433 = cast(%432, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %434 = clip(%433, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %435 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %436 = expand_dims(%435, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %437 = cast(%434, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %438 = cast(%436, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %439 = subtract(%437, %438) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %440 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %441 = fixed_point_multiply(%439, multiplier=1160052048, shift=1) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %442 = nn.pad(%434, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 10, 10, 64), int8] */;
-  %443 = cast(%v_param_31, dtype="int32") /* ty=Tensor[(3, 3, 64, 64), int32] */;
-  %444 = sum(%443, axis=[0, 1, 2]) /* ty=Tensor[(64), int32] */;
-  %445 = reshape(%444, newshape=[1, 1, 1, 64]) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %446 = nn.conv2d(%442, %v_param_31, padding=[0, 0, 0, 0], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %447 = multiply(-128 /* ty=int32 */, %445) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %448 = subtract(%446, %447) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %449 = nn.bias_add(%448, %v_param_32, axis=3) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %450 = cast(%449, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %451 = cast(%450, dtype="int64") /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %452 = multiply(%451, meta[relay.Constant][45] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %453 = add(%452, meta[relay.Constant][46] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %454 = right_shift(%453, meta[relay.Constant][47] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %455 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %456 = cast(%454, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %457 = add(%455, %456) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %458 = clip(%457, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %459 = cast(%458, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %460 = clip(%459, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %461 = nn.pad(%460, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 10, 10, 64), int8] */;
-  %462 = cast(%v_param_33, dtype="int32") /* ty=Tensor[(3, 3, 64, 64), int32] */;
-  %463 = sum(%462, axis=[0, 1, 2]) /* ty=Tensor[(64), int32] */;
-  %464 = reshape(%463, newshape=[1, 1, 1, 64]) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %465 = nn.conv2d(%461, %v_param_33, padding=[0, 0, 0, 0], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %466 = multiply(-128 /* ty=int32 */, %464) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %467 = subtract(%465, %466) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %468 = nn.bias_add(%467, %v_param_34, axis=3) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %469 = cast(%468, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %470 = cast(%469, dtype="int64") /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %471 = multiply(%470, meta[relay.Constant][48] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %472 = add(%471, meta[relay.Constant][49] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %473 = right_shift(%472, meta[relay.Constant][50] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %474 = cast(20 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %475 = cast(%473, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %476 = add(%474, %475) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %477 = clip(%476, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %478 = cast(%477, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %479 = reshape(20 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %480 = expand_dims(%479, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %481 = cast(%478, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %482 = cast(%480, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %483 = subtract(%481, %482) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %484 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %485 = fixed_point_multiply(%483, multiplier=1571794412, shift=0) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %486 = add(%440, %441) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %487 = add(%484, %485) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %488 = add(%486, %487) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %489 = subtract(%488, -128 /* ty=int32 */) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %490 = clip(%489, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %491 = cast(%490, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %492 = clip(%491, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %493 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %494 = expand_dims(%493, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %495 = cast(%492, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %496 = cast(%494, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %497 = subtract(%495, %496) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %498 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %499 = fixed_point_multiply(%497, multiplier=1811369337, shift=0) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %500 = nn.pad(%492, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 10, 10, 64), int8] */;
-  %501 = cast(%v_param_35, dtype="int32") /* ty=Tensor[(3, 3, 64, 64), int32] */;
-  %502 = sum(%501, axis=[0, 1, 2]) /* ty=Tensor[(64), int32] */;
-  %503 = reshape(%502, newshape=[1, 1, 1, 64]) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %504 = nn.conv2d(%500, %v_param_35, padding=[0, 0, 0, 0], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %505 = multiply(-128 /* ty=int32 */, %503) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %506 = subtract(%504, %505) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %507 = nn.bias_add(%506, %v_param_36, axis=3) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %508 = cast(%507, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %509 = cast(%508, dtype="int64") /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %510 = multiply(%509, meta[relay.Constant][51] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %511 = add(%510, meta[relay.Constant][52] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %512 = right_shift(%511, meta[relay.Constant][53] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %513 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %514 = cast(%512, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %515 = add(%513, %514) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %516 = clip(%515, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %517 = cast(%516, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %518 = clip(%517, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %519 = nn.pad(%518, -128 /* ty=int32 */, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 10, 10, 64), int8] */;
-  %520 = cast(%v_param_37, dtype="int32") /* ty=Tensor[(3, 3, 64, 64), int32] */;
-  %521 = sum(%520, axis=[0, 1, 2]) /* ty=Tensor[(64), int32] */;
-  %522 = reshape(%521, newshape=[1, 1, 1, 64]) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %523 = nn.conv2d(%519, %v_param_37, padding=[0, 0, 0, 0], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO", out_dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %524 = multiply(-128 /* ty=int32 */, %522) /* ty=Tensor[(1, 1, 1, 64), int32] */;
-  %525 = subtract(%523, %524) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %526 = nn.bias_add(%525, %v_param_38, axis=3) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %527 = cast(%526, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %528 = cast(%527, dtype="int64") /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %529 = multiply(%528, meta[relay.Constant][54] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %530 = add(%529, meta[relay.Constant][55] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %531 = right_shift(%530, meta[relay.Constant][56] /* ty=Tensor[(64), int64] */) /* ty=Tensor[(1, 8, 8, 64), int64] */;
-  %532 = cast(-13 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %533 = cast(%531, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %534 = add(%532, %533) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %535 = clip(%534, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %536 = cast(%535, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %537 = reshape(-13 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %538 = expand_dims(%537, axis=1, num_newaxis=3) /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %539 = cast(%536, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %540 = cast(%538, dtype="int32") /* ty=Tensor[(1, 1, 1, 1), int32] */;
-  %541 = subtract(%539, %540) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %542 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %543 = fixed_point_multiply(%541, multiplier=2097079130, shift=0) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %544 = add(%498, %499) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %545 = add(%542, %543) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %546 = add(%544, %545) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %547 = subtract(%546, -128 /* ty=int32 */) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %548 = clip(%547, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %549 = cast(%548, dtype="int8") /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %550 = clip(%549, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 8, 8, 64), int8] */;
-  %551 = cast(%550, dtype="int32") /* ty=Tensor[(1, 8, 8, 64), int32] */;
-  %552 = mean(%551, axis=[1, 2]) /* ty=Tensor[(1, 64), int32] */;
-  %553 = reshape(-128 /* ty=int32 */, newshape=[-1]) /* ty=Tensor[(1), int32] */;
-  %554 = cast(%552, dtype="int32") /* ty=Tensor[(1, 64), int32] */;
-  %555 = cast(%553, dtype="int32") /* ty=Tensor[(1), int32] */;
-  %556 = subtract(%554, %555) /* ty=Tensor[(1, 64), int32] */;
-  %557 = cast(-128 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %558 = fixed_point_multiply(%556, multiplier=1169221628, shift=4) /* ty=Tensor[(1, 64), int32] */;
-  %559 = add(%557, %558) /* ty=Tensor[(1, 64), int32] */;
-  %560 = clip(%559, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 64), int32] */;
-  %561 = cast(%560, dtype="int8") /* ty=Tensor[(1, 64), int8] */;
-  %562 = reshape(%561, newshape=[-1, 64]) /* ty=Tensor[(1, 64), int8] */;
-  %563 = cast(%v_param_39, dtype="int32") /* ty=Tensor[(10, 64), int32] */;
-  %564 = sum(%563, axis=[1]) /* ty=Tensor[(10), int32] */;
-  %565 = nn.dense(%562, %v_param_39, units=10, out_dtype="int32") /* ty=Tensor[(1, 10), int32] */;
-  %566 = multiply(-128 /* ty=int32 */, %564) /* ty=Tensor[(10), int32] */;
-  %567 = subtract(%565, %566) /* ty=Tensor[(1, 10), int32] */;
-  %568 = nn.bias_add(%567, %v_param_40) /* ty=Tensor[(1, 10), int32] */;
-  %569 = cast(%568, dtype="int32") /* ty=Tensor[(1, 10), int32] */;
-  %570 = cast(-55 /* ty=int32 */, dtype="int32") /* ty=int32 */;
-  %571 = fixed_point_multiply(%569, multiplier=1523793797, shift=-9) /* ty=Tensor[(1, 10), int32] */;
-  %572 = add(%570, %571) /* ty=Tensor[(1, 10), int32] */;
-  %573 = clip(%572, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 10), int32] */;
-  %574 = cast(%573, dtype="int8") /* ty=Tensor[(1, 10), int8] */;
-  %575 = cast(%574, dtype="int32") /* ty=Tensor[(1, 10), int32] */;
-  %576 = subtract(%575, -55 /* ty=int32 */) /* ty=Tensor[(1, 10), int32] */;
-  %577 = cast(%576, dtype="float32") /* ty=Tensor[(1, 10), float32] */;
-  multiply(%577, 0.156748f /* ty=float32 */) /* ty=Tensor[(1, 10), float32] */
+def @main(%input: Tensor[(1, 32, 32, 3), float32], %zero_point__92: Tensor[(64), int8], %zero_point__86: Tensor[(16), int8], %zero_point__72: int32, %zero_point__70: int8, %zero_point__68: int8, %zero_point__389: int8, %zero_point__377: int8, %zero_point__368: int8, %zero_point__353: int8, %zero_point__318: int8, %zero_point__298: int8, %zero_point__274: int8, %zero_point__239: int8, %zero_point__217: int8, %zero_point__197: int8, %zero_point__173: int8, %zero_point__146: Tensor[(16), int32], %zero_point__138: Tensor[(64), int32], %zero_point__112: Tensor[(32), int32], %zero_point__106: Tensor[(32), int8], %scale__99: Tensor[(64), float32], %scale__97: Tensor[(64), float32], %scale__95: Tensor[(64), float32], %scale__93: Tensor[(64), float32], %scale__91: Tensor[(64), float32], %scale__89: Tensor[(64), float32], %scale__87: Tensor[(16), float32], %scale__85: Tensor[(16), float32], %scale__83: Tensor[(16), float32], %scale__81: Tensor[(16), float32], %scale__79: Tensor[(16), float32], %scale__77: Tensor[(32), float32], %scale__75: Tensor[(32), float32], %scale__73: Tensor[(32), float32], %scale__71: float32, %scale__69: float32, %scale__65: float32, %scale__388: float32, %scale__382: float32, %scale__380: float32, %scale__376: float32, %scale__365: float32, %scale__358: float32, %scale__352: float32, %scale__345: float32, %scale__334: float32, %scale__325: float32, %scale__317: float32, %scale__308: float32, %scale__297: float32, %scale__288: float32, %scale__279: float32, %scale__273: float32, %scale__264: float32, %scale__257: float32, %scale__253: float32, %scale__240: float32, %scale__231: float32, %scale__218: float32, %scale__209: float32, %scale__198: float32, %scale__196: float32, %scale__185: float32, %scale__178: float32, %scale__174: float32, %scale__163: float32, %scale__156: float32, %scale__147: Tensor[(16), float32], %scale__145: Tensor[(16), float32], %scale__143: Tensor[(32), float32], %scale__141: Tensor[(32), float32], %scale__139: Tensor[(32), float32], %scale__137: Tensor[(64), float32], %scale__135: Tensor[(64), float32], %scale__133: Tensor[(64), float32], %scale__131: Tensor[(64), float32], %scale__129: Tensor[(64), float32], %scale__127: Tensor[(64), float32], %scale__125: Tensor[(16), float32], %scale__123: Tensor[(16), float32], %scale__121: Tensor[(16), float32], %scale__119: Tensor[(16), float32], %scale__117: Tensor[(16), float32], %scale__115: Tensor[(32), float32], %scale__113: Tensor[(32), float32], %scale__111: Tensor[(32), float32], %scale__109: Tensor[(16), float32], %scale__107: Tensor[(16), float32], %scale__105: Tensor[(32), float32], %scale__103: Tensor[(32), float32], %scale__101: Tensor[(32), float32], %pad_const__329: Tensor[(8), int64], %pad_const__250: Tensor[(8), int64], %model/dense/MatMul: Tensor[(64, 10), int8], %model/dense/BiasAdd/ReadVariableOp: Tensor[(10), int32], %model/conv2d_9/Conv2D: Tensor[(32, 32, 3, 3), int8], %model/conv2d_8/Conv2D: Tensor[(32, 32, 3, 3), int8], %model/conv2d_7/Conv2D: Tensor[(32, 16, 3, 3), int8], %model/conv2d_6/Conv2D: Tensor[(16, 16, 3, 3), int8], %model/conv2d_5/Conv2D: Tensor[(16, 16, 3, 3), int8], %model/conv2d_4/Conv2D: Tensor[(16, 16, 3, 3), int8], %model/conv2d_3/Conv2D: Tensor[(16, 16, 3, 3), int8], %model/conv2d_2/Conv2D: Tensor[(16, 16, 3, 3), int8], %model/conv2d_18/Conv2D: Tensor[(64, 64, 3, 3), int8], %model/conv2d_17/Conv2D: Tensor[(64, 64, 3, 3), int8], %model/conv2d_16/Conv2D: Tensor[(64, 64, 3, 3), int8], %model/conv2d_15/Conv2D: Tensor[(64, 64, 3, 3), int8], %model/conv2d_14/Conv2D: Tensor[(64, 64, 3, 3), int8], %model/conv2d_13/Conv2D: Tensor[(64, 32, 3, 3), int8], %model/conv2d_12/Conv2D: Tensor[(32, 32, 3, 3), int8], %model/conv2d_11/Conv2D: Tensor[(32, 32, 3, 3), int8], %model/conv2d_10/Conv2D: Tensor[(32, 32, 3, 3), int8], %model/conv2d_1/Conv2D: Tensor[(16, 16, 3, 3), int8], %model/conv2d/Conv2D: Tensor[(16, 3, 3, 3), int8], %model/batch_normalization_9/FusedBatchNormV3: Tensor[(32), int32], %model/batch_normalization_8/FusedBatchNormV3: Tensor[(32), int32], %model/batch_normalization_7/FusedBatchNormV3: Tensor[(32), int32], %model/batch_normalization_6/FusedBatchNormV3: Tensor[(16), int32], %model/batch_normalization_5/FusedBatchNormV3: Tensor[(16), int32], %model/batch_normalization_4/FusedBatchNormV3: Tensor[(16), int32], %model/batch_normalization_3/FusedBatchNormV3: Tensor[(16), int32], %model/batch_normalization_2/FusedBatchNormV3: Tensor[(16), int32], %model/batch_normalization_18/FusedBatchNormV3: Tensor[(64), int32], %model/batch_normalization_17/FusedBatchNormV3: Tensor[(64), int32], %model/batch_normalization_16/FusedBatchNormV3: Tensor[(64), int32], %model/batch_normalization_15/FusedBatchNormV3: Tensor[(64), int32], %model/batch_normalization_14/FusedBatchNormV3: Tensor[(64), int32], %model/batch_normalization_13/FusedBatchNormV3: Tensor[(64), int32], %model/batch_normalization_12/FusedBatchNormV3: Tensor[(32), int32], %model/batch_normalization_11/FusedBatchNormV3: Tensor[(32), int32], %model/batch_normalization_10/FusedBatchNormV3: Tensor[(32), int32], %model/batch_normalization_1/FusedBatchNormV3: Tensor[(16), int32], %model/batch_normalization/FusedBatchNormV3: Tensor[(16), int32], %const_axes__494: Tensor[(2), int64]) -> Tensor[(?, 10), float32] {
+  %0 = cast(%zero_point__68, dtype="int32") /* ty=int32 */;
+  %1 = divide(%input, %scale__65) /* ty=Tensor[(1, 32, 32, 3), float32] */;
+  %2 = cast(%0, dtype="float32") /* ty=float32 */;
+  %3 = add(%1, %2) /* ty=Tensor[(1, 32, 32, 3), float32] */;
+  %4 = clip(%3, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 32, 3), float32] */;
+  %5 = round(%4) /* ty=Tensor[(1, 32, 32, 3), float32] */;
+  %6 = cast(%5, dtype="int8") /* ty=Tensor[(1, 32, 32, 3), int8] */;
+  %7 = transpose(%6, axes=[0, 3, 1, 2]) /* ty=Tensor[(1, 3, 32, 32), int8] */;
+  %8 = cast(%7, dtype="int32") /* ty=Tensor[(1, 3, 32, 32), int32] */;
+  %9 = cast(%zero_point__68, dtype="int32") /* ty=int32 */;
+  %10 = subtract(%8, %9) /* ty=Tensor[(1, 3, 32, 32), int32] */;
+  %11 = cast(%10, dtype="float32") /* ty=Tensor[(1, 3, 32, 32), float32] */;
+  %12 = cast(%zero_point__86, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %13 = cast(%model/conv2d/Conv2D, dtype="int32") /* ty=Tensor[(16, 3, 3, 3), int32] */;
+  %14 = expand_dims(%12, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), int32] */;
+  %15 = subtract(%13, %14) /* ty=Tensor[(16, 3, 3, 3), int32] */;
+  %16 = cast(%15, dtype="float32") /* ty=Tensor[(16, 3, 3, 3), float32] */;
+  %17 = expand_dims(%scale__109, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), float32] */;
+  %18 = multiply(%11, %scale__65) /* ty=Tensor[(1, 3, 32, 32), float32] */;
+  %19 = multiply(%16, %17) /* ty=Tensor[(16, 3, 3, 3), float32] */;
+  %20 = cast(%model/batch_normalization/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %21 = cast(%zero_point__146, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %22 = subtract(%20, %21) /* ty=Tensor[(16), int32] */;
+  %23 = cast(%22, dtype="float32") /* ty=Tensor[(16), float32] */;
+  %24 = nn.conv2d(%18, %19, padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3]) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %25 = multiply(%23, %scale__147) /* ty=Tensor[(16), float32] */;
+  %26 = nn.bias_add(%24, %25) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %27 = nn.relu(%26) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %28 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %29 = divide(%27, %scale__156) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %30 = cast(%28, dtype="float32") /* ty=float32 */;
+  %31 = add(%29, %30) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %32 = clip(%31, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %33 = round(%32) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %34 = cast(%33, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %35 = cast(%34, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %36 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %37 = subtract(%35, %36) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %38 = cast(%37, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %39 = cast(%zero_point__86, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %40 = cast(%model/conv2d_1/Conv2D, dtype="int32") /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %41 = expand_dims(%39, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), int32] */;
+  %42 = subtract(%40, %41) /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %43 = cast(%42, dtype="float32") /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %44 = expand_dims(%scale__107, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), float32] */;
+  %45 = multiply(%38, %scale__156) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %46 = multiply(%43, %44) /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %47 = cast(%model/batch_normalization_1/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %48 = cast(%zero_point__146, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %49 = subtract(%47, %48) /* ty=Tensor[(16), int32] */;
+  %50 = cast(%49, dtype="float32") /* ty=Tensor[(16), float32] */;
+  %51 = nn.conv2d(%45, %46, padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3]) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %52 = multiply(%50, %scale__145) /* ty=Tensor[(16), float32] */;
+  %53 = nn.bias_add(%51, %52) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %54 = nn.relu(%53) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %55 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %56 = divide(%54, %scale__163) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %57 = cast(%55, dtype="float32") /* ty=float32 */;
+  %58 = add(%56, %57) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %59 = clip(%58, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %60 = round(%59) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %61 = cast(%60, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %62 = cast(%61, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %63 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %64 = subtract(%62, %63) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %65 = cast(%64, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %66 = cast(%zero_point__86, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %67 = cast(%model/conv2d_2/Conv2D, dtype="int32") /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %68 = expand_dims(%66, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), int32] */;
+  %69 = subtract(%67, %68) /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %70 = cast(%69, dtype="float32") /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %71 = expand_dims(%scale__87, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), float32] */;
+  %72 = multiply(%65, %scale__163) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %73 = multiply(%70, %71) /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %74 = cast(%model/batch_normalization_2/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %75 = cast(%zero_point__146, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %76 = subtract(%74, %75) /* ty=Tensor[(16), int32] */;
+  %77 = cast(%76, dtype="float32") /* ty=Tensor[(16), float32] */;
+  %78 = nn.conv2d(%72, %73, padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3]) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %79 = multiply(%77, %scale__125) /* ty=Tensor[(16), float32] */;
+  %80 = nn.bias_add(%78, %79) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %81 = cast(%zero_point__173, dtype="int32") /* ty=int32 */;
+  %82 = divide(%80, %scale__174) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %83 = cast(%81, dtype="float32") /* ty=float32 */;
+  %84 = add(%82, %83) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %85 = clip(%84, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %86 = round(%85) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %87 = cast(%86, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %88 = cast(%87, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %89 = cast(%zero_point__173, dtype="int32") /* ty=int32 */;
+  %90 = subtract(%88, %89) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %91 = cast(%90, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %92 = multiply(%91, %scale__174) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %93 = add(%45, %92) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %94 = nn.relu(%93) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %95 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %96 = divide(%94, %scale__178) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %97 = cast(%95, dtype="float32") /* ty=float32 */;
+  %98 = add(%96, %97) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %99 = clip(%98, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %100 = round(%99) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %101 = cast(%100, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %102 = cast(%101, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %103 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %104 = subtract(%102, %103) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %105 = cast(%104, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %106 = cast(%zero_point__86, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %107 = cast(%model/conv2d_3/Conv2D, dtype="int32") /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %108 = expand_dims(%106, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), int32] */;
+  %109 = subtract(%107, %108) /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %110 = cast(%109, dtype="float32") /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %111 = expand_dims(%scale__85, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), float32] */;
+  %112 = multiply(%105, %scale__178) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %113 = multiply(%110, %111) /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %114 = cast(%model/batch_normalization_3/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %115 = cast(%zero_point__146, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %116 = subtract(%114, %115) /* ty=Tensor[(16), int32] */;
+  %117 = cast(%116, dtype="float32") /* ty=Tensor[(16), float32] */;
+  %118 = nn.conv2d(%112, %113, padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3]) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %119 = multiply(%117, %scale__123) /* ty=Tensor[(16), float32] */;
+  %120 = nn.bias_add(%118, %119) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %121 = nn.relu(%120) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %122 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %123 = divide(%121, %scale__185) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %124 = cast(%122, dtype="float32") /* ty=float32 */;
+  %125 = add(%123, %124) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %126 = clip(%125, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %127 = round(%126) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %128 = cast(%127, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %129 = cast(%128, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %130 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %131 = subtract(%129, %130) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %132 = cast(%131, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %133 = cast(%zero_point__86, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %134 = cast(%model/conv2d_4/Conv2D, dtype="int32") /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %135 = expand_dims(%133, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), int32] */;
+  %136 = subtract(%134, %135) /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %137 = cast(%136, dtype="float32") /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %138 = expand_dims(%scale__83, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), float32] */;
+  %139 = multiply(%132, %scale__185) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %140 = multiply(%137, %138) /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %141 = cast(%model/batch_normalization_4/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %142 = cast(%zero_point__146, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %143 = subtract(%141, %142) /* ty=Tensor[(16), int32] */;
+  %144 = cast(%143, dtype="float32") /* ty=Tensor[(16), float32] */;
+  %145 = nn.conv2d(%139, %140, padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3]) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %146 = multiply(%144, %scale__121) /* ty=Tensor[(16), float32] */;
+  %147 = nn.bias_add(%145, %146) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %148 = cast(%zero_point__197, dtype="int32") /* ty=int32 */;
+  %149 = divide(%147, %scale__196) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %150 = cast(%148, dtype="float32") /* ty=float32 */;
+  %151 = add(%149, %150) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %152 = clip(%151, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %153 = round(%152) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %154 = cast(%153, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %155 = cast(%154, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %156 = cast(%zero_point__197, dtype="int32") /* ty=int32 */;
+  %157 = subtract(%155, %156) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %158 = cast(%157, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %159 = multiply(%158, %scale__196) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %160 = add(%112, %159) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %161 = nn.relu(%160) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %162 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %163 = divide(%161, %scale__198) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %164 = cast(%162, dtype="float32") /* ty=float32 */;
+  %165 = add(%163, %164) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %166 = clip(%165, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %167 = round(%166) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %168 = cast(%167, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %169 = cast(%168, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %170 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %171 = subtract(%169, %170) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %172 = cast(%171, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %173 = cast(%zero_point__86, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %174 = cast(%model/conv2d_5/Conv2D, dtype="int32") /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %175 = expand_dims(%173, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), int32] */;
+  %176 = subtract(%174, %175) /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %177 = cast(%176, dtype="float32") /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %178 = expand_dims(%scale__81, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), float32] */;
+  %179 = multiply(%172, %scale__198) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %180 = multiply(%177, %178) /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %181 = cast(%model/batch_normalization_5/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %182 = cast(%zero_point__146, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %183 = subtract(%181, %182) /* ty=Tensor[(16), int32] */;
+  %184 = cast(%183, dtype="float32") /* ty=Tensor[(16), float32] */;
+  %185 = nn.conv2d(%179, %180, padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3]) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %186 = multiply(%184, %scale__119) /* ty=Tensor[(16), float32] */;
+  %187 = nn.bias_add(%185, %186) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %188 = nn.relu(%187) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %189 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %190 = divide(%188, %scale__209) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %191 = cast(%189, dtype="float32") /* ty=float32 */;
+  %192 = add(%190, %191) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %193 = clip(%192, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %194 = round(%193) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %195 = cast(%194, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %196 = cast(%195, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %197 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %198 = subtract(%196, %197) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %199 = cast(%198, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %200 = cast(%zero_point__86, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %201 = cast(%model/conv2d_6/Conv2D, dtype="int32") /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %202 = expand_dims(%200, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), int32] */;
+  %203 = subtract(%201, %202) /* ty=Tensor[(16, 16, 3, 3), int32] */;
+  %204 = cast(%203, dtype="float32") /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %205 = expand_dims(%scale__79, axis=1, num_newaxis=3) /* ty=Tensor[(16, 1, 1, 1), float32] */;
+  %206 = multiply(%199, %scale__209) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %207 = multiply(%204, %205) /* ty=Tensor[(16, 16, 3, 3), float32] */;
+  %208 = cast(%model/batch_normalization_6/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %209 = cast(%zero_point__146, dtype="int32") /* ty=Tensor[(16), int32] */;
+  %210 = subtract(%208, %209) /* ty=Tensor[(16), int32] */;
+  %211 = cast(%210, dtype="float32") /* ty=Tensor[(16), float32] */;
+  %212 = nn.conv2d(%206, %207, padding=[1, 1, 1, 1], channels=16, kernel_size=[3, 3]) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %213 = multiply(%211, %scale__117) /* ty=Tensor[(16), float32] */;
+  %214 = nn.bias_add(%212, %213) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %215 = cast(%zero_point__217, dtype="int32") /* ty=int32 */;
+  %216 = divide(%214, %scale__218) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %217 = cast(%215, dtype="float32") /* ty=float32 */;
+  %218 = add(%216, %217) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %219 = clip(%218, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %220 = round(%219) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %221 = cast(%220, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %222 = cast(%221, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %223 = cast(%zero_point__217, dtype="int32") /* ty=int32 */;
+  %224 = subtract(%222, %223) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %225 = cast(%224, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %226 = multiply(%225, %scale__218) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %227 = add(%179, %226) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %228 = nn.relu(%227) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %229 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %230 = divide(%228, %scale__253) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %231 = cast(%229, dtype="float32") /* ty=float32 */;
+  %232 = add(%230, %231) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %233 = clip(%232, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %234 = round(%233) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %235 = cast(%234, dtype="int8") /* ty=Tensor[(1, 16, 32, 32), int8] */;
+  %236 = cast(%235, dtype="int32") /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %237 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %238 = subtract(%236, %237) /* ty=Tensor[(1, 16, 32, 32), int32] */;
+  %239 = cast(%238, dtype="float32") /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %240 = multiply(%239, %scale__253) /* ty=Tensor[(1, 16, 32, 32), float32] */;
+  %241 = nn.max_pool2d(%240, pool_size=[1, 1], strides=[2, 2], padding=[0, 0, 0, 0]) /* ty=Tensor[(1, 16, 16, 16), float32] */;
+  %242 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %243 = divide(%241, %scale__253) /* ty=Tensor[(1, 16, 16, 16), float32] */;
+  %244 = cast(%242, dtype="float32") /* ty=float32 */;
+  %245 = add(%243, %244) /* ty=Tensor[(1, 16, 16, 16), float32] */;
+  %246 = clip(%245, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 16, 16, 16), float32] */;
+  %247 = round(%246) /* ty=Tensor[(1, 16, 16, 16), float32] */;
+  %248 = cast(%247, dtype="int8") /* ty=Tensor[(1, 16, 16, 16), int8] */;
+  %249 = cast(%248, dtype="int32") /* ty=Tensor[(1, 16, 16, 16), int32] */;
+  %250 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %251 = subtract(%249, %250) /* ty=Tensor[(1, 16, 16, 16), int32] */;
+  %252 = cast(%251, dtype="float32") /* ty=Tensor[(1, 16, 16, 16), float32] */;
+  %253 = reshape(%pad_const__250, newshape=[2, -1]) /* ty=Tensor[(2, 4), int64] */;
+  %254 = multiply(%252, %scale__253) /* ty=Tensor[(1, 16, 16, 16), float32] */;
+  %255 = transpose(%253, axes=None) /* ty=Tensor[(4, 2), int64] */;
+  %256 = dyn.nn.pad(%254, %255, 0f /* ty=float32 */, pad_width=[]) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %257 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %258 = divide(%256, %scale__253) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %259 = cast(%257, dtype="float32") /* ty=float32 */;
+  %260 = add(%258, %259) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %261 = clip(%260, a_min=-128f, a_max=127f) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %262 = round(%261) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %263 = cast(%262, dtype="int8") /* ty=Tensor[(?, ?, ?, ?), int8] */;
+  %264 = cast(%263, dtype="int32") /* ty=Tensor[(?, ?, ?, ?), int32] */;
+  %265 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %266 = subtract(%264, %265) /* ty=Tensor[(?, ?, ?, ?), int32] */;
+  %267 = cast(%266, dtype="float32") /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %268 = cast(%zero_point__106, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %269 = cast(%model/conv2d_7/Conv2D, dtype="int32") /* ty=Tensor[(32, 16, 3, 3), int32] */;
+  %270 = expand_dims(%268, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), int32] */;
+  %271 = subtract(%269, %270) /* ty=Tensor[(32, 16, 3, 3), int32] */;
+  %272 = cast(%271, dtype="float32") /* ty=Tensor[(32, 16, 3, 3), float32] */;
+  %273 = expand_dims(%scale__77, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), float32] */;
+  %274 = multiply(%272, %273) /* ty=Tensor[(32, 16, 3, 3), float32] */;
+  %275 = cast(%model/batch_normalization_7/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %276 = cast(%zero_point__112, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %277 = subtract(%275, %276) /* ty=Tensor[(32), int32] */;
+  %278 = cast(%277, dtype="float32") /* ty=Tensor[(32), float32] */;
+  %279 = nn.conv2d(%240, %274, strides=[2, 2], padding=[0, 0, 1, 1], channels=32, kernel_size=[3, 3]) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %280 = multiply(%278, %scale__115) /* ty=Tensor[(32), float32] */;
+  %281 = nn.bias_add(%279, %280) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %282 = nn.relu(%281) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %283 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %284 = divide(%282, %scale__231) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %285 = cast(%283, dtype="float32") /* ty=float32 */;
+  %286 = add(%284, %285) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %287 = clip(%286, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %288 = round(%287) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %289 = cast(%288, dtype="int8") /* ty=Tensor[(1, 32, 16, 16), int8] */;
+  %290 = cast(%289, dtype="int32") /* ty=Tensor[(1, 32, 16, 16), int32] */;
+  %291 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %292 = subtract(%290, %291) /* ty=Tensor[(1, 32, 16, 16), int32] */;
+  %293 = cast(%292, dtype="float32") /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %294 = cast(%zero_point__106, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %295 = cast(%model/conv2d_8/Conv2D, dtype="int32") /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %296 = expand_dims(%294, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), int32] */;
+  %297 = subtract(%295, %296) /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %298 = cast(%297, dtype="float32") /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %299 = expand_dims(%scale__75, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), float32] */;
+  %300 = multiply(%293, %scale__231) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %301 = multiply(%298, %299) /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %302 = cast(%model/batch_normalization_8/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %303 = cast(%zero_point__112, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %304 = subtract(%302, %303) /* ty=Tensor[(32), int32] */;
+  %305 = cast(%304, dtype="float32") /* ty=Tensor[(32), float32] */;
+  %306 = nn.conv2d(%300, %301, padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3]) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %307 = multiply(%305, %scale__113) /* ty=Tensor[(32), float32] */;
+  %308 = nn.bias_add(%306, %307) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %309 = cast(%zero_point__239, dtype="int32") /* ty=int32 */;
+  %310 = divide(%308, %scale__240) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %311 = cast(%309, dtype="float32") /* ty=float32 */;
+  %312 = add(%310, %311) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %313 = clip(%312, a_min=-128f, a_max=127f) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %314 = round(%313) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %315 = cast(%314, dtype="int8") /* ty=Tensor[(1, 32, 16, 16), int8] */;
+  %316 = cast(%315, dtype="int32") /* ty=Tensor[(1, 32, 16, 16), int32] */;
+  %317 = cast(%zero_point__239, dtype="int32") /* ty=int32 */;
+  %318 = subtract(%316, %317) /* ty=Tensor[(1, 32, 16, 16), int32] */;
+  %319 = cast(%318, dtype="float32") /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %320 = multiply(%267, %scale__253) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %321 = multiply(%319, %scale__240) /* ty=Tensor[(1, 32, 16, 16), float32] */;
+  %322 = add(%320, %321) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %323 = nn.relu(%322) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %324 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %325 = divide(%323, %scale__257) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %326 = cast(%324, dtype="float32") /* ty=float32 */;
+  %327 = add(%325, %326) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %328 = clip(%327, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %329 = round(%328) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %330 = cast(%329, dtype="int8") /* ty=Tensor[(?, 32, 16, 16), int8] */;
+  %331 = cast(%330, dtype="int32") /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %332 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %333 = subtract(%331, %332) /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %334 = cast(%333, dtype="float32") /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %335 = cast(%zero_point__106, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %336 = cast(%model/conv2d_9/Conv2D, dtype="int32") /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %337 = expand_dims(%335, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), int32] */;
+  %338 = subtract(%336, %337) /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %339 = cast(%338, dtype="float32") /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %340 = expand_dims(%scale__73, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), float32] */;
+  %341 = multiply(%334, %scale__257) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %342 = multiply(%339, %340) /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %343 = cast(%model/batch_normalization_9/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %344 = cast(%zero_point__112, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %345 = subtract(%343, %344) /* ty=Tensor[(32), int32] */;
+  %346 = cast(%345, dtype="float32") /* ty=Tensor[(32), float32] */;
+  %347 = nn.conv2d(%341, %342, padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3]) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %348 = multiply(%346, %scale__111) /* ty=Tensor[(32), float32] */;
+  %349 = nn.bias_add(%347, %348) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %350 = nn.relu(%349) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %351 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %352 = divide(%350, %scale__264) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %353 = cast(%351, dtype="float32") /* ty=float32 */;
+  %354 = add(%352, %353) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %355 = clip(%354, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %356 = round(%355) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %357 = cast(%356, dtype="int8") /* ty=Tensor[(?, 32, 16, 16), int8] */;
+  %358 = cast(%357, dtype="int32") /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %359 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %360 = subtract(%358, %359) /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %361 = cast(%360, dtype="float32") /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %362 = cast(%zero_point__106, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %363 = cast(%model/conv2d_10/Conv2D, dtype="int32") /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %364 = expand_dims(%362, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), int32] */;
+  %365 = subtract(%363, %364) /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %366 = cast(%365, dtype="float32") /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %367 = expand_dims(%scale__105, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), float32] */;
+  %368 = multiply(%361, %scale__264) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %369 = multiply(%366, %367) /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %370 = cast(%model/batch_normalization_10/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %371 = cast(%zero_point__112, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %372 = subtract(%370, %371) /* ty=Tensor[(32), int32] */;
+  %373 = cast(%372, dtype="float32") /* ty=Tensor[(32), float32] */;
+  %374 = nn.conv2d(%368, %369, padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3]) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %375 = multiply(%373, %scale__143) /* ty=Tensor[(32), float32] */;
+  %376 = nn.bias_add(%374, %375) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %377 = cast(%zero_point__274, dtype="int32") /* ty=int32 */;
+  %378 = divide(%376, %scale__273) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %379 = cast(%377, dtype="float32") /* ty=float32 */;
+  %380 = add(%378, %379) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %381 = clip(%380, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %382 = round(%381) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %383 = cast(%382, dtype="int8") /* ty=Tensor[(?, 32, 16, 16), int8] */;
+  %384 = cast(%383, dtype="int32") /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %385 = cast(%zero_point__274, dtype="int32") /* ty=int32 */;
+  %386 = subtract(%384, %385) /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %387 = cast(%386, dtype="float32") /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %388 = multiply(%387, %scale__273) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %389 = add(%341, %388) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %390 = nn.relu(%389) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %391 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %392 = divide(%390, %scale__279) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %393 = cast(%391, dtype="float32") /* ty=float32 */;
+  %394 = add(%392, %393) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %395 = clip(%394, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %396 = round(%395) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %397 = cast(%396, dtype="int8") /* ty=Tensor[(?, 32, 16, 16), int8] */;
+  %398 = cast(%397, dtype="int32") /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %399 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %400 = subtract(%398, %399) /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %401 = cast(%400, dtype="float32") /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %402 = cast(%zero_point__106, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %403 = cast(%model/conv2d_11/Conv2D, dtype="int32") /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %404 = expand_dims(%402, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), int32] */;
+  %405 = subtract(%403, %404) /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %406 = cast(%405, dtype="float32") /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %407 = expand_dims(%scale__103, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), float32] */;
+  %408 = multiply(%401, %scale__279) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %409 = multiply(%406, %407) /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %410 = cast(%model/batch_normalization_11/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %411 = cast(%zero_point__112, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %412 = subtract(%410, %411) /* ty=Tensor[(32), int32] */;
+  %413 = cast(%412, dtype="float32") /* ty=Tensor[(32), float32] */;
+  %414 = nn.conv2d(%408, %409, padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3]) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %415 = multiply(%413, %scale__141) /* ty=Tensor[(32), float32] */;
+  %416 = nn.bias_add(%414, %415) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %417 = nn.relu(%416) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %418 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %419 = divide(%417, %scale__288) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %420 = cast(%418, dtype="float32") /* ty=float32 */;
+  %421 = add(%419, %420) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %422 = clip(%421, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %423 = round(%422) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %424 = cast(%423, dtype="int8") /* ty=Tensor[(?, 32, 16, 16), int8] */;
+  %425 = cast(%424, dtype="int32") /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %426 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %427 = subtract(%425, %426) /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %428 = cast(%427, dtype="float32") /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %429 = cast(%zero_point__106, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %430 = cast(%model/conv2d_12/Conv2D, dtype="int32") /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %431 = expand_dims(%429, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), int32] */;
+  %432 = subtract(%430, %431) /* ty=Tensor[(32, 32, 3, 3), int32] */;
+  %433 = cast(%432, dtype="float32") /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %434 = expand_dims(%scale__101, axis=1, num_newaxis=3) /* ty=Tensor[(32, 1, 1, 1), float32] */;
+  %435 = multiply(%428, %scale__288) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %436 = multiply(%433, %434) /* ty=Tensor[(32, 32, 3, 3), float32] */;
+  %437 = cast(%model/batch_normalization_12/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %438 = cast(%zero_point__112, dtype="int32") /* ty=Tensor[(32), int32] */;
+  %439 = subtract(%437, %438) /* ty=Tensor[(32), int32] */;
+  %440 = cast(%439, dtype="float32") /* ty=Tensor[(32), float32] */;
+  %441 = nn.conv2d(%435, %436, padding=[1, 1, 1, 1], channels=32, kernel_size=[3, 3]) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %442 = multiply(%440, %scale__139) /* ty=Tensor[(32), float32] */;
+  %443 = nn.bias_add(%441, %442) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %444 = cast(%zero_point__298, dtype="int32") /* ty=int32 */;
+  %445 = divide(%443, %scale__297) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %446 = cast(%444, dtype="float32") /* ty=float32 */;
+  %447 = add(%445, %446) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %448 = clip(%447, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %449 = round(%448) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %450 = cast(%449, dtype="int8") /* ty=Tensor[(?, 32, 16, 16), int8] */;
+  %451 = cast(%450, dtype="int32") /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %452 = cast(%zero_point__298, dtype="int32") /* ty=int32 */;
+  %453 = subtract(%451, %452) /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %454 = cast(%453, dtype="float32") /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %455 = multiply(%454, %scale__297) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %456 = add(%408, %455) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %457 = nn.relu(%456) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %458 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %459 = divide(%457, %scale__325) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %460 = cast(%458, dtype="float32") /* ty=float32 */;
+  %461 = add(%459, %460) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %462 = clip(%461, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %463 = round(%462) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %464 = cast(%463, dtype="int8") /* ty=Tensor[(?, 32, 16, 16), int8] */;
+  %465 = cast(%464, dtype="int32") /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %466 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %467 = subtract(%465, %466) /* ty=Tensor[(?, 32, 16, 16), int32] */;
+  %468 = cast(%467, dtype="float32") /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %469 = multiply(%468, %scale__325) /* ty=Tensor[(?, 32, 16, 16), float32] */;
+  %470 = nn.max_pool2d(%469, pool_size=[1, 1], strides=[2, 2], padding=[0, 0, 0, 0]) /* ty=Tensor[(?, 32, 8, 8), float32] */;
+  %471 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %472 = divide(%470, %scale__325) /* ty=Tensor[(?, 32, 8, 8), float32] */;
+  %473 = cast(%471, dtype="float32") /* ty=float32 */;
+  %474 = add(%472, %473) /* ty=Tensor[(?, 32, 8, 8), float32] */;
+  %475 = clip(%474, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 32, 8, 8), float32] */;
+  %476 = round(%475) /* ty=Tensor[(?, 32, 8, 8), float32] */;
+  %477 = cast(%476, dtype="int8") /* ty=Tensor[(?, 32, 8, 8), int8] */;
+  %478 = cast(%477, dtype="int32") /* ty=Tensor[(?, 32, 8, 8), int32] */;
+  %479 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %480 = subtract(%478, %479) /* ty=Tensor[(?, 32, 8, 8), int32] */;
+  %481 = cast(%480, dtype="float32") /* ty=Tensor[(?, 32, 8, 8), float32] */;
+  %482 = reshape(%pad_const__329, newshape=[2, -1]) /* ty=Tensor[(2, 4), int64] */;
+  %483 = multiply(%481, %scale__325) /* ty=Tensor[(?, 32, 8, 8), float32] */;
+  %484 = transpose(%482, axes=None) /* ty=Tensor[(4, 2), int64] */;
+  %485 = dyn.nn.pad(%483, %484, 0f /* ty=float32 */, pad_width=[]) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %486 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %487 = divide(%485, %scale__325) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %488 = cast(%486, dtype="float32") /* ty=float32 */;
+  %489 = add(%487, %488) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %490 = clip(%489, a_min=-128f, a_max=127f) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %491 = round(%490) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %492 = cast(%491, dtype="int8") /* ty=Tensor[(?, ?, ?, ?), int8] */;
+  %493 = cast(%492, dtype="int32") /* ty=Tensor[(?, ?, ?, ?), int32] */;
+  %494 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %495 = subtract(%493, %494) /* ty=Tensor[(?, ?, ?, ?), int32] */;
+  %496 = cast(%495, dtype="float32") /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %497 = cast(%zero_point__92, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %498 = cast(%model/conv2d_13/Conv2D, dtype="int32") /* ty=Tensor[(64, 32, 3, 3), int32] */;
+  %499 = expand_dims(%497, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), int32] */;
+  %500 = subtract(%498, %499) /* ty=Tensor[(64, 32, 3, 3), int32] */;
+  %501 = cast(%500, dtype="float32") /* ty=Tensor[(64, 32, 3, 3), float32] */;
+  %502 = expand_dims(%scale__99, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), float32] */;
+  %503 = multiply(%501, %502) /* ty=Tensor[(64, 32, 3, 3), float32] */;
+  %504 = cast(%model/batch_normalization_13/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %505 = cast(%zero_point__138, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %506 = subtract(%504, %505) /* ty=Tensor[(64), int32] */;
+  %507 = cast(%506, dtype="float32") /* ty=Tensor[(64), float32] */;
+  %508 = nn.conv2d(%469, %503, strides=[2, 2], padding=[0, 0, 1, 1], channels=64, kernel_size=[3, 3]) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %509 = multiply(%507, %scale__137) /* ty=Tensor[(64), float32] */;
+  %510 = nn.bias_add(%508, %509) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %511 = nn.relu(%510) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %512 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %513 = divide(%511, %scale__308) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %514 = cast(%512, dtype="float32") /* ty=float32 */;
+  %515 = add(%513, %514) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %516 = clip(%515, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %517 = round(%516) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %518 = cast(%517, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %519 = cast(%518, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %520 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %521 = subtract(%519, %520) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %522 = cast(%521, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %523 = cast(%zero_point__92, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %524 = cast(%model/conv2d_14/Conv2D, dtype="int32") /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %525 = expand_dims(%523, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), int32] */;
+  %526 = subtract(%524, %525) /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %527 = cast(%526, dtype="float32") /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %528 = expand_dims(%scale__97, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), float32] */;
+  %529 = multiply(%522, %scale__308) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %530 = multiply(%527, %528) /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %531 = cast(%model/batch_normalization_14/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %532 = cast(%zero_point__138, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %533 = subtract(%531, %532) /* ty=Tensor[(64), int32] */;
+  %534 = cast(%533, dtype="float32") /* ty=Tensor[(64), float32] */;
+  %535 = nn.conv2d(%529, %530, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3]) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %536 = multiply(%534, %scale__135) /* ty=Tensor[(64), float32] */;
+  %537 = nn.bias_add(%535, %536) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %538 = cast(%zero_point__318, dtype="int32") /* ty=int32 */;
+  %539 = divide(%537, %scale__317) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %540 = cast(%538, dtype="float32") /* ty=float32 */;
+  %541 = add(%539, %540) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %542 = clip(%541, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %543 = round(%542) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %544 = cast(%543, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %545 = cast(%544, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %546 = cast(%zero_point__318, dtype="int32") /* ty=int32 */;
+  %547 = subtract(%545, %546) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %548 = cast(%547, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %549 = multiply(%496, %scale__325) /* ty=Tensor[(?, ?, ?, ?), float32] */;
+  %550 = multiply(%548, %scale__317) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %551 = add(%549, %550) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %552 = nn.relu(%551) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %553 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %554 = divide(%552, %scale__334) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %555 = cast(%553, dtype="float32") /* ty=float32 */;
+  %556 = add(%554, %555) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %557 = clip(%556, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %558 = round(%557) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %559 = cast(%558, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %560 = cast(%559, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %561 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %562 = subtract(%560, %561) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %563 = cast(%562, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %564 = cast(%zero_point__92, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %565 = cast(%model/conv2d_15/Conv2D, dtype="int32") /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %566 = expand_dims(%564, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), int32] */;
+  %567 = subtract(%565, %566) /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %568 = cast(%567, dtype="float32") /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %569 = expand_dims(%scale__95, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), float32] */;
+  %570 = multiply(%563, %scale__334) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %571 = multiply(%568, %569) /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %572 = cast(%model/batch_normalization_15/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %573 = cast(%zero_point__138, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %574 = subtract(%572, %573) /* ty=Tensor[(64), int32] */;
+  %575 = cast(%574, dtype="float32") /* ty=Tensor[(64), float32] */;
+  %576 = nn.conv2d(%570, %571, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3]) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %577 = multiply(%575, %scale__133) /* ty=Tensor[(64), float32] */;
+  %578 = nn.bias_add(%576, %577) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %579 = nn.relu(%578) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %580 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %581 = divide(%579, %scale__345) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %582 = cast(%580, dtype="float32") /* ty=float32 */;
+  %583 = add(%581, %582) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %584 = clip(%583, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %585 = round(%584) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %586 = cast(%585, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %587 = cast(%586, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %588 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %589 = subtract(%587, %588) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %590 = cast(%589, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %591 = cast(%zero_point__92, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %592 = cast(%model/conv2d_16/Conv2D, dtype="int32") /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %593 = expand_dims(%591, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), int32] */;
+  %594 = subtract(%592, %593) /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %595 = cast(%594, dtype="float32") /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %596 = expand_dims(%scale__93, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), float32] */;
+  %597 = multiply(%590, %scale__345) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %598 = multiply(%595, %596) /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %599 = cast(%model/batch_normalization_16/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %600 = cast(%zero_point__138, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %601 = subtract(%599, %600) /* ty=Tensor[(64), int32] */;
+  %602 = cast(%601, dtype="float32") /* ty=Tensor[(64), float32] */;
+  %603 = nn.conv2d(%597, %598, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3]) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %604 = multiply(%602, %scale__131) /* ty=Tensor[(64), float32] */;
+  %605 = nn.bias_add(%603, %604) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %606 = cast(%zero_point__353, dtype="int32") /* ty=int32 */;
+  %607 = divide(%605, %scale__352) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %608 = cast(%606, dtype="float32") /* ty=float32 */;
+  %609 = add(%607, %608) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %610 = clip(%609, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %611 = round(%610) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %612 = cast(%611, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %613 = cast(%612, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %614 = cast(%zero_point__353, dtype="int32") /* ty=int32 */;
+  %615 = subtract(%613, %614) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %616 = cast(%615, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %617 = multiply(%616, %scale__352) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %618 = add(%570, %617) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %619 = nn.relu(%618) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %620 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %621 = divide(%619, %scale__358) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %622 = cast(%620, dtype="float32") /* ty=float32 */;
+  %623 = add(%621, %622) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %624 = clip(%623, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %625 = round(%624) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %626 = cast(%625, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %627 = cast(%626, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %628 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %629 = subtract(%627, %628) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %630 = cast(%629, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %631 = cast(%zero_point__92, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %632 = cast(%model/conv2d_17/Conv2D, dtype="int32") /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %633 = expand_dims(%631, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), int32] */;
+  %634 = subtract(%632, %633) /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %635 = cast(%634, dtype="float32") /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %636 = expand_dims(%scale__91, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), float32] */;
+  %637 = multiply(%630, %scale__358) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %638 = multiply(%635, %636) /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %639 = cast(%model/batch_normalization_17/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %640 = cast(%zero_point__138, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %641 = subtract(%639, %640) /* ty=Tensor[(64), int32] */;
+  %642 = cast(%641, dtype="float32") /* ty=Tensor[(64), float32] */;
+  %643 = nn.conv2d(%637, %638, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3]) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %644 = multiply(%642, %scale__129) /* ty=Tensor[(64), float32] */;
+  %645 = nn.bias_add(%643, %644) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %646 = nn.relu(%645) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %647 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %648 = divide(%646, %scale__365) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %649 = cast(%647, dtype="float32") /* ty=float32 */;
+  %650 = add(%648, %649) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %651 = clip(%650, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %652 = round(%651) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %653 = cast(%652, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %654 = cast(%653, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %655 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %656 = subtract(%654, %655) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %657 = cast(%656, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %658 = cast(%zero_point__92, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %659 = cast(%model/conv2d_18/Conv2D, dtype="int32") /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %660 = expand_dims(%658, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), int32] */;
+  %661 = subtract(%659, %660) /* ty=Tensor[(64, 64, 3, 3), int32] */;
+  %662 = cast(%661, dtype="float32") /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %663 = expand_dims(%scale__89, axis=1, num_newaxis=3) /* ty=Tensor[(64, 1, 1, 1), float32] */;
+  %664 = multiply(%657, %scale__365) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %665 = multiply(%662, %663) /* ty=Tensor[(64, 64, 3, 3), float32] */;
+  %666 = cast(%model/batch_normalization_18/FusedBatchNormV3, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %667 = cast(%zero_point__138, dtype="int32") /* ty=Tensor[(64), int32] */;
+  %668 = subtract(%666, %667) /* ty=Tensor[(64), int32] */;
+  %669 = cast(%668, dtype="float32") /* ty=Tensor[(64), float32] */;
+  %670 = nn.conv2d(%664, %665, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3]) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %671 = multiply(%669, %scale__127) /* ty=Tensor[(64), float32] */;
+  %672 = nn.bias_add(%670, %671) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %673 = cast(%zero_point__377, dtype="int32") /* ty=int32 */;
+  %674 = divide(%672, %scale__376) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %675 = cast(%673, dtype="float32") /* ty=float32 */;
+  %676 = add(%674, %675) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %677 = clip(%676, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %678 = round(%677) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %679 = cast(%678, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %680 = cast(%679, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %681 = cast(%zero_point__377, dtype="int32") /* ty=int32 */;
+  %682 = subtract(%680, %681) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %683 = cast(%682, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %684 = multiply(%683, %scale__376) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %685 = add(%637, %684) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %686 = nn.relu(%685) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %687 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %688 = divide(%686, %scale__380) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %689 = cast(%687, dtype="float32") /* ty=float32 */;
+  %690 = add(%688, %689) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %691 = clip(%690, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %692 = round(%691) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %693 = cast(%692, dtype="int8") /* ty=Tensor[(?, 64, 8, 8), int8] */;
+  %694 = cast(%693, dtype="int32") /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %695 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %696 = subtract(%694, %695) /* ty=Tensor[(?, 64, 8, 8), int32] */;
+  %697 = cast(%696, dtype="float32") /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %698 = multiply(%697, %scale__380) /* ty=Tensor[(?, 64, 8, 8), float32] */;
+  %699 = nn.global_avg_pool2d(%698) /* ty=Tensor[(?, 64, 1, 1), float32] */;
+  %700 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %701 = divide(%699, %scale__382) /* ty=Tensor[(?, 64, 1, 1), float32] */;
+  %702 = cast(%700, dtype="float32") /* ty=float32 */;
+  %703 = add(%701, %702) /* ty=Tensor[(?, 64, 1, 1), float32] */;
+  %704 = clip(%703, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 64, 1, 1), float32] */;
+  %705 = round(%704) /* ty=Tensor[(?, 64, 1, 1), float32] */;
+  %706 = cast(%705, dtype="int8") /* ty=Tensor[(?, 64, 1, 1), int8] */;
+  %707 = shape_of(%706, dtype="int64") /* ty=Tensor[(4), int64] */;
+  %708 = shape_of(%707, dtype="int64") /* ty=Tensor[(1), int64] */;
+  %709 = less(%const_axes__494, 0 /* ty=int64 */) /* ty=Tensor[(2), bool] */;
+  %710 = add(%const_axes__494, %708) /* ty=Tensor[(2), int64] */;
+  %711 = where(%709, %710, %const_axes__494) /* ty=Tensor[(2), int64] */;
+  %712 = dyn.squeeze(%706, %711, axis=[]) /* ty=Tensor[(?, ?), int8] */;
+  %713 = cast(%712, dtype="int32") /* ty=Tensor[(?, ?), int32] */;
+  %714 = cast(%zero_point__368, dtype="int32") /* ty=int32 */;
+  %715 = subtract(%713, %714) /* ty=Tensor[(?, ?), int32] */;
+  %716 = cast(%715, dtype="float32") /* ty=Tensor[(?, ?), float32] */;
+  %717 = cast(%model/dense/MatMul, dtype="int32") /* ty=Tensor[(64, 10), int32] */;
+  %718 = cast(%zero_point__70, dtype="int32") /* ty=int32 */;
+  %719 = subtract(%717, %718) /* ty=Tensor[(64, 10), int32] */;
+  %720 = cast(%719, dtype="float32") /* ty=Tensor[(64, 10), float32] */;
+  %721 = multiply(%720, %scale__69) /* ty=Tensor[(64, 10), float32] */;
+  %722 = multiply(%716, %scale__382) /* ty=Tensor[(?, ?), float32] */;
+  %723 = transpose(%721, axes=[1, 0]) /* ty=Tensor[(10, 64), float32] */;
+  %724 = cast(%model/dense/BiasAdd/ReadVariableOp, dtype="int32") /* ty=Tensor[(10), int32] */;
+  %725 = cast(%zero_point__72, dtype="int32") /* ty=int32 */;
+  %726 = subtract(%724, %725) /* ty=Tensor[(10), int32] */;
+  %727 = cast(%726, dtype="float32") /* ty=Tensor[(10), float32] */;
+  %728 = nn.dense(%722, %723, units=None, out_dtype="float32") /* ty=Tensor[(?, 10), float32] */;
+  %729 = multiply(%727, %scale__71) /* ty=Tensor[(10), float32] */;
+  %730 = add(%728, %729) /* ty=Tensor[(?, 10), float32] */;
+  %731 = cast(%zero_point__389, dtype="int32") /* ty=int32 */;
+  %732 = divide(%730, %scale__388) /* ty=Tensor[(?, 10), float32] */;
+  %733 = cast(%731, dtype="float32") /* ty=float32 */;
+  %734 = add(%732, %733) /* ty=Tensor[(?, 10), float32] */;
+  %735 = clip(%734, a_min=-128f, a_max=127f) /* ty=Tensor[(?, 10), float32] */;
+  %736 = round(%735) /* ty=Tensor[(?, 10), float32] */;
+  %737 = cast(%736, dtype="int8") /* ty=Tensor[(?, 10), int8] */;
+  %738 = cast(%737, dtype="int32") /* ty=Tensor[(?, 10), int32] */;
+  %739 = cast(%zero_point__389, dtype="int32") /* ty=int32 */;
+  %740 = subtract(%738, %739) /* ty=Tensor[(?, 10), int32] */;
+  %741 = cast(%740, dtype="float32") /* ty=Tensor[(?, 10), float32] */;
+  multiply(%741, %scale__388) /* ty=Tensor[(?, 10), float32] */
 }
 
-#[metadata]
-{
-  "root": 1, 
-  "nodes": [
-    {
-      "type_key": ""
-    }, 
-    {
-      "type_key": "Map", 
-      "keys": [
-        "relay.Constant"
-      ], 
-      "data": [2]
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [
-        3, 
-        9, 
-        13, 
-        17, 
-        21, 
-        25, 
-        29, 
-        33, 
-        37, 
-        41, 
-        45, 
-        49, 
-        53, 
-        57, 
-        61, 
-        65, 
-        69, 
-        73, 
-        77, 
-        81, 
-        85, 
-        89, 
-        93, 
-        97, 
-        101, 
-        105, 
-        109, 
-        113, 
-        117, 
-        121, 
-        125, 
-        129, 
-        133, 
-        137, 
-        141, 
-        145, 
-        149, 
-        153, 
-        157, 
-        161, 
-        165, 
-        169, 
-        173, 
-        177, 
-        181, 
-        185, 
-        189, 
-        193, 
-        197, 
-        201, 
-        205, 
-        209, 
-        213, 
-        217, 
-        221, 
-        225, 
-        229
-      ]
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "6", 
-        "data": "0", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "VirtualDevice", 
-      "attrs": {
-        "device_type_int": "-1", 
-        "memory_scope": "5", 
-        "target": "0", 
-        "virtual_device_id": "-1"
-      }
-    }, 
-    {
-      "type_key": "runtime.String"
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "7", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [8]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "10", 
-        "data": "1", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "11", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [12]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "14", 
-        "data": "2", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "15", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [16]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "18", 
-        "data": "3", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "19", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [20]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "22", 
-        "data": "4", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "23", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [24]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "26", 
-        "data": "5", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "27", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [28]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "30", 
-        "data": "6", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "31", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [32]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "34", 
-        "data": "7", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "35", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [36]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "38", 
-        "data": "8", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "39", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [40]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "42", 
-        "data": "9", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "43", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [44]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "46", 
-        "data": "10", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "47", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [48]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "50", 
-        "data": "11", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "51", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [52]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "54", 
-        "data": "12", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "55", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [56]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "58", 
-        "data": "13", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "59", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [60]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "62", 
-        "data": "14", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "63", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [64]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "66", 
-        "data": "15", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "67", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [68]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "70", 
-        "data": "16", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "71", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [72]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "74", 
-        "data": "17", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "75", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [76]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "78", 
-        "data": "18", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "79", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [80]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "82", 
-        "data": "19", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "83", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [84]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "86", 
-        "data": "20", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "87", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [88]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "16"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "90", 
-        "data": "21", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "91", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [92]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "94", 
-        "data": "22", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "95", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [96]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "98", 
-        "data": "23", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "99", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [100]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "102", 
-        "data": "24", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "103", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [104]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "106", 
-        "data": "25", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "107", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [108]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "110", 
-        "data": "26", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "111", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [112]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "114", 
-        "data": "27", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "115", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [116]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "118", 
-        "data": "28", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "119", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [120]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "122", 
-        "data": "29", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "123", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [124]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "126", 
-        "data": "30", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "127", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [128]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "130", 
-        "data": "31", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "131", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [132]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "134", 
-        "data": "32", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "135", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [136]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "138", 
-        "data": "33", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "139", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [140]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "142", 
-        "data": "34", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "143", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [144]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "146", 
-        "data": "35", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "147", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [148]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "150", 
-        "data": "36", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "151", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [152]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "154", 
-        "data": "37", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "155", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [156]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "158", 
-        "data": "38", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "159", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [160]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "32"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "162", 
-        "data": "39", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "163", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [164]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "166", 
-        "data": "40", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "167", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [168]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "170", 
-        "data": "41", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "171", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [172]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "174", 
-        "data": "42", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "175", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [176]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "178", 
-        "data": "43", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "179", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [180]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "182", 
-        "data": "44", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "183", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [184]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "186", 
-        "data": "45", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "187", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [188]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "190", 
-        "data": "46", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "191", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [192]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "194", 
-        "data": "47", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "195", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [196]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "198", 
-        "data": "48", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "199", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [200]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "202", 
-        "data": "49", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "203", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [204]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "206", 
-        "data": "50", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "207", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [208]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "210", 
-        "data": "51", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "211", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [212]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "214", 
-        "data": "52", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "215", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [216]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "218", 
-        "data": "53", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "219", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [220]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "222", 
-        "data": "54", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "223", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [224]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "226", 
-        "data": "55", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "227", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [228]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }, 
-    {
-      "type_key": "relay.Constant", 
-      "attrs": {
-        "_checked_type_": "230", 
-        "data": "56", 
-        "span": "0", 
-        "virtual_device_": "4"
-      }
-    }, 
-    {
-      "type_key": "relay.TensorType", 
-      "attrs": {
-        "dtype": "int64", 
-        "shape": "231", 
-        "span": "0"
-      }
-    }, 
-    {
-      "type_key": "Array", 
-      "data": [232]
-    }, 
-    {
-      "type_key": "IntImm", 
-      "attrs": {
-        "dtype": "int32", 
-        "span": "0", 
-        "value": "64"
-      }
-    }
-  ], 
-  "b64ndarrays": [
-    "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", 
-    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAABAAQBAAAAAAAAAAAACAAAAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAAAEAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAIAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAIAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAA=", 
-    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAABAAQBAAAAAAAAAAAACAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAApAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKQAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAApAAAAAAAAACkAAAAAAAAAKgAAAAAAAAApAAAAAAAAACkAAAAAAAAAKQAAAAAAAAAqAAAAAAAAACkAAAAAAAAAKQAAAAAAAAAqAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAA=", 
-    "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", 
-    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAABAAQBAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAIAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAA=", 
-    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAABAAQBAAAAAAAAAAAACAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKQAAAAAAAAApAAAAAAAAACoAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAqAAAAAAAAACkAAAAAAAAAKAAAAAAAAAAqAAAAAAAAACgAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAA=", 
-    "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", 
-    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAABAAQBAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAIAAAAA=", 
-    "P6G0lvBAXt0AAAAAAAAAAAEAAAAAAAAAAQAAAABAAQBAAAAAAAAAAAACAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKAAAAAAAAAApAAAAAAAAACkAAAAAAAAAKQAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKQAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKAAAAAAAAAApAAAAAAAAACkAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACkAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKQAAAAAAAAAoAAAAAAAAACgAAAAAAAAAKAAAAAAAAAApAAAAAAAAACgAAAAAAAAAKQAAAAAAAAApAAAAAAAAACkAAAAAAAAAKAAAAAAAAAA="
-  ], 
-  "attrs": {"tvm_version": "0.9.dev0"}
-}

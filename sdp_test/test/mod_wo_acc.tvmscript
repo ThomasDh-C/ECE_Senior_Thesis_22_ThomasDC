@@ -1,6 +1,5 @@
 #[version = "0.0.5"]
-def @main(%data: Tensor[(1, 2, 3, 2), float32], %gamma: Tensor[(2), float32], %beta: Tensor[(2), float32], %moving_mean: Tensor[(2), float32], %moving_var: Tensor[(2), float32]) {
-  %0 = nn.batch_norm(%data, %gamma, %beta, %moving_mean, %moving_var, axis=3, epsilon=0f);
-  %0.0
+def @main(%x: Tensor[(1, 2, 3, 2), int16]) {
+  nn.relu(%x)
 }
 

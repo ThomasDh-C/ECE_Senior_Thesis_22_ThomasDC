@@ -231,10 +231,10 @@ def channel_batch_norm(with_nvdla=True):
     moving_var_inp = np.array([np.var(data_inp[:, :, :, idx_c])
                               for idx_c in range(c)], dtype='float32')
     # np.zeros((c,), dtype='float32')
-    compile_and_run(batch_norm_func, [data_inp, gamma_inp, beta_inp, moving_mean_inp,
-                    moving_var_inp], with_nvdla=with_nvdla, print_output=True)
-    # test_correctness(batch_norm_func, [
-    #     data_inp, gamma_inp, beta_inp, moving_mean_inp, moving_var_inp])
+    # compile_and_run(batch_norm_func, [data_inp, gamma_inp, beta_inp, moving_mean_inp,
+    #                 moving_var_inp], with_nvdla=with_nvdla, print_output=True)
+    test_correctness(batch_norm_func, [
+        data_inp, gamma_inp, beta_inp, moving_mean_inp, moving_var_inp])
 
 
 def conv2d(with_nvdla=True):
@@ -289,13 +289,13 @@ def avgpool2d(with_nvdla=True):
 
 
 if __name__ == "__main__":
-    # layer_relu()
+    layer_relu()
     # channel_bias_add()
     # elemwise_max()
     # elemwise_min()
     # elemwise_equal()
     # elemwise_mul()
     # channel_prelu()
-    channel_batch_norm(with_nvdla=True)  # not fully implemented in c++
+    # channel_batch_norm(with_nvdla=True)
     # conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)
