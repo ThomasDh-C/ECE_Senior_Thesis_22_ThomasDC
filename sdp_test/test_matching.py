@@ -32,6 +32,37 @@ def red(inp_string):
     return f'{bcolors.FAIL}{inp_string}{bcolors.ENDC}'
 
 
+@relay.transform.function_pass(opt_level=1)
+class TransformSoftmax:
+    def transform_function(self, func, mod, ctx):
+        class SimpleTransform(relay.ExprMutator):
+            def infer_type(self, node):
+                mod = tvm.IRModule.from_expr(node)
+                mod = relay.transform.InferType()(mod)
+                entry = mod["main"]
+                return entry if isinstance(node, relay.Function) else entry.body
+
+            def visit_call(self, call):
+                op = call.op
+                if op.name not in {'nn.softmax', 'sqrt'}:
+                    # return relay.Call(call.op, list(map(self.visit, call.args)), call.attrs, type_args=call.type_args, span=call.span)
+                    return super().visit_call(call)
+                args = [self.visit(x) for x in call.args]
+                if op.name == 'nn.softmax':
+                    data = args[0]
+                    expr = relay.cast(data, 'float32')
+                    expr = relay.nn.softmax(expr)
+                    expr = relay.cast(expr, 'int16')
+                    return expr
+                if op.name == 'sqrt':
+                    data = args[0]
+                    expr = relay.cast(data, 'float32')
+                    expr = relay.sqrt(expr)
+                    expr = relay.cast(expr, 'int16')
+                    return expr
+        return SimpleTransform().visit(func)
+
+
 def compile_and_run(relay_func, args, with_nvdla=True, print_output=True):
     # with nvdla acceleration
     # mod = module
@@ -47,6 +78,9 @@ def compile_and_run(relay_func, args, with_nvdla=True, print_output=True):
         with open("./test/mod.tvmscript", 'w') as fout:
             print(mod.astext(), file=fout)
     else:
+        mod = relay.transform.InferType()(mod)
+        mod = tvm.relay.transform.SimplifyInference()(mod)
+        mod = TransformSoftmax()(mod)
         with open("./test/mod_wo_acc.tvmscript", 'w') as fout:
             print(mod.astext(), file=fout)
 
@@ -196,18 +230,18 @@ def channel_prelu(with_nvdla=True):
 
 def channel_batch_norm(with_nvdla=True):
     n, h, w, c = 1, 2, 3, 2
-    input_type = relay.TensorType(shape=(n, h, w, c), dtype='float32')
+    input_type = relay.TensorType(shape=(n, h, w, c), dtype='int16')
     data = relay.Var("data", input_type)  # 1, 2px, 3px 2ch - N * H * W * C
 
     # 1. norm data
     channel_type = relay.TensorType(shape=(c,), dtype='int16')
     channel_type_float = relay.TensorType(shape=(c,), dtype='float32')
     # 2ch, - C - 2. multiply after norm
-    gamma = relay.Var("gamma", channel_type_float)
+    gamma = relay.Var("gamma", channel_type)
     # 2ch, - C -   3. add after multiply
-    beta = relay.Var("beta", channel_type_float)
-    moving_mean = relay.Var("moving_mean", channel_type_float)  # 2ch, - C
-    moving_var = relay.Var("moving_var", channel_type_float)  # 2ch, - C
+    beta = relay.Var("beta", channel_type)
+    moving_mean = relay.Var("moving_mean", channel_type)  # 2ch, - C
+    moving_var = relay.Var("moving_var", channel_type)  # 2ch, - C
 
     func_params = [data, gamma, beta, moving_mean, moving_var]
     interior_func = relay.nn.batch_norm(
@@ -217,20 +251,22 @@ def channel_batch_norm(with_nvdla=True):
         func_params, body=out)
 
     # only int16 supported by sim so internally converts
-    data_inp = np.zeros((n, h, w, c), 'float32')
+    data_inp = np.random.randint(
+        size=(n, h, w, c), low=1000, high=2000, dtype='int16')
+    # data_inp = np.zeros((n, h, w, c), 'int16')
     idx = 0
     for n_h in range(h):
         for n_w in range(w):
             for n_c in range(c):
                 data_inp[0][n_h][n_w][n_c] = idx
                 idx += 10
-    gamma_inp = np.zeros(c, dtype='float32') + 1
-    beta_inp = np.zeros(c, dtype='float32')
+    gamma_inp = np.zeros(c, dtype='int16') + 1
+    beta_inp = np.zeros(c, dtype='int16')
     moving_mean_inp = np.array(
-        [np.mean(data_inp[:, :, :, idx_c]) for idx_c in range(c)], dtype='float32')
+        [np.mean(data_inp[:, :, :, idx_c]) for idx_c in range(c)], dtype='int16')
     moving_var_inp = np.array([np.var(data_inp[:, :, :, idx_c])
-                              for idx_c in range(c)], dtype='float32')
-    # np.zeros((c,), dtype='float32')
+                              for idx_c in range(c)], dtype='int16')
+
     # compile_and_run(batch_norm_func, [data_inp, gamma_inp, beta_inp, moving_mean_inp,
     #                 moving_var_inp], with_nvdla=with_nvdla, print_output=True)
     test_correctness(batch_norm_func, [
@@ -289,13 +325,13 @@ def avgpool2d(with_nvdla=True):
 
 
 if __name__ == "__main__":
-    layer_relu()
+    # layer_relu()
     # channel_bias_add()
     # elemwise_max()
     # elemwise_min()
     # elemwise_equal()
     # elemwise_mul()
     # channel_prelu()
-    # channel_batch_norm(with_nvdla=True)
+    channel_batch_norm(with_nvdla=False)
     # conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)

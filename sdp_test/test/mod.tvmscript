@@ -1,12 +1,13 @@
 #[version = "0.0.5"]
-def @main(%x: Tensor[(1, 2, 3, 2), int16]) -> Tensor[(1, 2, 3, 2), int16] {
-  @tvmgen_default_ilanvdla_main_0(%x) /* ty=Tensor[(1, 2, 3, 2), int16] */
+def @main(%data: Tensor[(1, 2, 3, 2), int16], %gamma: Tensor[(2), int16], %beta: Tensor[(2), int16], %moving_mean: Tensor[(2), int16], %moving_var: Tensor[(2), int16]) -> Tensor[(1, 2, 3, 2), int16] {
+  @tvmgen_default_ilanvdla_main_0(%data, %gamma, %beta, %moving_mean, %moving_var) /* ty=Tensor[(1, 2, 3, 2), int16] */
 }
 
-def @tvmgen_default_ilanvdla_main_0(%ilanvdla_0_i0: Tensor[(1, 2, 3, 2), int16], Inline=1, Compiler="ilanvdla", global_symbol="tvmgen_default_ilanvdla_main_0", Primitive=1) -> Tensor[(1, 2, 3, 2), int16] {
-  %0 = fn (%FunctionVar_0_0: Tensor[(1, 2, 3, 2), int16], PartitionedFromPattern="nn.relu_", Composite="ilanvdla.sdp.layer_relu") -> Tensor[(1, 2, 3, 2), int16] {
-    nn.relu(%FunctionVar_0_0) /* ty=Tensor[(1, 2, 3, 2), int16] */
+def @tvmgen_default_ilanvdla_main_0(%ilanvdla_0_i0: Tensor[(1, 2, 3, 2), int16], %ilanvdla_0_i1: Tensor[(2), int16], %ilanvdla_0_i2: Tensor[(2), int16], %ilanvdla_0_i3: Tensor[(2), int16], %ilanvdla_0_i4: Tensor[(2), int16], Inline=1, Compiler="ilanvdla", global_symbol="tvmgen_default_ilanvdla_main_0", Primitive=1) -> Tensor[(1, 2, 3, 2), int16] {
+  %1 = fn (%FunctionVar_0_0: Tensor[(1, 2, 3, 2), int16], %FunctionVar_0_1: Tensor[(2), int16], %FunctionVar_0_2: Tensor[(2), int16], %FunctionVar_0_3: Tensor[(2), int16], %FunctionVar_0_4: Tensor[(2), int16], PartitionedFromPattern="nn.batch_norm_TupleGetItem0_", Composite="ilanvdla.sdp.channel_batch_norm") -> Tensor[(1, 2, 3, 2), int16] {
+    %0 = nn.batch_norm(%FunctionVar_0_0, %FunctionVar_0_1, %FunctionVar_0_2, %FunctionVar_0_3, %FunctionVar_0_4, axis=3, epsilon=0f) /* ty=(Tensor[(1, 2, 3, 2), int16], Tensor[(2), int16], Tensor[(2), int16]) */;
+    %0.0
   };
-  %0(%ilanvdla_0_i0) /* ty=Tensor[(1, 2, 3, 2), int16] */
+  %1(%ilanvdla_0_i0, %ilanvdla_0_i1, %ilanvdla_0_i2, %ilanvdla_0_i3, %ilanvdla_0_i4) /* ty=Tensor[(1, 2, 3, 2), int16] */
 }
 

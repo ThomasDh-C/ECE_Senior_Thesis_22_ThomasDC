@@ -13,6 +13,8 @@ mod = relay.transform.InferType()(mod)
 inp1 = np.zeros((1, 3, 32, 32), 'int16')  # only int16 supported by sim
 mod = relay.transform.SimplifyInference()(mod)
 
+# https://pages.dogdog.run/tvm/tvm_user_pass.html
+
 
 @relay.transform.function_pass(opt_level=1)
 class TransformSoftmax:
