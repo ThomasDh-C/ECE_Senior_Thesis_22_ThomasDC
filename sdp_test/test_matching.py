@@ -167,6 +167,24 @@ def channel_bias_add(with_nvdla=True):
     channel_tester(bias_add_func, with_nvdla, n, h, w, c)
 
 
+def channel_bias_add_slim(with_nvdla=True):
+    # compilerIR/ compiler intermediate representation
+    w, c = 1, 10
+    x_type = relay.TensorType(shape=(w, c), dtype='int16')
+    x = relay.Var("x", x_type)  # 1, 2px, 3px 2ch - N * H * W * C
+    y_type = relay.TensorType((c,), dtype='int16')
+    y = relay.Var("y", y_type)  # 2ch, - C
+    bias_add_func = relay.Function([x, y], relay.nn.bias_add(x, y, axis=-1))
+    inp1 = np.zeros((w, c), 'int16')  # only int16 supported by sim
+    idx = 0
+    for n_c in range(c):
+        for n_w in range(w):
+            inp1[n_w][n_c] = idx
+            idx += 1
+    inp2 = np.arange(c, dtype='int16')
+    test_correctness(bias_add_func, [inp1, inp2])
+
+
 def elemwise_tester(elemwise_relay_func, with_nvdla, n, h, w, c):
     inp1 = np.zeros((n, h, w, c), 'int16')  # only int16 supported by sim
     inp2 = np.zeros((n, h, w, c), 'int16')  # only int16 supported by sim
@@ -214,6 +232,15 @@ def elemwise_mul():
     x, y = relay.Var("x", elemwise_type), relay.Var(
         "y", elemwise_type)  # 1, 2px,2px 1ch
     multiply_func = relay.Function([x, y], relay.multiply(x, y))
+    elemwise_tester(multiply_func, with_nvdla=True, n=n, h=h, w=w, c=c)
+
+
+def elemwise_add():
+    n, h, w, c = 1, 2, 3, 2
+    elemwise_type = relay.TensorType(shape=(n, h, w, c), dtype='int16')
+    x, y = relay.Var("x", elemwise_type), relay.Var(
+        "y", elemwise_type)  # 1, 2px,2px 1ch
+    multiply_func = relay.Function([x, y], relay.add(x, y))
     elemwise_tester(multiply_func, with_nvdla=True, n=n, h=h, w=w, c=c)
 
 
@@ -325,13 +352,15 @@ def avgpool2d(with_nvdla=True):
 
 
 if __name__ == "__main__":
-    # layer_relu()
-    # channel_bias_add()
-    # elemwise_max()
-    # elemwise_min()
-    # elemwise_equal()
-    # elemwise_mul()
-    # channel_prelu()
+    layer_relu()
+    channel_bias_add()
+    channel_bias_add_slim()
+    elemwise_max()
+    elemwise_min()
+    elemwise_equal()
+    elemwise_mul()
+    elemwise_add()
+    channel_prelu()
     channel_batch_norm(with_nvdla=False)
-    # conv2d(with_nvdla=True)
+    conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)

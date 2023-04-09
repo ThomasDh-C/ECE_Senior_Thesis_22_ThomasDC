@@ -5,13 +5,14 @@ import numpy as np
 from tvm.contrib import graph_executor
 from tvm.runtime.ndarray import cpu
 from tvm.relay import *
+from tvm.relay.op.contrib import ilanvdla
 
 mod, params = tvm.relay.testing.resnet.get_workload(
     1, 10, 18, image_shape=(3, 32, 32), layout='NCHW', dtype='int16')
 mod = relay.transform.InferType()(mod)
 
 inp1 = np.zeros((1, 3, 32, 32), 'int16')  # only int16 supported by sim
-mod = relay.transform.SimplifyInference()(mod)
+
 
 # https://pages.dogdog.run/tvm/tvm_user_pass.html
 
@@ -47,12 +48,45 @@ class TransformSoftmax:
         return SimpleTransform().visit(func)
 
 
-mod = TransformSoftmax()(mod)
-with tvm.transform.PassContext(opt_level=3):
-    device = tvm.cpu()
-    target = "llvm"
-    exe = relay.vm.compile(mod, target)
-    vm = runtime.vm.VirtualMachine(exe, device)
+def compile_and_run(module, input, parameters, with_nvdla=True, print_output=True):
+    if with_nvdla:
+        module = TransformSoftmax()(module)
+        pattern_table = ilanvdla.pattern_table()
+        module = tvm.relay.transform.MergeComposite(pattern_table)(module)
+        module = tvm.relay.transform.AnnotateTarget(["ilanvdla"])(module)
+        module = tvm.relay.transform.PartitionGraph()(module)
+        print(module)
+        with open("./test/mod.tvmscript", 'w') as fout:
+            print(module.astext(), file=fout)
+    else:
+        module = tvm.relay.transform.SimplifyInference()(module)
+        module = TransformSoftmax()(module)
+        with open("./test/mod_wo_acc.tvmscript", 'w') as fout:
+            print(module.astext(), file=fout)
 
-    ret = vm.invoke("main", inp1, **params)
-    ila_out = ret.asnumpy()
+    with tvm.transform.PassContext(opt_level=3):
+        device = tvm.cpu()
+        target = "llvm"
+        exe = relay.vm.compile(module, target)
+        vm = runtime.vm.VirtualMachine(exe, device)
+
+        ret = vm.invoke("main", input, **parameters)
+        ila_out = ret.asnumpy()
+
+    if print_output:
+        print("ila output: \n{}".format(ila_out))
+
+    return ila_out
+
+
+ila_out = compile_and_run(
+    mod, inp1, params, with_nvdla=True, print_output=True)
+# mod = TransformSoftmax()(mod)
+# with tvm.transform.PassContext(opt_level=3):
+#     device = tvm.cpu()
+#     target = "llvm"
+#     exe = relay.vm.compile(mod, target)
+#     vm = runtime.vm.VirtualMachine(exe, device)
+
+#     ret = vm.invoke("main", inp1, **params)
+#     ila_out = ret.asnumpy()
