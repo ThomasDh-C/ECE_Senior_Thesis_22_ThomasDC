@@ -133,13 +133,28 @@ def layer_relu(with_nvdla=True):
         shape=(n, h, w, c), dtype='int16'))  # 1, 2px, 3px 2ch - N * H * W * C
     relu_func = relay.Function([x], relay.nn.relu(
         x))
-    inp1 = np.zeros((n, h, w, c), 'int16')  # only int16 supported by sim
-    idx = 0
-    for n_c in range(c):
-        for n_h in range(h):
-            for n_w in range(w):
-                inp1[0][n_h][n_w][n_c] = idx
-                idx += 1
+    # inp1 = np.zeros((n, h, w, c), 'int16')  # only int16 supported by sim
+    # idx = 0
+    # for n_c in range(c):
+    #     for n_h in range(h):
+    #         for n_w in range(w):
+    #             inp1[0][n_h][n_w][n_c] = idx
+    #             idx += 1
+    inp1 = np.random.randint(size=(n, h, w, c), low=-
+                             100, high=100, dtype='int16')
+
+    test_correctness(relu_func, [inp1])
+
+
+def large_layer_relu(with_nvdla=True):
+    # compilerIR/ compiler intermediate representation
+    n, h, w, c = 1, 64, 32, 32
+    x = relay.Var("x", type_annotation=relay.TensorType(
+        shape=(n, h, w, c), dtype='int16'))  # 1, 2px, 3px 2ch - N * H * W * C
+    relu_func = relay.Function([x], relay.nn.relu(
+        x))
+    inp1 = np.random.randint(size=(n, h, w, c), low=-
+                             100, high=100, dtype='int16')
 
     test_correctness(relu_func, [inp1])
 
@@ -272,7 +287,7 @@ def channel_batch_norm(with_nvdla=True):
 
     func_params = [data, gamma, beta, moving_mean, moving_var]
     interior_func = relay.nn.batch_norm(
-        data, gamma, beta, moving_mean, moving_var, axis=3, epsilon=0)
+        data, gamma, beta, moving_mean, moving_var, axis=3, epsilon=1)
     out = relay.TupleGetItem(interior_func.astuple(), 0)
     batch_norm_func = relay.Function(
         func_params, body=out)
@@ -280,22 +295,12 @@ def channel_batch_norm(with_nvdla=True):
     # only int16 supported by sim so internally converts
     data_inp = np.random.randint(
         size=(n, h, w, c), low=1000, high=2000, dtype='int16')
-    # data_inp = np.zeros((n, h, w, c), 'int16')
-    idx = 0
-    for n_h in range(h):
-        for n_w in range(w):
-            for n_c in range(c):
-                data_inp[0][n_h][n_w][n_c] = idx
-                idx += 10
-    gamma_inp = np.zeros(c, dtype='int16') + 1
-    beta_inp = np.zeros(c, dtype='int16')
-    moving_mean_inp = np.array(
-        [np.mean(data_inp[:, :, :, idx_c]) for idx_c in range(c)], dtype='int16')
-    moving_var_inp = np.array([np.var(data_inp[:, :, :, idx_c])
-                              for idx_c in range(c)], dtype='int16')
-
-    # compile_and_run(batch_norm_func, [data_inp, gamma_inp, beta_inp, moving_mean_inp,
-    #                 moving_var_inp], with_nvdla=with_nvdla, print_output=True)
+    gamma_inp = np.random.randint(size=(c), low=-5, high=5, dtype='int16')
+    beta_inp = np.random.randint(size=(c), low=-5, high=5, dtype='int16')
+    moving_mean_inp = - \
+        np.random.randint(size=(c), low=1000, high=2000, dtype='int16')
+    # denominator has to be 1 or batchnorm always outputs 0 due to int(reciprocal calculation)
+    moving_var_inp = np.zeros(c, dtype='int16')
     test_correctness(batch_norm_func, [
         data_inp, gamma_inp, beta_inp, moving_mean_inp, moving_var_inp])
 
@@ -328,6 +333,37 @@ def conv2d(with_nvdla=True):
     test_correctness(conv2d_func, [inp1, inp2])
 
 
+def large_conv2d(with_nvdla=True):
+    # compilerIR/ compiler intermediate representation
+    n, c, h, w = 1, 3, 32, 32
+    kern_n, kern_c, kern_h, kern_w = 64, c, 3, 3  # kernel_nb, n_channels, h, w
+    x_type = relay.TensorType(shape=(n, c, h, w), dtype='int16')
+    x = relay.Var("x", x_type)  # 1, 2px, 3px 2ch - N * H * W * C
+    y_type = relay.TensorType(
+        shape=(kern_n, kern_c, kern_h, kern_w), dtype='int16')
+    # 1 kernel - 2 channel, width 2, height 2 -> output h=2, w = 1
+    y = relay.Var("y", y_type)
+    conv2d_func = relay.Function([x, y], relay.nn.conv2d(x, y, strides=(
+        1, 1), padding=(0, 0), dilation=(2, 2), data_layout='NCHW', kernel_layout="OIHW", kernel_size=(kern_h, kern_w), channels=kern_n))
+
+    # compilerIR/ compiler intermediate representation
+    # inp1 = np.zeros((n, c, h, w), 'int16')  # only int16 supported by sim
+    # idx = 0
+    # for n_c in range(c):
+    #     for n_h in range(h):
+    #         for n_w in range(w):
+    #             inp1[0][n_c][n_h][n_w] = idx
+    #             idx += 1
+    inp1 = np.random.randint(size=(n, c, h, w), low=-5, high=5, dtype='int16')
+    # inp2 = np.zeros((kern_n, kern_c, kern_h, kern_w), 'int16') - 2
+    inp2 = np.random.randint(
+        size=(kern_n, kern_c, kern_h, kern_w), low=-5, high=5, dtype='int16')
+    # print("inp:\n", inp1)
+    # print("kernel:\n", inp2)
+    # compile_and_run(conv2d_func, [inp1, inp2], with_nvdla=True)
+    test_correctness(conv2d_func, [inp1, inp2])
+
+
 def avgpool2d(with_nvdla=True):
     # compilerIR/ compiler intermediate representation
     n, c, h, w = 1, 1, 3, 2
@@ -352,15 +388,17 @@ def avgpool2d(with_nvdla=True):
 
 
 if __name__ == "__main__":
-    layer_relu()
-    channel_bias_add()
-    channel_bias_add_slim()
-    elemwise_max()
-    elemwise_min()
-    elemwise_equal()
-    elemwise_mul()
-    elemwise_add()
-    channel_prelu()
-    channel_batch_norm(with_nvdla=False)
-    conv2d(with_nvdla=True)
+    # layer_relu()
+    # large_layer_relu()
+    # channel_bias_add()
+    # channel_bias_add_slim()
+    # elemwise_max()
+    # elemwise_min()
+    # elemwise_equal()
+    # elemwise_mul()
+    # elemwise_add()
+    # channel_prelu()
+    # channel_batch_norm(with_nvdla=True)
+    # conv2d(with_nvdla=True)
+    large_conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)
