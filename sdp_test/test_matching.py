@@ -334,7 +334,7 @@ def channel_batch_norm(with_nvdla=True):
 
 def conv2d(with_nvdla=True):
     # compilerIR/ compiler intermediate representation
-    n, c, h, w = 1, 1, 4, 4
+    n, c, h, w = 1, 1, 8, 8
     kern_n, kern_c, kern_h, kern_w = 1, c, 2, 2  # kernel_nb, n_channels, h, w
     x_type = relay.TensorType(shape=(n, c, h, w), dtype='int16')
     x = relay.Var("x", x_type)  # 1, 2px, 3px 2ch - N * H * W * C
@@ -343,7 +343,7 @@ def conv2d(with_nvdla=True):
     # 1 kernel - 2 channel, width 2, height 2 -> output h=2, w = 1
     y = relay.Var("y", y_type)
     conv2d_func = relay.Function([x, y], relay.nn.conv2d(x, y, strides=(
-        1, 1), padding=(0, 0), dilation=(2, 2), data_layout='NCHW', kernel_layout="OIHW", kernel_size=(kern_h, kern_w), channels=kern_n))
+        2, 2), padding=(0, 0), dilation=(2, 2), data_layout='NCHW', kernel_layout="OIHW", kernel_size=(kern_h, kern_w), channels=kern_n))
 
     # compilerIR/ compiler intermediate representation
     inp1 = np.zeros((n, c, h, w), 'int16')  # only int16 supported by sim
@@ -371,7 +371,7 @@ def large_conv2d(with_nvdla=True):
     # 1 kernel - 2 channel, width 2, height 2 -> output h=2, w = 1
     y = relay.Var("y", y_type)
     conv2d_func = relay.Function([x, y], relay.nn.conv2d(x, y, strides=(
-        1, 1), padding=(0, 0), dilation=(2, 2), data_layout='NCHW', kernel_layout="OIHW", kernel_size=(kern_h, kern_w), channels=kern_n))
+        2, 2), padding=(0, 0), dilation=(2, 2), data_layout='NCHW', kernel_layout="OIHW", kernel_size=(kern_h, kern_w), channels=kern_n))
 
     # compilerIR/ compiler intermediate representation
     inp1 = np.random.randint(size=(n, c, h, w), low=-5, high=5, dtype='int16')
@@ -441,6 +441,6 @@ if __name__ == "__main__":
     # channel_prelu()
     # channel_batch_norm(with_nvdla=True)
     # conv2d(with_nvdla=True)
-    # large_conv2d(with_nvdla=True)
-    large_overflow_conv2d(with_nvdla=True)
+    large_conv2d(with_nvdla=True)
+    # large_overflow_conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)
