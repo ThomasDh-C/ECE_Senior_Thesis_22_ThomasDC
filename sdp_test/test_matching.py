@@ -182,6 +182,19 @@ def channel_bias_add(with_nvdla=True):
     channel_tester(bias_add_func, with_nvdla, n, h, w, c)
 
 
+def channel_bias_add_channel_zero(with_nvdla=True):
+    n, c, h, w = 1, 2, 3, 2
+    x_type = relay.TensorType(shape=(n, c, h, w), dtype='int16')
+    x = relay.Var("x", x_type)  # 1, 2px, 3px 2ch - N * H * W * C
+    y_type = relay.TensorType((c,), dtype='int16')
+    y = relay.Var("y", y_type)  # 2ch, - C
+    bias_add_func = relay.Function([x, y], relay.nn.bias_add(x, y, axis=1))
+
+    inp1 = np.random.randint(size=(n, c, h, w), low=-5, high=5, dtype='int16')
+    inp2 = np.arange(c, dtype='int16')
+    test_correctness(bias_add_func, [inp1, inp2])
+
+
 def channel_bias_add_slim(with_nvdla=True):
     # compilerIR/ compiler intermediate representation
     w, c = 1, 10
@@ -257,6 +270,20 @@ def elemwise_add():
         "y", elemwise_type)  # 1, 2px,2px 1ch
     multiply_func = relay.Function([x, y], relay.add(x, y))
     elemwise_tester(multiply_func, with_nvdla=True, n=n, h=h, w=w, c=c)
+
+
+def large_elemwise_add():
+    n, h, w, c = 1, 512, 4, 4
+    elemwise_type = relay.TensorType(shape=(n, h, w, c), dtype='int16')
+    x, y = relay.Var("x", elemwise_type), relay.Var(
+        "y", elemwise_type)  # 1, 2px,2px 1ch
+    add_func = relay.Function([x, y], relay.add(x, y))
+    inp1 = np.random.randint(size=(n, h, w, c), low=-
+                             100, high=100, dtype='int16')
+    inp2 = np.random.randint(size=(n, h, w, c), low=-
+                             100, high=100, dtype='int16')
+
+    test_correctness(add_func, [inp1, inp2])
 
 
 def channel_prelu(with_nvdla=True):
@@ -347,20 +374,32 @@ def large_conv2d(with_nvdla=True):
         1, 1), padding=(0, 0), dilation=(2, 2), data_layout='NCHW', kernel_layout="OIHW", kernel_size=(kern_h, kern_w), channels=kern_n))
 
     # compilerIR/ compiler intermediate representation
-    # inp1 = np.zeros((n, c, h, w), 'int16')  # only int16 supported by sim
-    # idx = 0
-    # for n_c in range(c):
-    #     for n_h in range(h):
-    #         for n_w in range(w):
-    #             inp1[0][n_c][n_h][n_w] = idx
-    #             idx += 1
     inp1 = np.random.randint(size=(n, c, h, w), low=-5, high=5, dtype='int16')
-    # inp2 = np.zeros((kern_n, kern_c, kern_h, kern_w), 'int16') - 2
     inp2 = np.random.randint(
         size=(kern_n, kern_c, kern_h, kern_w), low=-5, high=5, dtype='int16')
-    # print("inp:\n", inp1)
-    # print("kernel:\n", inp2)
-    # compile_and_run(conv2d_func, [inp1, inp2], with_nvdla=True)
+    test_correctness(conv2d_func, [inp1, inp2])
+
+
+def large_overflow_conv2d(with_nvdla=True):
+    # compilerIR/ compiler intermediate representation
+    n, c, h, w = 1, 3, 32, 32
+    kern_n, kern_c, kern_h, kern_w = 64, c, 3, 3  # kernel_nb, n_channels, h, w
+    x_type = relay.TensorType(shape=(n, c, h, w), dtype='int16')
+    x = relay.Var("x", x_type)  # 1, 2px, 3px 2ch - N * H * W * C
+    y_type = relay.TensorType(
+        shape=(kern_n, kern_c, kern_h, kern_w), dtype='int16')
+    # 1 kernel - 2 channel, width 2, height 2 -> output h=2, w = 1
+    y = relay.Var("y", y_type)
+    conv2d_func = relay.Function([x, y], relay.nn.conv2d(x, y, strides=(
+        1, 1), padding=(0, 0), dilation=(2, 2), data_layout='NCHW', kernel_layout="OIHW", kernel_size=(kern_h, kern_w), channels=kern_n))
+
+    # compilerIR/ compiler intermediate representation
+    # inp1 = np.random.randint(size=(n, c, h, w), low=-
+    #                          100, high=100, dtype='int16')
+    inp1 = np.zeros((n, c, h, w), 'int16') + 500  # only int16 supported by sim
+    inp2 = np.zeros((kern_n, kern_c, kern_h, kern_w), 'int16') + 500
+    # inp2 = np.random.randint(
+    #     size=(kern_n, kern_c, kern_h, kern_w), low=100, high=300, dtype='int16')
     test_correctness(conv2d_func, [inp1, inp2])
 
 
@@ -392,13 +431,16 @@ if __name__ == "__main__":
     # large_layer_relu()
     # channel_bias_add()
     # channel_bias_add_slim()
+    # channel_bias_add_channel_zero()
     # elemwise_max()
     # elemwise_min()
     # elemwise_equal()
     # elemwise_mul()
     # elemwise_add()
+    # large_elemwise_add()
     # channel_prelu()
     # channel_batch_norm(with_nvdla=True)
     # conv2d(with_nvdla=True)
-    large_conv2d(with_nvdla=True)
+    # large_conv2d(with_nvdla=True)
+    large_overflow_conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)

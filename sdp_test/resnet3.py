@@ -12,8 +12,9 @@ mod, params = tvm.relay.testing.resnet.get_workload(
     1, 10, 18, image_shape=(3, 32, 32), layout='NCHW', dtype='int16')
 
 # inp1 = np.zeros((1, 3, 32, 32), 'int16')  # only int16 supported by sim
-inp1 = np.random.randint(size=(1, 3, 32, 32), low=0,
-                         high=1000, dtype='int16')
+inp1 = np.random.randint(size=(1, 3, 32, 32), low=-5,
+                         high=5, dtype='int16')
+
 
 class BatchnormCallback(DFPatternCallback):
     # A callback class to rewrite the matched pattern to a batch_norm op.
@@ -79,13 +80,17 @@ def compile_and_run(module, input, parameters, with_nvdla=True, print_output=Tru
     return ila_out
 
 
-ila_out = compile_and_run(
+nvdla_out = compile_and_run(
     mod, inp1, params, with_nvdla=True, print_output=True)
-ila_out = compile_and_run(
+true_out = compile_and_run(
     mod, inp1, params, with_nvdla=False, print_output=True)
 
-# relu only ila output:
-# [[0 0 0 0 0 0 0 0 0 1]]
+if not np.equal(nvdla_out, true_out).all():
+    print("NVDLA output DIFFERENT from true output")
+else:
+    print("NVDLA output SAME as true output")
+# all sdp only ila output:
+# [[0 0 0 0 1 0 0 0 0 0]]
 # conv only ila output:
 # [[0 0 0 0 0 0 0 0 0 1]]
 # ila output:
