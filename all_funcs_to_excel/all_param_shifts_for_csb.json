@@ -340,6 +340,10 @@
             "NVDLA_CDMA_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_CDMA_CONSUMER": [
+                16,
+                16
             ]
         }
     },
@@ -353,6 +357,15 @@
             "NVDLA_CDMA_ARB_WMB": [
                 16,
                 19
+            ]
+        }
+    },
+    "CDMA_D_OP_ENABLE": {
+        "addr": "0x5010",
+        "shifts": {
+            "NVDLA_CDMA_D_OP_ENABLE": [
+                0,
+                0
             ]
         }
     },
@@ -833,6 +846,19 @@
             "NVDLA_CSC_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_CSC_CONSUMER": [
+                16,
+                16
+            ]
+        }
+    },
+    "CSC_D_OP_ENABLE": {
+        "addr": "0x6008",
+        "shifts": {
+            "NVDLA_CSC_D_OP_ENABLE": [
+                0,
+                0
             ]
         }
     },
@@ -1096,6 +1122,10 @@
             "NVDLA_CMAC_A_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_CMAC_A_CONSUMER": [
+                16,
+                16
             ]
         }
     },
@@ -1127,6 +1157,10 @@
             "NVDLA_CMAC_B_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_CMAC_B_CONSUMER": [
+                16,
+                16
             ]
         }
     },
@@ -1156,6 +1190,19 @@
         "addr": "0x9004",
         "shifts": {
             "NVDLA_CACC_PRODUCER": [
+                0,
+                0
+            ],
+            "NVDLA_CACC_CONSUMER": [
+                16,
+                16
+            ]
+        }
+    },
+    "CACC_D_OP_ENABLE": {
+        "addr": "0x9008",
+        "shifts": {
+            "NVDLA_CACC_D_OP_ENABLE": [
                 0,
                 0
             ]
@@ -1254,12 +1301,25 @@
             ]
         }
     },
+    "CACC_D_OUT_SATURATION": {
+        "addr": "0x9030",
+        "shifts": {
+            "NVDLA_CACC_SAT_COUNT": [
+                0,
+                31
+            ]
+        }
+    },
     "SDP_RDMA_S_POINTER": {
         "addr": "0xa004",
         "shifts": {
             "NVDLA_SDP_RDMA_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_SDP_RDMA_CONSUMER": [
+                16,
+                16
             ]
         }
     },
@@ -1593,6 +1653,10 @@
             "NVDLA_SDP_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_SDP_CONSUMER": [
+                16,
+                16
             ]
         }
     },
@@ -1736,6 +1800,15 @@
             "NVDLA_SDP_LUT_LO_SLOPE_OFLOW_SHIFT": [
                 5,
                 9
+            ]
+        }
+    },
+    "SDP_D_OP_ENABLE": {
+        "addr": "0xb038",
+        "shifts": {
+            "NVDLA_SDP_D_OP_ENABLE": [
+                0,
+                0
             ]
         }
     },
@@ -2194,6 +2267,19 @@
             "NVDLA_PDP_RDMA_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_PDP_RDMA_CONSUMER": [
+                16,
+                16
+            ]
+        }
+    },
+    "PDP_RDMA_D_OP_ENABLE": {
+        "addr": "0xc008",
+        "shifts": {
+            "NVDLA_PDP_RDMA_D_OP_ENABLE": [
+                0,
+                0
             ]
         }
     },
@@ -2348,6 +2434,19 @@
         "addr": "0xd004",
         "shifts": {
             "NVDLA_PDP_PRODUCER": [
+                0,
+                0
+            ],
+            "NVDLA_PDP_CONSUMER": [
+                16,
+                16
+            ]
+        }
+    },
+    "PDP_D_OP_ENABLE": {
+        "addr": "0xd008",
+        "shifts": {
+            "NVDLA_PDP_D_OP_ENABLE": [
                 0,
                 0
             ]
@@ -2695,6 +2794,19 @@
             "NVDLA_CDP_RDMA_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_CDP_RDMA_CONSUMER": [
+                16,
+                16
+            ]
+        }
+    },
+    "CDP_RDMA_D_OP_ENABLE": {
+        "addr": "0xe008",
+        "shifts": {
+            "NVDLA_CDP_RDMA_D_OP_ENABLE": [
+                0,
+                0
             ]
         }
     },
@@ -2770,6 +2882,24 @@
             ]
         }
     },
+    "CDP_RDMA_D_SRC_COMPRESSION_EN": {
+        "addr": "0xe02c",
+        "shifts": {
+            "NVDLA_CDP_RDMA_SRC_COMPRESSION_EN": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_RDMA_D_OPERATION_MODE": {
+        "addr": "0xe030",
+        "shifts": {
+            "NVDLA_CDP_RDMA_SPLIT_NUM": [
+                0,
+                7
+            ]
+        }
+    },
     "CDP_RDMA_D_DATA_FORMAT": {
         "addr": "0xe034",
         "shifts": {
@@ -2794,6 +2924,10 @@
             "NVDLA_CDP_PRODUCER": [
                 0,
                 0
+            ],
+            "NVDLA_CDP_CONSUMER": [
+                16,
+                16
             ]
         }
     },
@@ -2807,6 +2941,15 @@
             "NVDLA_CDP_LUT_ACCESS_TYPE": [
                 17,
                 17
+            ]
+        }
+    },
+    "CDP_S_LUT_ACCESS_DATA": {
+        "addr": "0xf00c",
+        "shifts": {
+            "NVDLA_CDP_LUT_DATA": [
+                0,
+                15
             ]
         }
     },
@@ -2972,6 +3115,15 @@
             ]
         }
     },
+    "CDP_D_OP_ENABLE": {
+        "addr": "0xf048",
+        "shifts": {
+            "NVDLA_CDP_D_OP_ENABLE": [
+                0,
+                0
+            ]
+        }
+    },
     "CDP_D_FUNC_BYPASS": {
         "addr": "0xf04c",
         "shifts": {
@@ -3025,6 +3177,15 @@
         "addr": "0xf060",
         "shifts": {
             "NVDLA_CDP_DST_RAM_TYPE": [
+                0,
+                0
+            ]
+        }
+    },
+    "CDP_D_DST_COMPRESSION_EN": {
+        "addr": "0xf064",
+        "shifts": {
+            "NVDLA_CDP_COMPRESSION_EN": [
                 0,
                 0
             ]
@@ -3128,6 +3289,19 @@
         "addr": "0x10004",
         "shifts": {
             "NVDLA_RUBIK_PRODUCER": [
+                0,
+                0
+            ],
+            "NVDLA_RUBIK_CONSUMER": [
+                16,
+                16
+            ]
+        }
+    },
+    "RUBIK_D_OP_ENABLE": {
+        "addr": "0x10008",
+        "shifts": {
+            "NVDLA_RUBIK_D_OP_ENABLE": [
                 0,
                 0
             ]
