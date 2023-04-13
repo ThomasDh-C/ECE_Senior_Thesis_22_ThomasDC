@@ -1323,6 +1323,15 @@
             ]
         }
     },
+    "SDP_RDMA_D_OP_ENABLE": {
+        "addr": "0xa008",
+        "shifts": {
+            "NVDLA_SDP_RDMA_D_OP_ENABLE": [
+                0,
+                0
+            ]
+        }
+    },
     "SDP_RDMA_D_DATA_CUBE_WIDTH": {
         "addr": "0xa00c",
         "shifts": {

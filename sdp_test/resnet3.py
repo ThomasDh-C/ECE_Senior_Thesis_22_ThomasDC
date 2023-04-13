@@ -89,9 +89,12 @@ if not np.equal(nvdla_out, true_out).all():
     print("NVDLA output DIFFERENT from true output")
 else:
     print("NVDLA output SAME as true output")
-# all sdp only ila output:
-# [[0 0 0 0 1 0 0 0 0 0]]
-# conv only ila output:
-# [[0 0 0 0 0 0 0 0 0 1]]
-# ila output:
-# [[0 0 0 0 1 0 0 0 0 0]]
+
+# ----------------------------------------
+# NVDLA output
+# pre-softmax: [[-2798 -2044 -5613 -2710 -5523   376 -1378 -3192  6997  5068]]
+# post-softmax: [[0 0 0 0 0 0 0 0 1 0]]
+# ----------------------------------------
+# CPU output
+# pre-softmax: [[-2798 -2044 -5613 -2710 -5523   376 -1378 -3192  6997  5068]]
+# post-softmax: [[0 0 0 0 0 0 0 0 1 0]]
