@@ -407,7 +407,7 @@ def avgpool2d(with_nvdla=True):
     # compilerIR/ compiler intermediate representation
     n, c, h, w = 1, 1, 3, 2
     x_type = relay.TensorType(shape=(n, c, h, w), dtype='int32')
-    x = relay.Var("x", x_type)  # 1, 2px, 3px 2ch - N * H * W * C
+    x = relay.Var("x", x_type)
     # int16 not supported by official relay
     avgpool2d_func = relay.Function([x], relay.nn.avg_pool2d(x, pool_size=(2, 2), strides=(2, 2),
                                                              dilation=(1, 1), padding=(1, 1), layout='NCHW',
@@ -423,24 +423,44 @@ def avgpool2d(with_nvdla=True):
                 inp1[0][n_c][n_h][n_w] = idx*10
                 idx += 1
     compile_and_run(avgpool2d_func, [inp1], with_nvdla)
-    # test_correctness(avgpool2d_func, [inp1])
+
+
+def lrn(with_nvdla=True):
+    # compilerIR/ compiler intermediate representation
+    n, c, h, w = 1, 2, 2, 2
+    x_type = relay.TensorType(shape=(n, c, h, w), dtype='float32')
+    x = relay.Var("x", x_type)
+    # int16 not supported by official relay
+    lrn_func = relay.Function([x], relay.nn.lrn(x, size=3))
+
+    inp1 = np.zeros((n, c, h, w), 'float32')  # only int16 supported by sim
+    idx = 0
+    for n_c in range(c):
+        for n_h in range(h):
+            for n_w in range(w):
+                inp1[0][n_c][n_h][n_w] = idx*10
+                idx += 1
+    print('input\n', inp1)
+    np_out = compile_and_run(lrn_func, [inp1], with_nvdla)
+    print(np_out.shape)
 
 
 if __name__ == "__main__":
-    layer_relu()
-    large_layer_relu()
-    channel_bias_add()
-    channel_bias_add_slim()
-    channel_bias_add_channel_zero()
-    elemwise_max()
-    elemwise_min()
-    elemwise_equal()
-    elemwise_mul()
-    elemwise_add()
-    large_elemwise_add()
-    channel_prelu()
-    channel_batch_norm(with_nvdla=True)
-    # conv2d(with_nvdla=True)
+    # layer_relu()
+    # large_layer_relu()
+    # channel_bias_add()
+    # channel_bias_add_slim()
+    # channel_bias_add_channel_zero()
+    # elemwise_max()
+    # elemwise_min()
+    # elemwise_equal()
+    # elemwise_mul()
+    # elemwise_add()
+    # large_elemwise_add()
+    # channel_prelu()
+    # channel_batch_norm(with_nvdla=True)
+    conv2d(with_nvdla=True)
     # large_conv2d(with_nvdla=True)
     # large_overflow_conv2d(with_nvdla=True)
     # avgpool2d(with_nvdla=True)
+    # lrn(with_nvdla=False)
