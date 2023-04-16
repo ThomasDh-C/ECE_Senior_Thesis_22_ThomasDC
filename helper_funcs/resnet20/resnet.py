@@ -61,19 +61,6 @@ mod, params = from_onnx(onnx_model_new, shape={"serving_default_input_1:0": (
 
 # onnx.save(onnx_model_new, "cifar_resnet20_float32q_shapes2.onnx")
 # https://github.com/dmlc/tensorboard/blob/master/tensorboard/src/onnx.proto
-# {1, 3, 6, 7}
-# enum DataType {
-#     UNDEFINED = 0;
-#     // Basic types.
-#     FLOAT = 1;   // float
-#     UINT8 = 2;   // uint8_t
-#     INT8 = 3;    // int8_t
-#     UINT16 = 4;  // uint16_t
-#     INT16 = 5;   // int16_t
-#     INT32 = 6;   // int32_t
-#     INT64 = 7;   // int64_t
-#     STRING = 8;  // string
-#     BOOL = 9;    // bool
 
 
 # onnx_model.graph.node[0].input[0] = 'input'
@@ -115,23 +102,3 @@ for l in mod.astext().split('\n'):
     if len(l) >= 3 and l[2] == '%':
         l = l.split(' = ')[1]
         funcs_called.add(l.split('(')[0])
-
-# image_data = np.random.uniform(size=input_shape).astype("int8")
-# target = "llvm"
-# with transform.PassContext(opt_level=3):
-#     lib = relay.build(mod, target, params=params)
-
-# # Create a runtime executor module
-# module = runtime.GraphModule(lib["default"](tvm.cpu()))
-
-# # Feed input data
-# module.set_input(input_tensor, tvm.nd.array(image_data))
-
-# # Run
-# module.run()
-
-# # Get output
-# tvm_output = module.get_output(0).numpy()
-# print(tvm_output)
-# class_names = ['plane', 'car', 'bird', 'cat',
-#                'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
