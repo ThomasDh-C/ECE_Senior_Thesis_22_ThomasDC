@@ -1,4 +1,6 @@
 *__pycache__
 **/test/**
 **/data/**
+!**/test/mod*
+!**/data/empty*
 **.pkl_memoise_py3

@@ -458,7 +458,7 @@ if __name__ == "__main__":
     # elemwise_add()
     # large_elemwise_add()
     # channel_prelu()
-    # channel_batch_norm(with_nvdla=True)
+    channel_batch_norm(with_nvdla=True)
     conv2d(with_nvdla=True)
     # large_conv2d(with_nvdla=True)
     # large_overflow_conv2d(with_nvdla=True)

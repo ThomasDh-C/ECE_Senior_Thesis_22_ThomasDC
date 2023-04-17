@@ -8,7 +8,9 @@ from tvm.relay import *
 from tvm.relay.op.contrib import ilanvdla
 from tvm.relay.dataflow_pattern import wildcard, is_op, is_tuple_get_item, rewrite, DFPatternCallback
 
-mod, params = tvm.relay.testing.resnet.get_workload(
+mod_nvdla, params_nvdla = tvm.relay.testing.resnet.get_workload(
+    1, 10, 18, image_shape=(3, 32, 32), layout='NCHW', dtype='int16')
+mod_cpu, params_cpu = tvm.relay.testing.resnet.get_workload(
     1, 10, 18, image_shape=(3, 32, 32), layout='NCHW', dtype='int16')
 
 # inp1 = np.zeros((1, 3, 32, 32), 'int16')  # only int16 supported by sim
@@ -80,10 +82,10 @@ def compile_and_run(module, input, parameters, with_nvdla=True, print_output=Tru
     return ila_out
 
 
-nvdla_out = compile_and_run(
-    mod, inp1, params, with_nvdla=True, print_output=True)
 true_out = compile_and_run(
-    mod, inp1, params, with_nvdla=False, print_output=True)
+    mod_cpu, inp1, params_cpu, with_nvdla=False, print_output=True)
+nvdla_out = compile_and_run(
+    mod_nvdla, inp1, params_nvdla, with_nvdla=True, print_output=True)
 
 if not np.equal(nvdla_out, true_out).all():
     print("NVDLA output DIFFERENT from true output")
